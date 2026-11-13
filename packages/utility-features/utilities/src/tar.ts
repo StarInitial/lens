@@ -22,6 +22,19 @@ export type ReadFileFromTarOpts<ParseJson extends boolean> = {
     }
 );
 
+/**
+ * The `ReadEntry` type of `@types/tar` extends `MiniPass`, but the version of
+ * `minipass` resolved in this repository (4.x, which ships its own types) no
+ * longer exposes the EventEmitter members on that type. Only a small structural
+ * subset of the entry is used here, so it is described explicitly.
+ */
+interface TarEntryStream {
+  path: string;
+  on(event: "data", listener: (chunk: Buffer) => void): void;
+  once(event: "error", listener: (err: Error) => void): void;
+  once(event: "end", listener: () => void): void;
+}
+
 export function readFileFromTar(opts: ReadFileFromTarOpts<false>): Promise<Buffer>;
 export function readFileFromTar(opts: ReadFileFromTarOpts<true>): Promise<JsonValue>;
 
@@ -34,13 +47,15 @@ export function readFileFromTar<ParseJson extends boolean>({ tarPath, filePath, 
       filter: entryPath => path.normalize(entryPath) === filePath,
       sync: true,
       onentry(entry) {
-        entry.on("data", chunk => {
+        const entryStream = entry as unknown as TarEntryStream;
+
+        entryStream.on("data", chunk => {
           fileChunks.push(chunk);
         });
-        entry.once("error", err => {
-          reject(new Error(`reading file has failed ${entry.path}: ${err}`));
+        entryStream.once("error", err => {
+          reject(new Error(`reading file has failed ${entryStream.path}: ${err}`));
         });
-        entry.once("end", () => {
+        entryStream.once("end", () => {
           const data = Buffer.concat(fileChunks);
           const result = parseJson ? JSON.parse(data.toString("utf8")) : data;
 

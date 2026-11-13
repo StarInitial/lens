@@ -14,6 +14,7 @@ import { observable, makeObservable } from "mobx";
 import { observer } from "mobx-react";
 import _ from "lodash";
 import type { StrictReactNode } from "@k8slens/utilities";
+import { getPathForFile } from "../../utils/get-path-for-file";
 
 export interface FileUploadProps {
     uploadDir: string;
@@ -179,10 +180,15 @@ class DefaultedFilePicker extends React.Component<FilePickerProps & typeof defau
         const paths: string[] = [];
         const promises = totalSizeLimitedFiles.map(async file => {
           const destinationPath = path.join(uploadDir, file.name);
+          const sourcePath = getPathForFile(file);
+
+          if (!sourcePath) {
+            throw `Could not determine the location of the file "${file.name}" on the filesystem`;
+          }
 
           paths.push(destinationPath);
 
-          return fse.copyFile(file.path, destinationPath);
+          return fse.copyFile(sourcePath, destinationPath);
         });
 
         await Promise.all(promises);

@@ -6,7 +6,6 @@
 import "./drawer.scss";
 
 import React from "react";
-import { clipboard } from "electron";
 import { createPortal } from "react-dom";
 import type { StrictReactNode } from "@k8slens/utilities";
 import { cssNames, noop } from "@k8slens/utilities";
@@ -19,6 +18,7 @@ import { withInjectables } from "@ogre-tools/injectable-react";
 import { historyInjectionToken } from "@k8slens/routing";
 import type { History } from "history";
 import type { StorageLayer } from "../../utils/storage-helper";
+import { copyTextToClipboard } from "../../utils/clipboard";
 
 export type DrawerPosition = "top" | "left" | "right" | "bottom";
 
@@ -171,14 +171,18 @@ class NonInjectedDrawer extends React.Component<DrawerProps & Dependencies & typ
     if (open) onClose();
   };
 
-  copyTitle = (title: string) => {
+  copyTitle = async (title: string) => {
     const itemName = title.split(":").splice(1).join(":") || title; // copy whole if no :
 
-    clipboard.writeText(itemName.trim());
-    this.setState({ isCopied: true });
-    setTimeout(() => {
-      this.setState({ isCopied: false });
-    }, 3000);
+    try {
+      await copyTextToClipboard(itemName.trim());
+      this.setState({ isCopied: true });
+      setTimeout(() => {
+        this.setState({ isCopied: false });
+      }, 3000);
+    } catch {
+      // nothing was copied, keep the "Copy" tooltip so that the user can retry
+    }
   };
 
   render() {

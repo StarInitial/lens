@@ -18,7 +18,11 @@ const setupSyncOpenAtLoginWithOsInjectable = getInjectable({
       reaction(() => state.openAtLogin, openAtLogin => {
         setLoginItemSettings({
           openAtLogin,
-          openAsHidden: true,
+          /**
+           * `openAsHidden` was removed in Electron 44 (it was a pre macOS 13
+           * login item attribute). Starting hidden is now driven solely by the
+           * `--hidden` argument, which is what `should-start-hidden` checks.
+           */
           args: ["--hidden"],
         });
       }, {

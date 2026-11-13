@@ -33,7 +33,15 @@ const setupAppPathsInjectable = getInjectable({
 
       const appDataPath = getElectronAppPath("appData");
 
-      setElectronAppPath("userData", joinPaths(appDataPath, appName));
+      /**
+       * Development builds use a separate profile (`<product>Dev`) so that they do
+       * not corrupt the data of an installed release. `LENS_USER_DATA_DIR` allows
+       * pointing a development build at an existing profile, e.g. to work with the
+       * clusters of the installed application.
+       */
+      const userDataDirOverride = process.env.LENS_USER_DATA_DIR;
+
+      setElectronAppPath("userData", userDataDirOverride || joinPaths(appDataPath, appName));
       setElectronAppPath("sessionData", getElectronAppPath("userData"));
 
       const appPaths = pipeline(

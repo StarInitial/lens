@@ -41,14 +41,21 @@ export abstract class IpcMain extends IpcRegistrar {
    */
   listen(channel: string, listener: (event: Electron.IpcRendererEvent, ...args: any[]) => any): Disposer {
     const prefixedChannel = `extensions@${this[IpcPrefix]}:${channel}`;
+    /**
+     * The public type of `listener` is `IpcRendererEvent` because that is what the
+     * extension API documents and extensions already rely on. The main process side
+     * of the channel receives an `IpcMainEvent` though, which is not assignable to
+     * it (Electron 44 tightened both types), hence the adapter.
+     */
+    const mainListener = listener as unknown as (event: Electron.IpcMainEvent, ...args: any[]) => void;
     const cleanup = once(() => {
       this.dependencies.logger.debug(`[IPC-RENDERER]: removing extension listener`, { channel, extension: { name: this.extension.name, version: this.extension.version }});
 
-      return ipcMain.removeListener(prefixedChannel, listener);
+      return ipcMain.removeListener(prefixedChannel, mainListener);
     });
 
     this.dependencies.logger.debug(`[IPC-RENDERER]: adding extension listener`, { channel, extension: { name: this.extension.name, version: this.extension.version }});
-    ipcMain.addListener(prefixedChannel, listener);
+    ipcMain.addListener(prefixedChannel, mainListener);
     this.extension[Disposers].push(cleanup);
 
     return cleanup;

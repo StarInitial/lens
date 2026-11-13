@@ -12,10 +12,10 @@ import { Wizard, WizardStep } from "../wizard";
 import type { ShowNotification } from "@k8slens/notifications";
 import { Button } from "@k8slens/button";
 import { Icon } from "@k8slens/icon";
-import { clipboard } from "electron";
 import { kebabCase } from "lodash/fp";
 import { withInjectables } from "@ogre-tools/injectable-react";
-import { showSuccessNotificationInjectable } from "@k8slens/notifications";
+import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@k8slens/notifications";
+import { copyTextToClipboard } from "../../utils/clipboard";
 
 export interface LogsDialogProps extends DialogProps {
   title: string;
@@ -24,6 +24,7 @@ export interface LogsDialogProps extends DialogProps {
 
 interface Dependencies {
   showSuccessNotification: ShowNotification;
+  showErrorNotification: ShowNotification;
 }
 
 const NonInjectedLogsDialog = (props: LogsDialogProps & Dependencies) => {
@@ -31,6 +32,7 @@ const NonInjectedLogsDialog = (props: LogsDialogProps & Dependencies) => {
     title,
     logs,
     showSuccessNotification,
+    showErrorNotification,
     ...dialogProps
   } = props;
 
@@ -50,9 +52,13 @@ const NonInjectedLogsDialog = (props: LogsDialogProps & Dependencies) => {
             <div className="buttons flex gaps align-center justify-space-between">
               <Button
                 plain
-                onClick={() => {
-                  clipboard.writeText(logs);
-                  showSuccessNotification(`Logs copied to clipboard.`);
+                onClick={async () => {
+                  try {
+                    await copyTextToClipboard(logs);
+                    showSuccessNotification(`Logs copied to clipboard.`);
+                  } catch (error) {
+                    showErrorNotification(error instanceof Error ? error.message : `Failed to copy logs to clipboard.`);
+                  }
                 }}
               >
                 <Icon material="assignment"/>
@@ -77,5 +83,6 @@ export const LogsDialog = withInjectables<Dependencies, LogsDialogProps>(NonInje
   getProps: (di, props) => ({
     ...props,
     showSuccessNotification: di.inject(showSuccessNotificationInjectable),
+    showErrorNotification: di.inject(showErrorNotificationInjectable),
   }),
 });

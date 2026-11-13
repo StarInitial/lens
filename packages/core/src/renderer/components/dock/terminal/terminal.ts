@@ -12,13 +12,13 @@ import type { TabId } from "../dock/store";
 import type { TerminalApi } from "../../../api/terminal-api";
 import { disposer } from "@k8slens/utilities";
 import { once } from "lodash";
-import { clipboard } from "electron";
 import type { Logger } from "@k8slens/logger";
 import assert from "assert";
 import { TerminalChannels } from "../../../../common/terminal/channels";
 import { LinkProvider } from "xterm-link-provider";
 import type { OpenLinkInBrowser } from "../../../../common/utils/open-link-in-browser.injectable";
 import type { TerminalConfig } from "../../../../features/user-preferences/common/preferences-helpers";
+import { copyTextToClipboard, readTextFromClipboard } from "../../../utils/clipboard";
 
 export interface TerminalDependencies {
   readonly spawningPool: HTMLElement;
@@ -180,22 +180,33 @@ export class Terminal {
   };
 
   onContextMenu = () => {
-    if (
-      // don't paste if user hasn't turned on the feature
-      this.dependencies.terminalCopyOnSelect.get()
-
-      // don't paste if the clipboard doesn't have text
-      && clipboard.availableFormats().includes("text/plain")
-    ) {
-      this.xterm.paste(clipboard.readText());
+    // don't paste if user hasn't turned on the feature
+    if (!this.dependencies.terminalCopyOnSelect.get()) {
+      return;
     }
+
+    void (async () => {
+      try {
+        const text = await readTextFromClipboard();
+
+        // don't paste if the clipboard doesn't have text
+        if (text) {
+          this.xterm.paste(text);
+        }
+      } catch (error) {
+        this.dependencies.logger.warn(`[TERMINAL]: failed to read the clipboard`, { error });
+      }
+    })();
   };
 
   onSelectionChange = () => {
     const selection = this.xterm.getSelection().trim();
 
     if (this.dependencies.terminalCopyOnSelect.get() && selection) {
-      clipboard.writeText(selection);
+      void copyTextToClipboard(selection)
+        .catch(error => {
+          this.dependencies.logger.warn(`[TERMINAL]: failed to copy selection to the clipboard`, { error });
+        });
     }
   };
 

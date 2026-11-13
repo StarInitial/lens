@@ -16,11 +16,11 @@ import { Icon } from "@k8slens/icon";
 import type { ShowNotification } from "@k8slens/notifications";
 import { Wizard, WizardStep } from "../wizard";
 import { MonacoEditor } from "../monaco-editor";
-import { clipboard } from "electron";
 import { withInjectables } from "@ogre-tools/injectable-react";
-import { showSuccessNotificationInjectable } from "@k8slens/notifications";
+import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@k8slens/notifications";
 import kubeconfigDialogStateInjectable from "./state.injectable";
 import { saveFileDialog } from "../../utils/saveFile";
+import { copyTextToClipboard } from "../../utils/clipboard";
 
 export interface KubeconfigDialogData {
   title?: StrictReactNode;
@@ -33,6 +33,7 @@ export interface KubeConfigDialogProps extends Partial<DialogProps> {
 interface Dependencies {
   state: IObservableValue<KubeconfigDialogData | undefined>;
   showSuccessNotification: ShowNotification;
+  showErrorNotification: ShowNotification;
 }
 
 @observer
@@ -45,9 +46,13 @@ class NonInjectedKubeConfigDialog extends React.Component<KubeConfigDialogProps 
     this.props.state.set(undefined);
   };
 
-  copyToClipboard = (config: string) => {
-    clipboard.writeText(config);
-    this.props.showSuccessNotification("Config copied to clipboard");
+  copyToClipboard = async (config: string) => {
+    try {
+      await copyTextToClipboard(config);
+      this.props.showSuccessNotification("Config copied to clipboard");
+    } catch (error) {
+      this.props.showErrorNotification(error instanceof Error ? error.message : "Failed to copy config to clipboard");
+    }
   };
 
   download = (config: string) => {
@@ -108,6 +113,7 @@ export const KubeConfigDialog = withInjectables<Dependencies, KubeConfigDialogPr
   getProps: (di, props) => ({
     ...props,
     showSuccessNotification: di.inject(showSuccessNotificationInjectable),
+    showErrorNotification: di.inject(showErrorNotificationInjectable),
     state: di.inject(kubeconfigDialogStateInjectable),
   }),
 });

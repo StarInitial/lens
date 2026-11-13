@@ -88,6 +88,14 @@ const createElectronWindowInjectable = getInjectable({
           nodeIntegration: true,
           nodeIntegrationInSubFrames: true,
           contextIsolation: false,
+          /**
+           * Monaco (0.38, used for the kubeconfig editor) implements its paste
+           * action with `document.execCommand("paste")`. Chromium disables that by
+           * default since Electron 34, so pasting into the kubeconfig editor did
+           * nothing. Everything that runs in this renderer is first party code, so
+           * re-enabling the deprecated path is acceptable here.
+           */
+          enableDeprecatedPaste: true,
         },
       });
 

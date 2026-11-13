@@ -17,12 +17,12 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "22"
 
       - uses: doyensec/electronegativity-action@v1.1
         with:
           input: packages/core/src/
-          electron-version: "19.0.4"
+          electron-version: "44.0.0"
           severity: medium
 
       - name: Upload sarif

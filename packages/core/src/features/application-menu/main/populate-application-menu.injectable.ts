@@ -4,6 +4,7 @@
  */
 import { getInjectable } from "@ogre-tools/injectable";
 import { Menu } from "electron";
+import type { MenuItemConstructorOptions } from "electron";
 import type { MenuItemOpts } from "./application-menu-items.injectable";
 import type { Composite } from "../../../common/utils/composite/get-composite/get-composite";
 import type { ApplicationMenuItemTypes } from "./menu-items/application-menu-item-injection-token";
@@ -83,7 +84,13 @@ const toHierarchicalElectronMenuItem = (
         ...(id ? { id } : {}),
         ...(label ? { label } : {}),
         ...(keyboardShortcut ? { accelerator: keyboardShortcut }: {}),
-        click: onClick,
+        /**
+         * Electron 44 widened the second argument of a menu `click` handler from
+         * `BrowserWindow` to `BaseWindow`. The type of `onClick` is part of the
+         * extension API (see `ElectronClickable`) and has to stay as is, so the
+         * handler is adapted here instead.
+         */
+        click: onClick as unknown as MenuItemConstructorOptions["click"],
       };
     }
 

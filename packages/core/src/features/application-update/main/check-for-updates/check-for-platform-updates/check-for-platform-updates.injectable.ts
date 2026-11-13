@@ -29,13 +29,21 @@ const checkForPlatformUpdatesInjectable = getInjectable({
       electronUpdater.autoDownload = false;
       electronUpdater.allowDowngrade = allowDowngrade;
 
-      let result: UpdateCheckResult;
+      // electron-updater 6 resolves with `null` when there is nothing to check
+      // (e.g. the update configuration is missing)
+      let result: UpdateCheckResult | null;
 
       try {
         result = await electronUpdater.checkForUpdates();
       } catch (error) {
         logger.error("[UPDATE-APP/CHECK-FOR-UPDATES]", error);
 
+        return {
+          updateWasDiscovered: false,
+        };
+      }
+
+      if (!result) {
         return {
           updateWasDiscovered: false,
         };

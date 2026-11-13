@@ -196,7 +196,12 @@ export type ComputeOutputFormat<Format> = Format extends "string"
     ? Buffer
     : string | Buffer;
 
-export interface ChildProcessExecpetion<Format> extends ExecFileException {
+/**
+ * `ExecFileException` of `@types/node` 20+ types `stdout`/`stderr` as
+ * `string | Buffer`, which cannot be narrowed per generic here, so they are omitted
+ * and re-declared with the format specific type.
+ */
+export interface ChildProcessExecpetion<Format> extends Omit<ExecFileException, "stderr" | "stdout"> {
   stderr: ComputeOutputFormat<Format>;
   stdout: ComputeOutputFormat<Format>;
 }

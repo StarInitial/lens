@@ -13,11 +13,29 @@ const setupHostnamesInjectable = getInjectable({
     run: () => {
       const app = di.inject(electronAppInjectable);
 
-      app.commandLine.appendSwitch("host-rules", [
+      /**
+       * Lens serves the application renderer through its own HTTPS proxy on
+       * https://lens.app:<port>/ (and uses *.lens.app for cluster frames), so those
+       * names have to resolve to the loopback interface.
+       *
+       * Up to Electron 22 this was done with the `host-rules` switch. That switch is
+       * deprecated since Electron 40 and has no effect anymore in Electron 44: the
+       * name was resolved through public DNS and the main window failed to load with
+       * ERR_CONNECTION_CLOSED. The Chromium replacement is `host-resolver-rules`.
+       */
+      app.commandLine.appendSwitch("host-resolver-rules", [
         "MAP localhost 127.0.0.1",
         "MAP lens.app 127.0.0.1",
         "MAP *.lens.app 127.0.0.1",
       ].join());
+
+      /**
+       * Requests to the Lens origins must also bypass a configured system proxy,
+       * otherwise the main window is proxied and fails to load. That is done in
+       * `setup-session-proxy-bypass` because it cannot be expressed with
+       * `--proxy-bypass-list` alone (Chromium only reads it together with
+       * `--proxy-server`).
+       */
 
       return undefined;
     },

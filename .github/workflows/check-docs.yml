@@ -10,7 +10,7 @@ jobs:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'area/documentation') }}
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [22.x]
     steps:
       - name: Checkout Release from lens
         uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install specific npm version
-        run: npm install -g npm@^9.6.7
+        run: npm install -g npm@^10
 
       - name: Generate Extensions API Reference using typedocs
         run: |

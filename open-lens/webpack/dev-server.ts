@@ -21,7 +21,13 @@ const server = new WebpackDevServer({
     "Access-Control-Allow-Origin": "*",
   },
   allowedHosts: ".lens.app",
-  host: "localhost",
+  /**
+   * Bind to the IPv4 loopback explicitly. With `localhost` Node 17+ may resolve to
+   * `::1` only, while the Lens proxy forwards the renderer requests to
+   * `http://127.0.0.1:<port>` and the main process probes the same address, which
+   * resulted in `ECONNREFUSED 127.0.0.1:9191` on startup.
+   */
+  host: "127.0.0.1",
   port: webpackDevServerPort,
   static: buildDir, // aka `devServer.contentBase` in webpack@4
   hot: "only", // use HMR only without errors

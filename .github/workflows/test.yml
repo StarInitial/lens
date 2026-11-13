@@ -16,8 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, macos-11, windows-2019]
-        node-version: [16.x]
+        os: [ubuntu-22.04, macos-13, windows-2019]
+        node-version: [22.x]
     steps:
       - name: Checkout Release from lens
         uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install specific npm version
-        run: npm install -g npm@^9.6.7
+        run: npm install -g npm@^10
 
       - name: Get npm cache directory path
         if: ${{ runner.os != 'Windows' }}
@@ -59,6 +59,11 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: npm ci
+
+      - name: Download Electron binary
+        # Electron >= 42 no longer downloads its binary from a postinstall script, so
+        # the binary has to be fetched explicitly before `electron-builder` runs.
+        run: node ./node_modules/electron/install.js
 
       - name: Install integration test dependencies
         id: minikube
@@ -86,8 +91,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
-        node-version: [16.x]
+        os: [ubuntu-22.04]
+        node-version: [22.x]
     steps:
       - name: Checkout Release from lens
         uses: actions/checkout@v3
@@ -105,7 +110,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install specific npm version
-        run: npm install -g npm@^9.6.7
+        run: npm install -g npm@^10
 
       - name: Get npm cache directory path
         if: ${{ runner.os != 'Windows' }}

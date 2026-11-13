@@ -3,8 +3,11 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 import { getInjectable } from "@ogre-tools/injectable";
+import { loggerInjectionToken } from "@k8slens/logger";
 import type { ContentSource, ElectronWindowTitleBarStyle } from "./create-electron-window.injectable";
 import createElectronWindowInjectable from "./create-electron-window.injectable";
+import setupSessionProxyBypassInjectable from "../setup-session-proxy-bypass.injectable";
+import waitForWebpackDevServerInjectable from "../wait-for-webpack-dev-server.injectable";
 import type { ClusterFrameInfo } from "../../../../common/cluster-frames.injectable";
 
 export interface ElectronWindow {
@@ -60,8 +63,22 @@ const createLensWindowInjectable = getInjectable({
 
   instantiate: (di) => {
     const createElectronWindow = di.inject(createElectronWindowInjectable);
+    const logger = di.inject(loggerInjectionToken);
+    const setupSessionProxyBypass = di.inject(setupSessionProxyBypassInjectable);
+    const waitForWebpackDevServer = di.inject(waitForWebpackDevServerInjectable);
 
     return (configuration: LensWindowConfiguration): LensWindow => {
+      /**
+       * Electron 44 runs the main process on Node 24, where an unhandled promise
+       * rejection terminates the entire process. A rejected `loadURL` used to be
+       * survivable; now it kills the app before the window is shown ("no window and
+       * no obvious error"). Failures are handled here instead, the detailed reason
+       * is logged by the `did-fail-load` handler of the window.
+       */
+      const logFailedNavigation = (error: unknown, content: string) => {
+        logger.error(`[LENS-WINDOW]: Failed to load content "${content}" for window "${configuration.id}"`, { error });
+      };
+
       let browserWindow: ElectronWindow | undefined;
 
       let windowIsShown = false;
@@ -91,6 +108,10 @@ const createLensWindowInjectable = getInjectable({
           if (!browserWindow) {
             windowIsStarting = true;
 
+            // must happen before the window navigates to the Lens origin
+            await waitForWebpackDevServer();
+            await setupSessionProxyBypass();
+
             browserWindow = createElectronWindow({
               ...configuration,
               onClose: () => {
@@ -107,9 +128,13 @@ const createLensWindowInjectable = getInjectable({
             const beforeOpen = configuration.beforeOpen?.();
 
             if (filePathForContent) {
-              await browserWindow.loadFile(filePathForContent);
+              await browserWindow.loadFile(filePathForContent).catch(error => {
+                logFailedNavigation(error, filePathForContent);
+              });
             } else if (urlForContent) {
-              await browserWindow.loadUrl(urlForContent);
+              await browserWindow.loadUrl(urlForContent).catch(error => {
+                logFailedNavigation(error, urlForContent);
+              });
             }
 
             await beforeOpen;

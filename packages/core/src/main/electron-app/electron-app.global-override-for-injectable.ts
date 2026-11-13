@@ -14,7 +14,14 @@ export default getGlobalOverride(electronAppInjectable, () => {
   const chromiumArgs = new Map<string, string | undefined>();
   const appPaths = new Map<string, string>();
 
-  return new class extends EventEmitter implements Electron.App {
+  /**
+   * `Electron.App` grows with almost every Electron major (Electron 44 added e.g.
+   * `configureWebAuthn`, `getAccessibilitySupportFeatures`, `getRecentDocuments`
+   * and `isActive`), so this test double only implements the members Lens actually
+   * uses and is casted to `Electron.App` instead of `implements`ing it. Using
+   * `implements` means every Electron upgrade breaks all tests in the repository.
+   */
+  const appDouble = new class extends EventEmitter {
     addRecentDocument(path: string): void {
       void path;
       throw new Error("Method not implemented.");
@@ -260,12 +267,13 @@ export default getGlobalOverride(electronAppInjectable, () => {
       return {
         executableWillLaunchAtLogin: false,
         openAtLogin: false,
-        openAsHidden: false,
         wasOpenedAtLogin: false,
-        wasOpenedAsHidden: false,
         restoreState: false,
+        status: "not-registered" as const,
         launchItems: [],
       };
     }
   };
+
+  return appDouble as unknown as Electron.App;
 });

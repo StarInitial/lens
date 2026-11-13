@@ -5,6 +5,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { loggerInjectionToken } from "@k8slens/logger";
 import attemptInstallsInjectable from "./attempt-installs.injectable";
+import { getPathForFile } from "../../utils/get-path-for-file";
 
 export type InstallOnDrop = (files: File[]) => Promise<void>;
 
@@ -18,7 +19,14 @@ const installOnDropInjectable = getInjectable({
     return (files) => {
       logger.info("Install from D&D");
 
-      return attemptInstalls(files.map(({ path }) => path));
+      // `File.path` was removed in Electron 32, `webUtils.getPathForFile` is the
+      // replacement. Files with an unknown path are skipped rather than passed as
+      // `undefined`, which would fail in the installer further down.
+      const paths = files
+        .map(getPathForFile)
+        .filter((path): path is string => path !== undefined);
+
+      return attemptInstalls(paths);
     };
   },
 });
