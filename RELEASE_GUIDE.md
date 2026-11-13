@@ -22,7 +22,7 @@ All releases will be made by creating a PR which bumps the version field in the 
 1. Pick the PRs that you want to include in this release using the keys listed.
     - If you are making a patch release this might include fixing up some cherry-picking of commits. These actions should be done in a separate terminal.
     - If a package version is having a major version bump then `npm` will complain about `peerDependency` conflicts. These will have to be fixed up separately.
-1. Once the PR is created, approved, and then merged the `Release Open Lens` workflow will create a tag and release for you.
+1. Once the PR is created, approved, and then merged, tag the merge commit manually (`git tag -a v<version> -m "v<version>" && git push origin v<version>`). This fork has no GitHub Actions workflows, so no workflow creates the tag or release for you; run `npm run build` / `electron-builder` locally if you need installers.
 1. If you are making a major or minor release, create a `release/v<MAJOR>.<MINOR>` branch and push it to `origin` so that future patch releases can be made from it.
 1. If you released a major or minor version, create a new patch milestone and move all bug issues to that milestone and all enhancement issues to the next minor milestone.
 1. If you released a patch version, create a new patch milestone for the next patch version and move all the issues and PRs (open or closed) that weren't included in the current release to that milestone.

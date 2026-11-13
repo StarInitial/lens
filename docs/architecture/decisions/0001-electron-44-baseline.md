@@ -45,8 +45,8 @@ every `44.x` patch release.
 
 The toolchain moves with it: `electron-builder@26`, `electron-updater@6.8`,
 `@sentry/electron@8`, `electron-devtools-installer@4`, `@electron/notarize@3`,
-TypeScript 5.x, `@types/node@24`, and Node 22.x on CI (the `electron` npm package
-requires `node >= 22.12.0`).
+TypeScript 5.x, `@types/node@24`, and Node 22.x for local builds (the `electron` npm
+package requires `node >= 22.12.0`).
 
 ## Consequences
 
@@ -65,6 +65,10 @@ Harder / accepted costs:
   they are all end-of-life as well; they were only useful as debugging checkpoints.
 * Dropping 32 bit Windows, macOS 12 and Windows 7/8/8.1 is a product decision with
   user facing impact and has to be reflected in the release notes.
+* No hosted CI: `.github/workflows/` was removed from this fork so GitHub never builds
+  artifacts. Type checking (`tsc -p packages/core --noEmit`), unit tests (`jest`),
+  lint and packaging (`electron-builder`) are run locally instead; the Node 22 baseline
+  above is therefore enforced by the local toolchain only.
 
 Code that had to change:
 
@@ -127,6 +131,7 @@ capabilities, or a security/compliance requirement for renderer sandboxing.
 ## See also
 
 * `scripts/check-electron-eol.mjs` - reports how much support window the pinned
-  major has left; wired into the `Electron baseline` CI workflow.
+  major has left. Run it manually (`node scripts/check-electron-eol.mjs`, optional
+  `--warn-days=<n>`) when re-evaluating the baseline.
 * Electron breaking changes: <https://github.com/electron/electron/blob/main/docs/breaking-changes.md>
 * Electron release schedule: <https://releases.electronjs.org/>
