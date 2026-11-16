@@ -9,6 +9,9 @@ import moment from "moment-timezone";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import type { UserPreferencesState } from "../../../features/user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../features/user-preferences/common/state.injectable";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { toMomentLocale } from "../../i18n/moment-locale";
 
 export interface LocaleDateProps {
   date: string;
@@ -16,11 +19,12 @@ export interface LocaleDateProps {
 
 interface Dependencies {
   state: UserPreferencesState;
+  i18n: I18n;
 }
 
-const NonInjectedLocaleDate = observer(({ date, state }: LocaleDateProps & Dependencies) => (
+const NonInjectedLocaleDate = observer(({ date, state, i18n }: LocaleDateProps & Dependencies) => (
   <>
-    {`${moment.tz(date, state.localeTimezone).format()}`}
+    {`${moment.tz(date, state.localeTimezone).locale(toMomentLocale(i18n.currentLocale)).format()}`}
   </>
 ));
 
@@ -28,5 +32,6 @@ export const LocaleDate = withInjectables<Dependencies, LocaleDateProps>(NonInje
   getProps: (di, props) => ({
     ...props,
     state: di.inject(userPreferencesStateInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 });

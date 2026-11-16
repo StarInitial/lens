@@ -13,7 +13,7 @@ const configSidebarItemInjectable = getInjectable({
 
   instantiate: () => ({
     parentId: null,
-    title: "Config",
+    title: "sidebar.config",
     getIcon: () => <Icon material="list" />,
     onClick: noop,
     orderNumber: 40,

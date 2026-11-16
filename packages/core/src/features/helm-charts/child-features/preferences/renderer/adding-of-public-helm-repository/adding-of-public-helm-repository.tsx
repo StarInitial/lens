@@ -15,6 +15,7 @@ import type { SingleValue } from "react-select";
 import selectHelmRepositoryInjectable from "./select-helm-repository/select-helm-repository.injectable";
 import { matches } from "lodash/fp";
 import activeHelmRepositoriesInjectable from "../active-helm-repositories.injectable";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   publicRepositories: IAsyncComputed<HelmRepo[]>;
@@ -27,6 +28,7 @@ const NonInjectedAddingOfPublicHelmRepository = observer(({
   activeRepositories,
   selectRepository,
 }: Dependencies) => {
+  const { t } = useTranslation();
   const dereferencesPublicRepositories = publicRepositories.value.get();
   const dereferencesActiveRepositories = activeRepositories.value.get();
 
@@ -41,7 +43,7 @@ const NonInjectedAddingOfPublicHelmRepository = observer(({
   return (
     <Select
       id="selection-of-active-public-helm-repository"
-      placeholder="Repositories"
+      placeholder={t("preferences.kubernetes.helm-charts.repositories")}
       isLoading={valuesAreLoading}
       isDisabled={valuesAreLoading}
       options={repositoryOptions}

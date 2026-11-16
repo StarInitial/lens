@@ -12,6 +12,8 @@ import { defaultThemeId } from "../../../common/vars";
 import currentTimezoneInjectable from "../../../common/vars/current-timezone.injectable";
 import type { EditorConfiguration, ExtensionRegistry, KubeconfigSyncEntry, KubeconfigSyncValue, TerminalConfig } from "./preferences-helpers";
 import { defaultExtensionRegistryUrlLocation, defaultEditorConfig, defaultTerminalConfig, defaultPackageMirror, getPreferenceDescriptor, packageMirrors } from "./preferences-helpers";
+import type { LocalePreference } from "../../../common/i18n/locale";
+import { isLocalePreference, systemLocalePreference } from "../../../common/i18n/locale";
 
 export type PreferenceDescriptors = ReturnType<typeof userPreferenceDescriptorsInjectable["instantiate"]>;
 
@@ -42,6 +44,14 @@ const userPreferenceDescriptorsInjectable = getInjectable({
       terminalTheme: getPreferenceDescriptor<string>({
         fromStore: val => val || "",
         toStore: val => val || undefined,
+      }),
+      locale: getPreferenceDescriptor<LocalePreference>({
+        fromStore: val => isLocalePreference(val)
+          ? val
+          : systemLocalePreference,
+        toStore: val => val === systemLocalePreference
+          ? undefined
+          : val,
       }),
       localeTimezone: getPreferenceDescriptor<string>({
         fromStore: val => val || currentTimezone,

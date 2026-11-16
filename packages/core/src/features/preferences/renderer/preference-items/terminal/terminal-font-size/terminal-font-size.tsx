@@ -18,7 +18,7 @@ const NonInjectedTerminalFontSize = observer(({
   state,
 }: Dependencies) => (
   <section>
-    <SubTitle title="Font size" />
+    <SubTitle title="preferences.terminal.font-size.title" />
     <Input
       theme="round-black"
       type="number"

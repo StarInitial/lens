@@ -20,7 +20,7 @@ const nodesSidebarItemInjectable = getInjectable({
     return {
       parentId: null,
       getIcon: () => <Icon svg="nodes" />,
-      title: "Nodes",
+      title: "sidebar.nodes",
       onClick: di.inject(navigateToNodesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

@@ -13,7 +13,7 @@ const workloadsSidebarItemInjectable = getInjectable({
 
   instantiate: () => ({
     parentId: null,
-    title: "Workloads",
+    title: "sidebar.workloads",
     getIcon: () => <Icon svg="workloads" />,
     onClick: noop,
     orderNumber: 20,

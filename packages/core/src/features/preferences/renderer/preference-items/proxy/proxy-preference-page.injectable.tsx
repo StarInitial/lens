@@ -10,7 +10,7 @@ import { PreferencePageComponent } from "../../preference-page-component";
 import { HorizontalLine } from "../../../../../renderer/components/horizontal-line/horizontal-line";
 
 const ProxyPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Proxy" id={item.id}>
+  <PreferencePageComponent title="preferences.pages.proxy.title" id={item.id}>
     {children}
   </PreferencePageComponent>
 );

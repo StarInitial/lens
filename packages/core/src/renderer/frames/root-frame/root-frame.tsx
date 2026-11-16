@@ -9,6 +9,7 @@ import { withInjectables } from "@ogre-tools/injectable-react";
 import broadcastThatRootFrameIsRenderedInjectable from "./broadcast-that-root-frame-is-rendered.injectable";
 import type { RootFrameChildComponent } from "@k8slens/react-application";
 import { rootFrameChildComponentInjectionToken } from "@k8slens/react-application";
+import { I18nProvider } from "../../i18n/i18n-provider";
 
 interface Dependencies {
   broadcastThatRootFrameIsRendered: () => void;
@@ -24,14 +25,14 @@ class NonInjectedRootFrame extends React.Component<Dependencies> {
 
   render() {
     return (
-      <>
+      <I18nProvider>
         {this.props.childComponents
           .map((child) => (
             <Observer key={child.id}>
               {() => (child.shouldRender.get() ? <child.Component /> : null) }
             </Observer>
           ))}
-      </>
+      </I18nProvider>
     );
   }
 }

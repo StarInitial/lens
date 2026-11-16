@@ -9,7 +9,7 @@ import React from "react";
 import { PreferencePageComponent } from "../../preference-page-component";
 
 const TelemetryPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Telemetry" id={item.id}>
+  <PreferencePageComponent title="preferences.pages.telemetry.title" id={item.id}>
     {children}
   </PreferencePageComponent>
 );

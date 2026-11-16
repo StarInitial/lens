@@ -16,7 +16,7 @@ interface Dependencies {
 
 const NonInjectedTerminalFontFamily = observer(({ model }: Dependencies) => (
   <section>
-    <SubTitle title="Font family" />
+    <SubTitle title="preferences.terminal.font-family.title" />
     <Select
       themeName="lens"
       controlShouldRenderValue

@@ -18,6 +18,8 @@ import { Icon } from "@k8slens/icon";
 import { checkThatAllDiscriminablesAreExhausted } from "../../../../common/utils/composable-responsibilities/discriminable/discriminable";
 import type { NavigateToPreferenceTab } from "./navigate-to-preference-tab/navigate-to-preference-tab.injectable";
 import navigateToPreferenceTabInjectable from "./navigate-to-preference-tab/navigate-to-preference-tab.injectable";
+import type { UseTranslation } from "../../../../renderer/i18n/i18n-context";
+import { useTranslation } from "../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   composite: IComputedValue<Composite<PreferenceItemTypes | PreferenceTabsRoot>>;
@@ -27,15 +29,19 @@ interface Dependencies {
 const NonInjectedPreferencesNavigation = observer(({
   composite,
   navigateToPreferenceTab,
-}: Dependencies) => (
-  <Tabs<string>
-    className="flex column"
-    scrollable={false}
-    onChange={navigateToPreferenceTab}
-  >
-    {toNavigationHierarchy(composite.get())}
-  </Tabs>
-));
+}: Dependencies) => {
+  const { t } = useTranslation();
+
+  return (
+    <Tabs<string>
+      className="flex column"
+      scrollable={false}
+      onChange={navigateToPreferenceTab}
+    >
+      {toNavigationHierarchy(composite.get(), t)}
+    </Tabs>
+  );
+});
 
 export const PreferencesNavigation = withInjectables<Dependencies>(NonInjectedPreferencesNavigation, {
   getProps: (di) => ({
@@ -44,7 +50,10 @@ export const PreferencesNavigation = withInjectables<Dependencies>(NonInjectedPr
   }),
 });
 
-const toNavigationHierarchy = (composite: Composite<PreferenceItemTypes | PreferenceTabsRoot>) => {
+const toNavigationHierarchy = (
+  composite: Composite<PreferenceItemTypes | PreferenceTabsRoot>,
+  t: UseTranslation["t"],
+): React.ReactElement => {
   const value = composite.value;
 
   switch (value.kind) {
@@ -68,11 +77,11 @@ const toNavigationHierarchy = (composite: Composite<PreferenceItemTypes | Prefer
                 smallest
                 className="mr-3" />
             )}
-            {value.label}
+            {t(value.label)}
           </div>
 
           <Map items={composite.children.filter(hasContent)}>
-            {toNavigationHierarchy}
+            {(child) => toNavigationHierarchy(child, t)}
           </Map>
         </div>
       );
@@ -89,7 +98,7 @@ const toNavigationHierarchy = (composite: Composite<PreferenceItemTypes | Prefer
           items={composite.children.filter(hasContent) as Composite<PreferenceItemTypes>[]}
           getSeparator={value.childSeparator}
         >
-          {toNavigationHierarchy}
+          {(child) => toNavigationHierarchy(child, t)}
         </Map>
       );
     }

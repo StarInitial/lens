@@ -14,7 +14,7 @@ const helmSidebarItemInjectable = getInjectable({
   instantiate: () => ({
     parentId: null,
     getIcon: () => <Icon svg="helm" />,
-    title: "Helm",
+    title: "sidebar.helm",
     onClick: noop,
     orderNumber: 90,
   }),

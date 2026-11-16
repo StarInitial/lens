@@ -16,7 +16,7 @@ interface Dependencies {
 
 const NonInjectedEditorFontFamily = observer(({ state: { editorConfiguration }}: Dependencies) => (
   <section>
-    <SubTitle title="Font family" />
+    <SubTitle title="preferences.editor.font-family.title" />
     <Input
       theme="round-black"
       type="text"

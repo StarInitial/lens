@@ -10,7 +10,7 @@ import { HorizontalLine } from "../../../../../renderer/components/horizontal-li
 import React from "react";
 
 const ApplicationPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Application" id={item.id}>
+  <PreferencePageComponent title="preferences.pages.application.title" id={item.id}>
     {children}
   </PreferencePageComponent>
 );

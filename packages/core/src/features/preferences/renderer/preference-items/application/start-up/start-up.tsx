@@ -9,22 +9,27 @@ import { Switch } from "../../../../../../renderer/components/switch";
 import { observer } from "mobx-react";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
 }
 
-const NonInjectedStartUp = observer(({ state }: Dependencies) => (
-  <section id="other">
-    <SubTitle title="Start-up" />
-    <Switch
-      checked={state.openAtLogin}
-      onChange={() => (state.openAtLogin = !state.openAtLogin)}
-    >
-      Automatically start Lens on login
-    </Switch>
-  </section>
-));
+const NonInjectedStartUp = observer(({ state }: Dependencies) => {
+  const { t } = useTranslation();
+
+  return (
+    <section id="other">
+      <SubTitle title="preferences.application.startup.title" />
+      <Switch
+        checked={state.openAtLogin}
+        onChange={() => (state.openAtLogin = !state.openAtLogin)}
+      >
+        {t("preferences.application.startup.open-at-login")}
+      </Switch>
+    </section>
+  );
+});
 
 export const StartUp = withInjectables<Dependencies>(NonInjectedStartUp, {
   getProps: (di) => ({

@@ -8,6 +8,7 @@
 // APIs
 import * as Catalog from "./catalog";
 import * as Component from "./components";
+import * as I18n from "./i18n";
 import * as K8sApi from "./k8s-api";
 import * as Navigation from "./navigation";
 import * as Theme from "./theming";
@@ -17,6 +18,7 @@ import { LensRendererExtension as LensExtension } from "../lens-renderer-extensi
 export {
   Catalog,
   Component,
+  I18n,
   K8sApi,
   Navigation,
   Theme,

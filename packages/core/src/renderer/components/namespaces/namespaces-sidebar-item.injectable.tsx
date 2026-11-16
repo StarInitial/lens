@@ -19,7 +19,7 @@ const namespacesSidebarItemInjectable = getInjectable({
     return {
       parentId: null,
       getIcon: () => <Icon material="layers" />,
-      title: "Namespaces",
+      title: "sidebar.namespaces",
       onClick: di.inject(navigateToNamespacesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

@@ -12,6 +12,7 @@ import defaultLensThemeInjectable from "../../../../../../renderer/themes/defaul
 import { lensThemeDeclarationInjectionToken } from "../../../../../../renderer/themes/declaration";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
@@ -24,10 +25,11 @@ const NonInjectedTheme = observer(({
   themes,
   defaultTheme,
 }: Dependencies) => {
+  const { t } = useTranslation();
   const themeOptions = [
     {
       value: "system", // TODO: replace with a sentinel value that isn't string (and serialize it differently)
-      label: "Sync with computer",
+      label: t("preferences.application.theme.system"),
     },
     ...themes.map(theme => ({
       value: theme.name,
@@ -37,7 +39,7 @@ const NonInjectedTheme = observer(({
 
   return (
     <section id="appearance">
-      <SubTitle title="Theme" />
+      <SubTitle title="preferences.application.theme.title" />
       <Select
         id="theme-input"
         options={themeOptions}

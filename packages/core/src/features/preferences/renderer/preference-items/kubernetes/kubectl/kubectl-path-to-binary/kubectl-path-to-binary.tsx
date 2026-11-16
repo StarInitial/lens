@@ -29,7 +29,7 @@ const NonInjectedKubectlPathToBinary = observer(({
 
   return (
     <section>
-      <SubTitle title="Path to kubectl binary" />
+      <SubTitle title="preferences.kubernetes.kubectl.path-to-binary.title" />
       <Input
         theme="round-black"
         placeholder={defaultPathForKubectlBinaries}

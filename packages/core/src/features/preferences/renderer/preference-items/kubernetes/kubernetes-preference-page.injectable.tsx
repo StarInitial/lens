@@ -10,7 +10,7 @@ import { HorizontalLine } from "../../../../../renderer/components/horizontal-li
 import React from "react";
 
 const KubernetesPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Kubernetes" id={item.id}>
+  <PreferencePageComponent title="preferences.pages.kubernetes.title" id={item.id}>
     {children}
   </PreferencePageComponent>
 );

@@ -10,34 +10,46 @@ import { Select } from "../../../../../../../renderer/components/select";
 import { defaultPackageMirror, packageMirrors } from "../../../../../../user-preferences/common/preferences-helpers";
 import type { UserPreferencesState } from "../../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
 }
 
-const downloadMirrorOptions = Array.from(packageMirrors, ([name, mirror]) => ({
-  value: name,
-  label: mirror.label,
+const NonInjectedKubectlDownloadMirror = observer(({ state }: Dependencies) => {
+  const { t } = useTranslation();
 
-  // TODO: Side-effect
-  isDisabled: !mirror.platforms.has(process.platform),
-}));
+  const downloadMirrorOptions = Array.from(packageMirrors, ([name, mirror]) => {
+    const key = `preferences.kubernetes.kubectl.download-mirror.${name}`;
+    const translated = t(key);
 
+    return {
+      value: name,
 
-const NonInjectedKubectlDownloadMirror = observer(({ state }: Dependencies) => (
-  <section>
-    <SubTitle title="Download mirror" />
-    <Select
-      id="download-mirror-input"
-      placeholder="Download mirror for kubectl"
-      options={downloadMirrorOptions}
-      value={state.downloadMirror}
-      onChange={option => state.downloadMirror = option?.value ?? defaultPackageMirror}
-      isDisabled={!state.downloadKubectlBinaries}
-      themeName="lens"
-    />
-  </section>
-));
+      // Mirrors registered by other builds may not have a catalog entry; they keep
+      // the label they were declared with.
+      label: translated === key ? mirror.label : translated,
+
+      // TODO: Side-effect
+      isDisabled: !mirror.platforms.has(process.platform),
+    };
+  });
+
+  return (
+    <section>
+      <SubTitle title="preferences.kubernetes.kubectl.download-mirror.title" />
+      <Select
+        id="download-mirror-input"
+        placeholder={t("preferences.kubernetes.kubectl.download-mirror.placeholder")}
+        options={downloadMirrorOptions}
+        value={state.downloadMirror}
+        onChange={option => state.downloadMirror = option?.value ?? defaultPackageMirror}
+        isDisabled={!state.downloadKubectlBinaries}
+        themeName="lens"
+      />
+    </section>
+  );
+});
 
 export const KubectlDownloadMirror = withInjectables<Dependencies>(NonInjectedKubectlDownloadMirror, {
   getProps: (di) => ({

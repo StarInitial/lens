@@ -20,7 +20,7 @@ const eventsSidebarItemInjectable = getInjectable({
     return {
       parentId: null,
       getIcon: () => <Icon material="access_time" />,
-      title: "Events",
+      title: "sidebar.events",
       onClick: di.inject(navigateToEventsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

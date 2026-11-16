@@ -21,7 +21,7 @@ const NonInjectedTerminalShellPath = observer(({
   defaultShell,
 }: Dependencies) => (
   <section id="shell">
-    <SubTitle title="Terminal Shell Path" />
+    <SubTitle title="preferences.terminal.shell-path.title" />
     <Input
       theme="round-black"
       placeholder={defaultShell}

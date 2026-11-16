@@ -16,6 +16,7 @@ import { clusterFrameChildComponentInjectionToken } from "@k8slens/react-applica
 import watchHistoryStateInjectable from "../../remote-helpers/watch-history-state.injectable";
 import { computedInjectManyInjectable } from "@ogre-tools/injectable-extension-for-mobx";
 import type { IComputedValue } from "mobx";
+import { I18nProvider } from "../../i18n/i18n-provider";
 
 interface Dependencies {
   namespaceStore: NamespaceStore;
@@ -38,14 +39,16 @@ const NonInjectedClusterFrame = observer(({
   ), []);
 
   return (
-    <ErrorBoundary>
-      {childComponents.get()
-        .map((child) => (
-          <Observer key={child.id}>
-            {() => (child.shouldRender.get() ? <child.Component /> : null) }
-          </Observer>
-        ))}
-    </ErrorBoundary>
+    <I18nProvider>
+      <ErrorBoundary>
+        {childComponents.get()
+          .map((child) => (
+            <Observer key={child.id}>
+              {() => (child.shouldRender.get() ? <child.Component /> : null) }
+            </Observer>
+          ))}
+      </ErrorBoundary>
+    </I18nProvider>
   );
 });
 

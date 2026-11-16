@@ -17,6 +17,7 @@ import type { WelcomeMenuRegistration } from "./welcome-menu-items/welcome-menu-
 import welcomeBannerItemsInjectable from "./welcome-banner-items/welcome-banner-items.injectable";
 import type { WelcomeBannerRegistration } from "./welcome-banner-items/welcome-banner-registration";
 import productNameInjectable from "../../../common/vars/product-name.injectable";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export const defaultWidth = 320;
 
@@ -34,6 +35,7 @@ const NonInjectedWelcome = observer(({
   welcomeBannerItems,
   productName,
 }: Dependencies) => {
+  const { t } = useTranslation();
   const welcomeBanners = welcomeBannerItems.get();
 
   // if there is banner with specified width, use it to calculate the width of the container
@@ -84,27 +86,23 @@ const NonInjectedWelcome = observer(({
             data-testid="welcome-text-container"
           >
             <h2>
-              {`Welcome to ${productName}!`}
+              {t("welcome.heading", { productName })}
             </h2>
 
             <p>
-              To get you started we have auto-detected your clusters in your
-              {" "}
-              kubeconfig file and added them to the catalog, your centralized
-              {" "}
-              view for managing all your cloud-native resources.
+              {t("welcome.description")}
               <br />
               <br />
-              {"If you have any questions or feedback, please join our "}
+              {t("welcome.feedback-prefix")}
               <a
                 href={forumsUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="link"
               >
-                Lens Forums
+                {t("welcome.forums-link")}
               </a>
-              .
+              {t("welcome.feedback-suffix")}
             </p>
 
             <ul

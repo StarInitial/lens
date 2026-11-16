@@ -47,6 +47,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
         state.hiddenTableColumns = descriptors.hiddenTableColumns.fromStore(preferences.hiddenTableColumns);
         state.httpsProxy = descriptors.httpsProxy.fromStore(preferences.httpsProxy);
         state.kubectlBinariesPath = descriptors.kubectlBinariesPath.fromStore(preferences.kubectlBinariesPath);
+        state.locale = descriptors.locale.fromStore(preferences.locale);
         state.localeTimezone = descriptors.localeTimezone.fromStore(preferences.localeTimezone);
         state.openAtLogin = descriptors.openAtLogin.fromStore(preferences.openAtLogin);
         state.shell = descriptors.shell.fromStore(preferences.shell);
@@ -71,6 +72,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
           hiddenTableColumns: descriptors.hiddenTableColumns.toStore(state.hiddenTableColumns),
           httpsProxy: descriptors.httpsProxy.toStore(state.httpsProxy),
           kubectlBinariesPath: descriptors.kubectlBinariesPath.toStore(state.kubectlBinariesPath),
+          locale: descriptors.locale.toStore(state.locale),
           localeTimezone: descriptors.localeTimezone.toStore(state.localeTimezone),
           openAtLogin: descriptors.openAtLogin.toStore(state.openAtLogin),
           shell: descriptors.shell.toStore(state.shell),

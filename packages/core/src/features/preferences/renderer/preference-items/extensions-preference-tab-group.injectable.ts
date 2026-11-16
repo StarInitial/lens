@@ -12,7 +12,7 @@ const extensionsPreferenceTabGroupInjectable = getInjectable({
     kind: "tab-group" as const,
     id: "extensions-tab-group",
     parentId: "preference-tabs" as const,
-    label: "Extensions",
+    label: "preferences.tabs.extensions",
     orderNumber: 20,
     iconName: "extension",
   }),

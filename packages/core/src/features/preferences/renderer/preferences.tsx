@@ -17,6 +17,7 @@ import { observer } from "mobx-react";
 import { PreferencesNavigation } from "./preference-navigation/preferences-navigation";
 import Gutter from "../../../renderer/components/gutter/gutter";
 import { checkThatAllDiscriminablesAreExhausted } from "../../../common/utils/composable-responsibilities/discriminable/discriminable";
+import { useTranslation } from "../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   closePreferences: () => void;
@@ -25,6 +26,7 @@ interface Dependencies {
 
 const NonInjectedPreferences = observer(
   ({ closePreferences, pageComposite }: Dependencies) => {
+    const { t } = useTranslation();
     const composite = pageComposite.get();
 
     return (
@@ -42,7 +44,7 @@ const NonInjectedPreferences = observer(
             className="flex items-center"
             data-preference-page-does-not-exist-test={true}
           >
-            No preferences found
+            {t("preferences.not-found")}
           </div>
         )}
       </SettingLayout>

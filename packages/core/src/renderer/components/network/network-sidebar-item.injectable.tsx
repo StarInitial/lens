@@ -14,7 +14,7 @@ const networkSidebarItemInjectable = getInjectable({
   instantiate: () => ({
     parentId: null,
     getIcon: () => <Icon material="device_hub" />,
-    title: "Network",
+    title: "sidebar.network",
     onClick: noop,
     orderNumber: 50,
   }),

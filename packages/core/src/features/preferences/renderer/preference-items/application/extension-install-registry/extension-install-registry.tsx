@@ -13,32 +13,34 @@ import { observer } from "mobx-react";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 import { defaultExtensionRegistryUrlLocation, defaultExtensionRegistryUrl } from "../../../../../user-preferences/common/preferences-helpers";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
 }
 
-const extensionInstallRegistryOptions = [
-  {
-    value: "default",
-    label: "Default Url",
-  },
-  {
-    value: "npmrc",
-    label: "Global .npmrc file's Url",
-  },
-  {
-    value: "custom",
-    label: "Custom Url",
-  },
-] as const;
-
 const NonInjectedExtensionInstallRegistry = observer(({ state }: Dependencies) => {
+  const { t } = useTranslation();
   const [customUrl, setCustomUrl] = React.useState(state.extensionRegistryUrl.customUrl || "");
+
+  const extensionInstallRegistryOptions = [
+    {
+      value: "default",
+      label: t("preferences.application.extension-registry.default-url"),
+    },
+    {
+      value: "npmrc",
+      label: t("preferences.application.extension-registry.npmrc-url"),
+    },
+    {
+      value: "custom",
+      label: t("preferences.application.extension-registry.custom-url"),
+    },
+  ] as const;
 
   return (
     <section id="extensionRegistryUrl">
-      <SubTitle title="Extension Install Registry" />
+      <SubTitle title="preferences.application.extension-registry.title" />
       <Select
         id="extension-install-registry-input"
         options={extensionInstallRegistryOptions}
@@ -56,12 +58,11 @@ const NonInjectedExtensionInstallRegistry = observer(({ state }: Dependencies) =
         themeName="lens"
       />
       <p className="mt-4 mb-5 leading-relaxed">
-        {
-          "This setting is to change the registry URL for installing extensions by name. "
-        }
-        {`If you are unable to access the default registry (${defaultExtensionRegistryUrl}) you can change it in your `}
+        {t("preferences.application.extension-registry.description-prefix", {
+          defaultRegistryUrl: defaultExtensionRegistryUrl,
+        })}
         <b>.npmrc</b>
-        {" file or in the input below."}
+        {t("preferences.application.extension-registry.description-suffix")}
       </p>
 
       <Input
@@ -70,7 +71,7 @@ const NonInjectedExtensionInstallRegistry = observer(({ state }: Dependencies) =
         value={customUrl}
         onChange={setCustomUrl}
         onBlur={() => (state.extensionRegistryUrl.customUrl = customUrl)}
-        placeholder="Custom Extension Registry URL..."
+        placeholder={t("preferences.application.extension-registry.placeholder")}
         disabled={state.extensionRegistryUrl.location !== "custom"}
       />
     </section>

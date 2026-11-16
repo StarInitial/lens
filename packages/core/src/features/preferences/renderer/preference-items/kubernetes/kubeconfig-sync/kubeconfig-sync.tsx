@@ -21,6 +21,8 @@ import discoverKubeconfigSyncKindInjectable from "./discover-sync-kind.injectabl
 import discoverAllKubeconfigSyncKindsInjectable from "./discover-all-sync-kinds.injectable";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import type { I18n } from "../../../../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../../../../common/i18n/i18n.injectable";
 
 interface Entry extends SyncKind {
   filePath: string;
@@ -32,6 +34,7 @@ interface Dependencies {
   logger: Logger;
   discoverAllKubeconfigSyncKinds: DiscoverAllKubeconfigSyncKinds;
   discoverKubeconfigSyncKind: DiscoverKubeconfigSyncKind;
+  i18n: I18n;
 }
 
 @observer
@@ -117,7 +120,7 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
     if (!entries.length) {
       return (
         <Notice className="mt-3">
-          <div className="flex-grow text-center">No files and folders have been synced yet</div>
+          <div className="flex-grow text-center">{this.props.i18n.t("preferences.kubernetes.kubeconfig-sync.empty")}</div>
         </Notice>
       );
     }
@@ -130,20 +133,22 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
   }
 
   renderSyncButtons() {
+    const { t } = this.props.i18n;
+
     if (this.props.isWindows) {
       return (
         <div className="flex gaps align-center mb-5">
           <PathPicker
-            message="Sync file(s)"
+            message={t("preferences.kubernetes.kubeconfig-sync.sync-files")}
             onPick={this.onPick}
-            buttonLabel="Sync"
+            buttonLabel={t("preferences.kubernetes.kubeconfig-sync.sync")}
             properties={["showHiddenFiles", "multiSelections", "openFile"]}
           />
-          <span>or</span>
+          <span>{t("preferences.kubernetes.kubeconfig-sync.or")}</span>
           <PathPicker
-            message="Sync folder(s)"
+            message={t("preferences.kubernetes.kubeconfig-sync.sync-folders")}
             onPick={this.onPick}
-            buttonLabel="Sync"
+            buttonLabel={t("preferences.kubernetes.kubeconfig-sync.sync")}
             properties={["showHiddenFiles", "multiSelections", "openDirectory"]}
           />
         </div>
@@ -153,9 +158,9 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
     return (
       <div className="self-start mb-5">
         <PathPicker
-          message="Sync Files and Folders"
+          message={t("preferences.kubernetes.kubeconfig-sync.sync-files-and-folders")}
           onPick={this.onPick}
-          buttonLabel="Sync"
+          buttonLabel={t("preferences.kubernetes.kubeconfig-sync.sync")}
           properties={["showHiddenFiles", "multiSelections", "openFile", "openDirectory"]}
         />
       </div>
@@ -165,10 +170,10 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
   render() {
     return (
       <section id="kube-sync">
-        <h2 data-testid="kubernetes-sync-header">Kubeconfig Syncs</h2>
+        <h2 data-testid="kubernetes-sync-header">{this.props.i18n.t("preferences.kubernetes.kubeconfig-sync.header")}</h2>
 
         {this.renderSyncButtons()}
-        <SubTitle title="Synced Items" className="pt-5"/>
+        <SubTitle title="preferences.kubernetes.kubeconfig-sync.synced-items" className="pt-5"/>
         {this.renderEntries()}
       </section>
     );
@@ -182,5 +187,6 @@ export const KubeconfigSync = withInjectables<Dependencies>(NonInjectedKubeconfi
     logger: di.inject(loggerInjectionToken),
     discoverAllKubeconfigSyncKinds: di.inject(discoverAllKubeconfigSyncKindsInjectable),
     discoverKubeconfigSyncKind: di.inject(discoverKubeconfigSyncKindInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 });

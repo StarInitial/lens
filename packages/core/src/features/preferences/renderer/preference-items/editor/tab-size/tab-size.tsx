@@ -16,7 +16,7 @@ interface Dependencies {
 
 const NonInjectedTabSize = observer(({ state: { editorConfiguration }}: Dependencies) => (
   <section>
-    <SubTitle title="Tab size" />
+    <SubTitle title="preferences.editor.tab-size.title" />
     <Input
       theme="round-black"
       type="number"

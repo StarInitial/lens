@@ -15,6 +15,7 @@ import helmRepositoriesErrorStateInjectable from "./helm-repositories-error-stat
 import type { IObservableValue } from "mobx";
 import { observer } from "mobx-react";
 import { Notice } from "../../../../../renderer/components/extensions/notice";
+import { useTranslation } from "../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   helmRepositoriesErrorState: IObservableValue<HelmRepositoriesErrorState>;
@@ -22,11 +23,12 @@ interface Dependencies {
 
 const NonInjectedHelmCharts = observer(
   ({ helmRepositoriesErrorState }: Dependencies) => {
+    const { t } = useTranslation();
     const state = helmRepositoriesErrorState.get();
 
     return (
       <section id="helm">
-        <h2>Helm Charts</h2>
+        <h2>{t("preferences.kubernetes.helm-charts.title")}</h2>
 
         <div>
           {!state.controlsAreShown && (

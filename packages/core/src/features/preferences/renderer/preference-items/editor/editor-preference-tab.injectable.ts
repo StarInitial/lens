@@ -13,7 +13,7 @@ const editorPreferenceTabInjectable = getInjectable({
     id: "editor-tab",
     parentId: "general-tab-group" as const,
     pathId: "editor",
-    label: "Editor",
+    label: "preferences.tabs.editor",
     orderNumber: 40,
   }),
 

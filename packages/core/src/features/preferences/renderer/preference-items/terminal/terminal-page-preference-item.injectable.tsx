@@ -9,7 +9,7 @@ import { PreferencePageComponent } from "../../preference-page-component";
 import React from "react";
 
 const TerminalPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Terminal" id={item.id}>
+  <PreferencePageComponent title="preferences.pages.terminal.title" id={item.id}>
     {children}
   </PreferencePageComponent>
 );

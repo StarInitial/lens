@@ -14,7 +14,7 @@ const storageSidebarItemInjectable = getInjectable({
   instantiate: () => ({
     parentId: null,
     getIcon: () => <Icon material="storage" />,
-    title: "Storage",
+    title: "sidebar.storage",
     onClick: noop,
     orderNumber: 60,
   }),

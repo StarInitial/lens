@@ -18,7 +18,7 @@ const clusterOverviewSidebarItemInjectable = getInjectable({
 
     return {
       parentId: null,
-      title: "Cluster",
+      title: "sidebar.cluster",
       getIcon: () => <Icon svg="kube" />,
       onClick: di.inject(navigateToClusterOverviewInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),

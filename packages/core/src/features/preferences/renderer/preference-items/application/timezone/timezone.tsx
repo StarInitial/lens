@@ -28,7 +28,7 @@ const NonInjectedTimezone = observer(({
   currentTimezone,
 }: Dependencies) => (
   <section id="locale">
-    <SubTitle title="Locale Timezone" />
+    <SubTitle title="preferences.application.timezone.title" />
     <Select
       id="timezone-input"
       options={timezoneOptions}

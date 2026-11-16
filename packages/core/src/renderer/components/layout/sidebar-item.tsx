@@ -14,9 +14,12 @@ import type { SidebarStorageState } from "./sidebar-storage/sidebar-storage.inje
 import sidebarStorageInjectable from "./sidebar-storage/sidebar-storage.injectable";
 import type { SidebarItemDeclaration } from "@k8slens/cluster-sidebar";
 import type { StorageLayer } from "../../utils/storage-helper";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
 
 interface Dependencies {
   sidebarStorage: StorageLayer<SidebarStorageState>;
+  i18n: I18n;
 }
 
 export interface SidebarItemProps {
@@ -24,8 +27,14 @@ export interface SidebarItemProps {
 }
 
 const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies) => {
-  const { item, sidebarStorage } = props;
+  const { item, sidebarStorage, i18n } = props;
   const id = item.id;
+
+  // Only the labels that have an entry in the catalogs are translated; the rest
+  // (for example "Pods" or "Deployments") stay as they are.
+  const title = typeof item.title === "string"
+    ? i18n.t(item.title)
+    : item.title;
   const expanded = sidebarStorage.get().expanded[id] ?? false;
   const isExpandable = item.children.length > 0 && item.children.some(item => item.isVisible.get());
   const isActive = item.isActive.get();
@@ -77,7 +86,7 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
         data-testid={`link-for-${id}`}
       >
         {item.getIcon?.()}
-        <span>{item.title}</span>
+        <span>{title}</span>
         {isExpandable && (
           <Icon
             className={styles.expandIcon}
@@ -95,6 +104,7 @@ export const SidebarItem = withInjectables<Dependencies, SidebarItemProps>(NonIn
   getProps: (di, props) => ({
     ...props,
     sidebarStorage: di.inject(sidebarStorageInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 });
 

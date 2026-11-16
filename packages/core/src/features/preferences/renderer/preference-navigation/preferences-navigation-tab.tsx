@@ -9,6 +9,7 @@ import type { PreferenceTab } from "../preference-items/preference-item-injectio
 import type { IComputedValue } from "mobx";
 import preferenceTabIsActiveInjectable from "./navigate-to-preference-tab/preference-tab-is-active.injectable";
 import React from "react";
+import { useTranslation } from "../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   tabIsActive: IComputedValue<boolean>;
@@ -21,14 +22,18 @@ interface PreferenceNavigationTabProps {
 const NonInjectedPreferencesNavigationTab = observer(({
   tabIsActive,
   tab,
-}: Dependencies & PreferenceNavigationTabProps) => (
-  <Tab
-    active={tabIsActive.get()}
-    label={tab.label}
-    data-preference-tab-link-test={tab.pathId}
-    value={tab.pathId}
-  />
-));
+}: Dependencies & PreferenceNavigationTabProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Tab
+      active={tabIsActive.get()}
+      label={t(tab.label)}
+      data-preference-tab-link-test={tab.pathId}
+      value={tab.pathId}
+    />
+  );
+});
 
 export const PreferencesNavigationTab = withInjectables<Dependencies, PreferenceNavigationTabProps>(NonInjectedPreferencesNavigationTab, {
   getProps: (di, props) => ({

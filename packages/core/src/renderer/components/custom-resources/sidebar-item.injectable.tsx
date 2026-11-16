@@ -12,7 +12,7 @@ const customResourcesSidebarItemInjectable = getInjectable({
   id: "sidebar-item-custom-resources",
   instantiate: () => ({
     parentId: null,
-    title: "Custom Resources",
+    title: "sidebar.custom-resources",
     getIcon: () => <Icon material="extension" />,
     onClick: noop,
     orderNumber: 110,

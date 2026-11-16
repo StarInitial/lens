@@ -10,6 +10,7 @@ import { Input, InputValidators } from "../../../../../../../renderer/components
 import directoryForBinariesInjectable from "../../../../../../../common/app-paths/directory-for-binaries/directory-for-binaries.injectable";
 import type { UserPreferencesState } from "../../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
@@ -18,6 +19,7 @@ interface Dependencies {
 
 const NonInjectedKubectlDirectoryForBinaries = observer(
   ({ state, defaultPathForGeneralBinaries }: Dependencies) => {
+    const { t } = useTranslation();
     const [downloadPath, setDownloadPath] = useState(state.downloadBinariesPath || "");
     const pathValidator = downloadPath ? InputValidators.isPath : undefined;
 
@@ -27,7 +29,7 @@ const NonInjectedKubectlDirectoryForBinaries = observer(
 
     return (
       <section>
-        <SubTitle title="Directory for binaries" />
+        <SubTitle title="preferences.kubernetes.kubectl.directory-for-binaries.title" />
         <Input
           theme="round-black"
           value={downloadPath}
@@ -37,7 +39,7 @@ const NonInjectedKubectlDirectoryForBinaries = observer(
           onBlur={save}
           disabled={!state.downloadKubectlBinaries}
         />
-        <div className="hint">The directory to download binaries into.</div>
+        <div className="hint">{t("preferences.kubernetes.kubectl.directory-for-binaries.hint")}</div>
       </section>
     );
   },

@@ -16,7 +16,7 @@ interface Dependencies {
 
 const NonInjectedEditorFontSize = observer(({ state: { editorConfiguration }}: Dependencies) => (
   <section>
-    <SubTitle title="Font size" />
+    <SubTitle title="preferences.editor.font-size.title" />
     <Input
       theme="round-black"
       type="number"

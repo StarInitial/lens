@@ -11,6 +11,7 @@ import type { LensTheme } from "../../../../../../renderer/themes/lens-theme";
 import { lensThemeDeclarationInjectionToken } from "../../../../../../renderer/themes/declaration";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
@@ -21,10 +22,11 @@ const NonInjectedTerminalTheme = observer(({
   state,
   themes,
 }: Dependencies) => {
+  const { t } = useTranslation();
   const themeOptions = [
     {
       value: "", // TODO: replace with a sentinel value that isn't string (and serialize it differently)
-      label: "Match Lens Theme",
+      label: t("preferences.terminal.theme.match"),
     },
     ...themes.map(theme => ({
       value: theme.name,
@@ -34,7 +36,7 @@ const NonInjectedTerminalTheme = observer(({
 
   return (
     <section id="terminalTheme">
-      <SubTitle title="Terminal theme" />
+      <SubTitle title="preferences.terminal.theme.title" />
       <Select
         id="terminal-theme-input"
         themeName="lens"
@@ -44,8 +46,7 @@ const NonInjectedTerminalTheme = observer(({
       />
     </section>
   );
-},
-);
+});
 
 export const TerminalTheme = withInjectables<Dependencies>(NonInjectedTerminalTheme, {
   getProps: (di) => ({

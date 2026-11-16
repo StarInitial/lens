@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { Input } from "../../../../../../renderer/components/input";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
@@ -17,20 +18,21 @@ interface Dependencies {
 const NonInjectedHttpProxyUrl = observer(({
   state,
 }: Dependencies) => {
+  const { t } = useTranslation();
   const [proxy, setProxy] = React.useState(state.httpsProxy || "");
 
   return (
     <section>
-      <SubTitle title="HTTP Proxy" />
+      <SubTitle title="preferences.proxy.http-proxy.title" />
       <Input
         theme="round-black"
-        placeholder="Type HTTP proxy url (example: http://proxy.acme.org:8080)"
+        placeholder={t("preferences.proxy.http-proxy.placeholder")}
         value={proxy}
         onChange={(v) => setProxy(v)}
         onBlur={() => (state.httpsProxy = proxy)}
       />
       <small className="hint">
-        Proxy is used only for non-cluster communication.
+        {t("preferences.proxy.http-proxy.hint")}
       </small>
     </section>
   );

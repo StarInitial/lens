@@ -24,6 +24,7 @@ import { SubTitle } from "../../../../../../renderer/components/layout/sub-title
 import { Checkbox } from "../../../../../../renderer/components/checkbox";
 import { HelmFileInput } from "./helm-file-input/helm-file-input";
 import { toJS } from "../../../../../../common/utils";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   helmRepo: HelmRepo;
@@ -37,106 +38,110 @@ const NonInjectedActivationOfCustomHelmRepositoryDialogContent = observer(({
   submitCustomRepository,
   maximalOptionsAreShown,
   hideDialog,
-} : Dependencies) => (
-  <Wizard header={<h5>Add custom Helm Repo</h5>} done={hideDialog}>
-    <WizardStep
-      contentClass="flow column"
-      nextLabel="Add"
-      next={() => submitCustomRepository(toJS(helmRepo))}
-      testIdForNext="custom-helm-repository-submit-button"
-      testIdForPrev="custom-helm-repository-cancel-button"
-    >
-      <div className="flex column gaps" data-testid="add-custom-helm-repository-dialog">
-        <Input
-          autoFocus
-          required
-          placeholder="Helm repo name"
-          trim
-          validators={systemName}
-          value={helmRepo.name}
-          onChange={action(v => helmRepo.name = v)}
-          data-testid="custom-helm-repository-name-input"
-        />
-        <Input
-          required
-          placeholder="URL"
-          validators={isUrl}
-          value={helmRepo.url}
-          onChange={action(v => helmRepo.url = v)}
-          data-testid="custom-helm-repository-url-input"
-        />
-        <Button
-          plain
-          className="accordion"
-          data-testid="toggle-maximal-options-for-custom-helm-repository-button"
-          onClick={action(() => maximalOptionsAreShown.set(!maximalOptionsAreShown.get()))}
-        >
-          More
-          <Icon
-            small
-            tooltip="More"
-            material={maximalOptionsAreShown.get() ? "remove" : "add"}
+} : Dependencies) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wizard header={<h5>{t("preferences.kubernetes.helm-charts.add-custom-repository-header")}</h5>} done={hideDialog}>
+      <WizardStep
+        contentClass="flow column"
+        nextLabel={t("preferences.kubernetes.helm-charts.add")}
+        next={() => submitCustomRepository(toJS(helmRepo))}
+        testIdForNext="custom-helm-repository-submit-button"
+        testIdForPrev="custom-helm-repository-cancel-button"
+      >
+        <div className="flex column gaps" data-testid="add-custom-helm-repository-dialog">
+          <Input
+            autoFocus
+            required
+            placeholder={t("preferences.kubernetes.helm-charts.repo-name-placeholder")}
+            trim
+            validators={systemName}
+            value={helmRepo.name}
+            onChange={action(v => helmRepo.name = v)}
+            data-testid="custom-helm-repository-name-input"
           />
-        </Button>
-
-        {maximalOptionsAreShown.get() && (
-          <div data-testid="maximal-options-for-custom-helm-repository-dialog">
-            <SubTitle title="Security settings" />
-
-            <Checkbox
-              label="Skip TLS certificate checks for the repository"
-              value={helmRepo.insecureSkipTlsVerify}
-              onChange={action(v => {
-                helmRepo.insecureSkipTlsVerify = v;
-              })}
-              data-testid="custom-helm-repository-verify-tls-input"
+          <Input
+            required
+            placeholder="URL"
+            validators={isUrl}
+            value={helmRepo.url}
+            onChange={action(v => helmRepo.url = v)}
+            data-testid="custom-helm-repository-url-input"
+          />
+          <Button
+            plain
+            className="accordion"
+            data-testid="toggle-maximal-options-for-custom-helm-repository-button"
+            onClick={action(() => maximalOptionsAreShown.set(!maximalOptionsAreShown.get()))}
+          >
+            {t("preferences.kubernetes.helm-charts.more")}
+            <Icon
+              small
+              tooltip={t("preferences.kubernetes.helm-charts.more")}
+              material={maximalOptionsAreShown.get() ? "remove" : "add"}
             />
+          </Button>
 
-            <HelmFileInput
-              placeholder="Key file"
-              value={helmRepo.keyFile || ""}
-              setValue={action((value) => helmRepo.keyFile = value)}
-              fileExtensions={keyExtensions}
-              data-testid="custom-helm-repository-key-file-input"
-            />
+          {maximalOptionsAreShown.get() && (
+            <div data-testid="maximal-options-for-custom-helm-repository-dialog">
+              <SubTitle title="preferences.kubernetes.helm-charts.security-settings" />
 
-            <HelmFileInput
-              placeholder="Ca file"
-              value={helmRepo.caFile || ""}
-              setValue={action((value) => helmRepo.caFile = value)}
-              fileExtensions={certExtensions}
-              data-testid="custom-helm-repository-ca-cert-file-input"
-            />
+              <Checkbox
+                label={t("preferences.kubernetes.helm-charts.skip-tls")}
+                value={helmRepo.insecureSkipTlsVerify}
+                onChange={action(v => {
+                  helmRepo.insecureSkipTlsVerify = v;
+                })}
+                data-testid="custom-helm-repository-verify-tls-input"
+              />
 
-            <HelmFileInput
-              placeholder="Certificate file"
-              value={helmRepo.certFile || ""}
-              setValue={action((value) => helmRepo.certFile = value)}
-              fileExtensions={certExtensions}
-              data-testid="custom-helm-repository-cert-file-input"
-            />
+              <HelmFileInput
+                placeholder={t("preferences.kubernetes.helm-charts.key-file")}
+                value={helmRepo.keyFile || ""}
+                setValue={action((value) => helmRepo.keyFile = value)}
+                fileExtensions={keyExtensions}
+                data-testid="custom-helm-repository-key-file-input"
+              />
 
-            <SubTitle title="Chart Repository Credentials" />
+              <HelmFileInput
+                placeholder={t("preferences.kubernetes.helm-charts.ca-file")}
+                value={helmRepo.caFile || ""}
+                setValue={action((value) => helmRepo.caFile = value)}
+                fileExtensions={certExtensions}
+                data-testid="custom-helm-repository-ca-cert-file-input"
+              />
 
-            <Input
-              placeholder="Username"
-              value={helmRepo.username}
-              onChange= {action(v => helmRepo.username = v)}
-              data-testid="custom-helm-repository-username-input"
-            />
-            <Input
-              type="password"
-              placeholder="Password"
-              value={helmRepo.password}
-              onChange={action(v => helmRepo.password = v)}
-              data-testid="custom-helm-repository-password-input"
-            />
-          </div>
-        )}
-      </div>
-    </WizardStep>
-  </Wizard>
-));
+              <HelmFileInput
+                placeholder={t("preferences.kubernetes.helm-charts.certificate-file")}
+                value={helmRepo.certFile || ""}
+                setValue={action((value) => helmRepo.certFile = value)}
+                fileExtensions={certExtensions}
+                data-testid="custom-helm-repository-cert-file-input"
+              />
+
+              <SubTitle title="preferences.kubernetes.helm-charts.credentials" />
+
+              <Input
+                placeholder={t("preferences.kubernetes.helm-charts.username")}
+                value={helmRepo.username}
+                onChange= {action(v => helmRepo.username = v)}
+                data-testid="custom-helm-repository-username-input"
+              />
+              <Input
+                type="password"
+                placeholder={t("preferences.kubernetes.helm-charts.password")}
+                value={helmRepo.password}
+                onChange={action(v => helmRepo.password = v)}
+                data-testid="custom-helm-repository-password-input"
+              />
+            </div>
+          )}
+        </div>
+      </WizardStep>
+    </Wizard>
+  );
+});
 
 
 

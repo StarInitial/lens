@@ -9,7 +9,7 @@ import { PreferencePageComponent } from "../../preference-page-component";
 import React from "react";
 
 const EditorPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Editor" id={item.id}>
+  <PreferencePageComponent title="preferences.pages.editor.title" id={item.id}>
     {children}
   </PreferencePageComponent>
 );

@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { Switch } from "../../../../../../renderer/components/switch";
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
 
 interface Dependencies {
   state: UserPreferencesState;
@@ -16,17 +17,21 @@ interface Dependencies {
 
 const NonInjectedCopyPasteFromTerminal = observer(({
   state,
-}: Dependencies) => (
-  <section id="terminalSelection">
-    <SubTitle title="Terminal copy & paste" />
-    <Switch
-      checked={state.terminalCopyOnSelect}
-      onChange={() => state.terminalCopyOnSelect = !state.terminalCopyOnSelect}
-    >
-      Copy on select and paste on right-click
-    </Switch>
-  </section>
-));
+}: Dependencies) => {
+  const { t } = useTranslation();
+
+  return (
+    <section id="terminalSelection">
+      <SubTitle title="preferences.terminal.copy-paste.title" />
+      <Switch
+        checked={state.terminalCopyOnSelect}
+        onChange={() => state.terminalCopyOnSelect = !state.terminalCopyOnSelect}
+      >
+        {t("preferences.terminal.copy-paste.description")}
+      </Switch>
+    </section>
+  );
+});
 
 export const CopyPasteFromTerminal = withInjectables<Dependencies>(NonInjectedCopyPasteFromTerminal, {
   getProps: (di) => ({

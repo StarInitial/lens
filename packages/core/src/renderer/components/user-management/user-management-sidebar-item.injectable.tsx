@@ -14,7 +14,7 @@ const userManagementSidebarItemInjectable = getInjectable({
   instantiate: () => ({
     parentId: null,
     getIcon: () => <Icon material="security" />,
-    title: "Access Control",
+    title: "sidebar.access-control",
     onClick: noop,
     orderNumber: 100,
   }),
