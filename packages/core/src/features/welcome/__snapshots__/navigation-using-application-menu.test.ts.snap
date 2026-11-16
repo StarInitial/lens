@@ -1097,7 +1097,7 @@ exports[`welcome - navigation using application menu when navigated somewhere el
 </body>
 `;
 
-exports[`welcome - navigation using application menu when navigated somewhere else when navigated to welcome using application menu renders 1`] = `
+exports[`welcome - navigation using application menu when navigated somewhere else when navigated to welcome again renders 1`] = `
 <div>
   <div
     class="Notifications flex column align-flex-end"

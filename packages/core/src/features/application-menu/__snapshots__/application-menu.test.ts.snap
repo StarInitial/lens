@@ -43,11 +43,7 @@ exports[`application-menu, given platform is 'darwin' given enough time passes p
   'root -> view -> zoom-in',
   'root -> view -> zoom-out',
   'root -> view -> separator-3-for-view',
-  'root -> view -> toggle-full-screen',
-  'root -> help',
-  'root -> help -> navigate-to-welcome',
-  'root -> help -> open-documentation',
-  'root -> help -> open-support'
+  'root -> view -> toggle-full-screen'
 ]"
 `;
 
@@ -82,12 +78,7 @@ exports[`application-menu, given platform is 'linux' given enough time passes po
   'root -> view -> zoom-in',
   'root -> view -> zoom-out',
   'root -> view -> separator-3-for-view',
-  'root -> view -> toggle-full-screen',
-  'root -> help',
-  'root -> help -> navigate-to-welcome',
-  'root -> help -> open-documentation',
-  'root -> help -> open-support',
-  'root -> help -> about'
+  'root -> view -> toggle-full-screen'
 ]"
 `;
 
@@ -122,11 +113,6 @@ exports[`application-menu, given platform is 'win32' given enough time passes po
   'root -> view -> zoom-in',
   'root -> view -> zoom-out',
   'root -> view -> separator-3-for-view',
-  'root -> view -> toggle-full-screen',
-  'root -> help',
-  'root -> help -> navigate-to-welcome',
-  'root -> help -> open-documentation',
-  'root -> help -> open-support',
-  'root -> help -> about'
+  'root -> view -> toggle-full-screen'
 ]"
 `;

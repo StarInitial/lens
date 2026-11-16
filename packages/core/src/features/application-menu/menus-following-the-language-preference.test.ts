@@ -53,7 +53,7 @@ describe("menus following the language preference", () => {
   });
 
   it("translates the application menu to English by default", () => {
-    expect(getTopLevelLabels()).toEqual(["File", "Edit", "View", "Help"]);
+    expect(getTopLevelLabels()).toEqual(["File", "Edit", "View"]);
   });
 
   it("translates the file menu to English by default", () => {
@@ -75,6 +75,14 @@ describe("menus following the language preference", () => {
     expect(builder.tray.get("about-app")).toBeNull();
   });
 
+  it("does not offer a help menu", () => {
+    expect(getMenuTemplate().map((menuItem) => menuItem.id)).toEqual([
+      "file",
+      "edit",
+      "view",
+    ]);
+  });
+
   describe("when the language preference is simplified Chinese", () => {
     beforeEach(() => {
       const userPreferencesState = builder.mainDi.inject(userPreferencesStateInjectable);
@@ -87,7 +95,7 @@ describe("menus following the language preference", () => {
     });
 
     it("translates the top level of the application menu", () => {
-      expect(getTopLevelLabels()).toEqual(["文件", "编辑", "视图", "帮助"]);
+      expect(getTopLevelLabels()).toEqual(["文件", "编辑", "视图"]);
     });
 
     it("translates the items of the file menu", () => {
@@ -105,10 +113,6 @@ describe("menus following the language preference", () => {
 
     it("translates the items of the view menu", () => {
       expect(getLabelsOfSubMenu("view")).toContain("资源目录");
-    });
-
-    it("translates the items of the help menu", () => {
-      expect(getLabelsOfSubMenu("help")).toContain("欢迎页");
     });
 
     it("translates the labels of the tray", () => {

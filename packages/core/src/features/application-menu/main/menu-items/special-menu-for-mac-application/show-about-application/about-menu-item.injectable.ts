@@ -22,8 +22,9 @@ const aboutMenuItemInjectable = getInjectable({
     return {
       kind: "clickable-menu-item" as const,
       id: "about",
-      parentId: isMac ? "mac" : "help",
-      orderNumber: isMac ? 10 : 40,
+      parentId: "mac",
+      orderNumber: 10,
+      isShown: isMac,
       label: computed(() => i18n.t("menu.about", { productName })),
 
       onClick() {

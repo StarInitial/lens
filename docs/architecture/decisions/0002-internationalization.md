@@ -132,8 +132,10 @@ cannot use `useTranslation()`. Instead:
   Electron in the language of the *operating system*. They pass an optional
   `labelKey` to `getApplicationMenuOperationSystemActionInjectable` so that they
   follow the language of the application instead.
-* the tray no longer offers an "About" entry; "About" lives in the Help menu and
-  in the macOS application menu only.
+* the tray no longer offers an "About" entry, and the top level Help menu was
+  removed completely (welcome page, documentation, support and about). "About"
+  now lives in the macOS application menu only; "Check for Updates..." moved
+  from Help to the File menu on Windows and Linux.
 * `getSystemLocale()` gained an `Intl.DateTimeFormat().resolvedOptions().locale`
   fallback, because the main process has no `navigator` and Windows/macOS do not
   set `LC_ALL`/`LANG`. On those systems the menu follows the OS locale when the

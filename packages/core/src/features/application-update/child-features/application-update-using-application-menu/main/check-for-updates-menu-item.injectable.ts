@@ -27,7 +27,7 @@ const checkForUpdatesMenuItemInjectable = getInjectable({
     return {
       kind: "clickable-menu-item" as const,
       id: "check-for-updates",
-      parentId: isMac ? "mac" : "help",
+      parentId: isMac ? "mac" : "file",
       orderNumber: isMac ? 20 : 50,
       label: computed(() => i18n.t("menu.check-for-updates")),
       isShown: updatingIsEnabled,

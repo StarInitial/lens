@@ -6,6 +6,7 @@
 import type { RenderResult } from "@testing-library/react";
 import type { ApplicationBuilder } from "../../renderer/components/test-utils/get-application-builder";
 import { getApplicationBuilder } from "../../renderer/components/test-utils/get-application-builder";
+import navigateToWelcomeInjectable from "../../common/front-end-routing/routes/welcome/navigate-to-welcome.injectable";
 
 describe("welcome - navigation using application menu", () => {
   let applicationBuilder: ApplicationBuilder;
@@ -46,13 +47,9 @@ describe("welcome - navigation using application menu", () => {
       expect(actual).toBeNull();
     });
 
-    describe("when navigated to welcome using application menu", () => {
+    describe("when navigated to welcome again", () => {
       beforeEach(() => {
-        applicationBuilder.applicationMenu.click(
-          "root",
-          "help",
-          "navigate-to-welcome",
-        );
+        applicationBuilder.navigateWith(navigateToWelcomeInjectable);
       });
 
       it("renders", () => {
