@@ -24,6 +24,8 @@ import type { LocalTerminalSettingPresenter } from "./local-terminal-setting-pre
 import localTerminalSettingPresenterInjectable from "./local-terminal-setting-presenter.injectable";
 import { Spinner } from "@k8slens/spinner";
 import { action, runInAction } from "mobx";
+import { useTranslation } from "../../i18n/i18n-context";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface ClusterLocalTerminalSettingProps {
   cluster: Cluster;
@@ -47,6 +49,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
     openPathPickingDialog,
     presenter,
   } = props;
+  const { t } = useTranslation();
   const commitDirectory = async (directory: string) => {
     if (!directory) {
       runInAction(() => {
@@ -70,9 +73,9 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
 
     showErrorNotification(
       <>
-        <b>Terminal Working Directory</b>
+        <b>{t("cluster-settings.working-directory")}</b>
         <p>
-          {"Your changes were not saved because "}
+          {t("cluster-settings.changes-were-not-saved-because")}
           {result.error}
         </p>
       </>,
@@ -90,8 +93,8 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
 
   const openFilePicker = () => {
     openPathPickingDialog({
-      message: "Choose Working Directory",
-      buttonLabel: "Pick",
+      message: t("cluster-settings.choose-working-directory"),
+      buttonLabel: t("cluster-settings.pick"),
       properties: ["openDirectory", "showHiddenFiles"],
       onPick: ([directory]) => setAndCommitDirectory(directory),
     });
@@ -100,7 +103,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
   return (
     <>
       <section className="working-directory">
-        <SubTitle title="Working Directory"/>
+        <SubTitle title="cluster-settings.working-directory"/>
         <Input
           theme="round-black"
           value={presenter.directory.get()}
@@ -114,7 +117,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
                 presenter.directory.get() && (
                   <Icon
                     material="close"
-                    title="Clear"
+                    title={t("cluster-settings.clear")}
                     onClick={() => setAndCommitDirectory("")}
                     smallest
                     style={{ marginRight: "var(--margin)" }}
@@ -123,7 +126,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
               }
               <Icon
                 material="folder"
-                title="Pick from filesystem"
+                title={t("cluster-settings.pick-from-filesystem")}
                 onClick={openFilePicker}
                 smallest
               />
@@ -131,14 +134,12 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
           )}
         />
         <small className="hint">
-          An explicit start path where the terminal will be launched,
-          {" "}
-          this is used as the current working directory (cwd) for the shell process.
+          <TranslatedKeyText value="cluster-settings.working-directory-hint" />
         </small>
       </section>
       <Gutter />
       <section className="default-namespace">
-        <SubTitle title="Default Namespace"/>
+        <SubTitle title="cluster-settings.default-namespace"/>
         <Input
           theme="round-black"
           data-testid="default-namespace"
@@ -148,7 +149,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
           placeholder={presenter.placeholderDefaultNamespace}
         />
         <small className="hint">
-          Default namespace used for kubectl.
+          <TranslatedKeyText value="cluster-settings.default-namespace-hint" />
         </small>
       </section>
     </>

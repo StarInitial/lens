@@ -23,6 +23,9 @@ import navigateToEntitySettingsInjectable from "../../../common/front-end-routin
 import catalogEntityRegistryInjectable from "../../api/catalog/entity/registry.injectable";
 import type { RequestClusterActivation } from "../../../features/cluster/activation/common/request-token";
 import requestClusterActivationInjectable from "../../../features/cluster/activation/renderer/request-activation.injectable";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { translateName } from "../../i18n/translated-text";
 
 export interface ClusterStatusProps {
   className?: IClassName;
@@ -33,6 +36,7 @@ interface Dependencies {
   navigateToEntitySettings: NavigateToEntitySettings;
   entityRegistry: CatalogEntityRegistry;
   requestClusterActivation: RequestClusterActivation;
+  i18n: I18n;
 }
 
 @observer
@@ -109,7 +113,7 @@ class NonInjectedClusterStatus extends React.Component<ClusterStatusProps & Depe
         {
           this.authOutput.map(({ message, level }, index) => (
             <p key={index} className={cssNames({ error: level === "error", warning: level === "warning" })}>
-              {message.trim()}
+              {translateName(this.props.i18n.t, "cluster-status.", message.trim())}
             </p>
           ))
         }
@@ -127,7 +131,9 @@ class NonInjectedClusterStatus extends React.Component<ClusterStatusProps & Depe
         <Spinner singleColor={false} className={styles.spinner} />
         <pre className="kube-auth-out">
           <p>
-            {this.isReconnecting ? "Reconnecting" : "Connecting"}
+            {this.isReconnecting
+              ? this.props.i18n.t("cluster-status.reconnecting")
+              : this.props.i18n.t("cluster-status.connecting")}
             &hellip;
           </p>
         </pre>
@@ -141,7 +147,7 @@ class NonInjectedClusterStatus extends React.Component<ClusterStatusProps & Depe
         <>
           <Button
             primary
-            label="Reconnect"
+            label={this.props.i18n.t("cluster-status.reconnect")}
             className="box center"
             onClick={this.reconnect}
             waiting={this.isReconnecting}
@@ -150,7 +156,7 @@ class NonInjectedClusterStatus extends React.Component<ClusterStatusProps & Depe
             className="box center interactive"
             onClick={this.manageProxySettings}
           >
-            Manage Proxy Settings
+            {this.props.i18n.t("cluster-status.manage-proxy-settings")}
           </a>
         </>
       );
@@ -179,5 +185,6 @@ export const ClusterStatus = withInjectables<Dependencies, ClusterStatusProps>(N
     navigateToEntitySettings: di.inject(navigateToEntitySettingsInjectable),
     entityRegistry: di.inject(catalogEntityRegistryInjectable),
     requestClusterActivation: di.inject(requestClusterActivationInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 });

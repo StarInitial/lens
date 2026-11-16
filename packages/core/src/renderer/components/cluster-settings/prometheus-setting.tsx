@@ -16,6 +16,9 @@ import type { MetricProviderInfo, RequestMetricsProviders } from "../../../commo
 import { withInjectables } from "@ogre-tools/injectable-react";
 import requestMetricsProvidersInjectable from "../../../common/k8s-api/endpoints/metrics.api/request-providers.injectable";
 import productNameInjectable from "../../../common/vars/product-name.injectable";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface ClusterPrometheusSettingProps {
   cluster: Cluster;
@@ -28,6 +31,7 @@ type ProviderValue = typeof autoDetectPrometheus | string;
 interface Dependencies {
   productName: string;
   requestMetricsProviders: RequestMetricsProviders;
+  i18n: I18n;
 }
 
 @observer
@@ -41,7 +45,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
     return [
       {
         value: autoDetectPrometheus,
-        label: "Auto Detect Prometheus",
+        label: this.props.i18n.t("cluster-settings.auto-detect-prometheus"),
         isSelected: autoDetectPrometheus === this.selectedOption,
       },
       ...Array.from(this.loadedOptions, ([id, provider]) => ({
@@ -126,7 +130,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
     return (
       <>
         <section>
-          <SubTitle title="Prometheus" />
+          <SubTitle title="cluster-settings.prometheus" />
           {
             this.loading
               ? <Spinner />
@@ -142,7 +146,9 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                     options={this.options}
                     themeName="lens"
                   />
-                  <small className="hint">What query format is used to fetch metrics from Prometheus</small>
+                  <small className="hint">
+                    <TranslatedKeyText value="cluster-settings.prometheus-hint" />
+                  </small>
                 </>
               )
           }
@@ -151,7 +157,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
           <>
             <hr />
             <section>
-              <SubTitle title="Prometheus service address" />
+              <SubTitle title="cluster-settings.prometheus-service-address" />
               <Input
                 theme="round-black"
                 value={this.path}
@@ -160,7 +166,9 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                 placeholder="<namespace>/<service>:<port>"
               />
               <small className="hint">
-                {`An address to an existing Prometheus installation (<namespace>/<service>:<port>). ${this.props.productName} tries to auto-detect address if left empty.`}
+                {this.props.i18n.t("cluster-settings.prometheus-service-address-hint", {
+                  productName: this.props.productName,
+                })}
               </small>
             </section>
           </>
@@ -175,5 +183,6 @@ export const ClusterPrometheusSetting = withInjectables<Dependencies, ClusterPro
     ...props,
     productName: di.inject(productNameInjectable),
     requestMetricsProviders: di.inject(requestMetricsProvidersInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 });

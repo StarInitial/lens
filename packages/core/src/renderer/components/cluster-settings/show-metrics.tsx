@@ -10,16 +10,24 @@ import { observable, reaction, makeObservable } from "mobx";
 import { Badge } from "../badge/badge";
 import { Icon } from "@k8slens/icon";
 import { Notice } from "../extensions/notice";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface ShowMetricsSettingProps {
   cluster: Cluster;
 }
 
+interface Dependencies {
+  i18n: I18n;
+}
+
 @observer
-export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps> {
+class NonInjectedShowMetricsSetting extends React.Component<ShowMetricsSettingProps & Dependencies> {
   @observable hiddenMetrics = observable.set<string>();
 
-  constructor(props: ShowMetricsSettingProps) {
+  constructor(props: ShowMetricsSettingProps & Dependencies) {
     super(props);
     makeObservable(this);
   }
@@ -44,7 +52,9 @@ export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps>
 
     if (!metrics.length) {
       return (
-        <div className="flex-grow text-center">All metrics are visible on the UI</div>
+        <div className="flex-grow text-center">
+          <TranslatedKeyText value="cluster-settings.all-metrics-visible" />
+        </div>
       );
     }
 
@@ -63,7 +73,7 @@ export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps>
               smallest
               material="clear"
               onClick={() => this.removeMetric(name)}
-              tooltip="Remove"
+              tooltip={this.props.i18n.t("cluster-settings.remove")}
               className="mx-3"
             />
           </Badge>
@@ -73,7 +83,6 @@ export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps>
   }
 
   render() {
-
     return (
       <Notice>
         <div className="MetricsSelect flex wrap gaps leading-relaxed">
@@ -83,3 +92,10 @@ export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps>
     );
   }
 }
+
+export const ShowMetricsSetting = withInjectables<Dependencies, ShowMetricsSettingProps>(NonInjectedShowMetricsSetting, {
+  getProps: (di, props) => ({
+    ...props,
+    i18n: di.inject(i18nInjectable),
+  }),
+});

@@ -121,6 +121,14 @@ translation exists.
   use `details.metrics-not-available` / `details.cluster-metrics-not-available`,
   and `translateChartDatasets` translates the `label` and `tooltip` of the chart
   datasets through `charts.*` / `charts.tooltips.*`.
+* Cluster settings, the cluster connection overlay and the catalog context menus
+  are translated as well: `EntitySettings` translates the group and tab titles
+  (`cluster-settings.*`), the settings pages use keys or
+  `<TranslatedKeyText>`, `ClusterStatus` translates the messages the main process
+  broadcasts (`cluster-status.*`), the catalog status column gained
+  `catalog.phase.connected`/`connecting`, and `normalizeCatalogEntityContextMenu`
+  translates entity context menu titles (`catalog-menu.*`), which covers both the
+  catalog drawer and the hotbar menus.
 * `LocaleDate` formats with the moment locale of the current language
   (`renderer/i18n/moment-locale.ts`).
 

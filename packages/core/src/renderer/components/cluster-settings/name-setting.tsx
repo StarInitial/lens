@@ -45,7 +45,7 @@ export class ClusterNameSetting extends React.Component<ClusterNameSettingProps>
   render() {
     return (
       <>
-        <SubTitle title="Cluster Name" />
+        <SubTitle title="cluster-settings.cluster-name" />
         <Input
           theme="round-black"
           validators={isRequired}

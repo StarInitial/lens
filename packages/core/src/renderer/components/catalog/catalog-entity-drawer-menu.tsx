@@ -20,6 +20,8 @@ import type { Navigate } from "../../navigation/navigate.injectable";
 import navigateInjectable from "../../navigation/navigate.injectable";
 import type { NormalizeCatalogEntityContextMenu } from "../../catalog/normalize-menu-item.injectable";
 import normalizeCatalogEntityContextMenuInjectable from "../../catalog/normalize-menu-item.injectable";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
 
 export interface CatalogEntityDrawerMenuProps<Entity extends CatalogEntity> extends MenuActionsProps {
   entity: Entity;
@@ -29,6 +31,7 @@ interface Dependencies {
   normalizeMenuItem: NormalizeCatalogEntityContextMenu;
   navigate: Navigate;
   visitEntityContextMenu: VisitEntityContextMenu;
+  i18n: I18n;
 }
 
 @observer
@@ -69,7 +72,7 @@ class NonInjectedCatalogEntityDrawerMenu<T extends CatalogEntity> extends React.
             material="push_pin"
             interactive
             small
-            tooltip="Add to Hotbar"
+            tooltip={this.props.i18n.t("catalog-menu.add-to-hotbar")}
           />
         )}
         removeContent={(
@@ -77,7 +80,7 @@ class NonInjectedCatalogEntityDrawerMenu<T extends CatalogEntity> extends React.
             svg="push_off"
             interactive
             small
-            tooltip="Remove from Hotbar"
+            tooltip={this.props.i18n.t("catalog-menu.remove-from-hotbar")}
           />
         )}
       />,
@@ -112,5 +115,6 @@ export const CatalogEntityDrawerMenu = withInjectables<Dependencies, CatalogEnti
     visitEntityContextMenu: di.inject(visitEntityContextMenuInjectable),
     normalizeMenuItem: di.inject(normalizeCatalogEntityContextMenuInjectable),
     navigate: di.inject(navigateInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 }) as <Entity extends CatalogEntity>(props: CatalogEntityDrawerMenuProps<Entity>) => JSX.Element;

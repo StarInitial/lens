@@ -10,16 +10,24 @@ import { SubTitle } from "../layout/sub-title";
 import { EditableList } from "../editable-list";
 import { observable, makeObservable } from "mobx";
 import { systemName } from "../input/input_validators";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface ClusterAccessibleNamespacesProps {
   cluster: Cluster;
 }
 
+interface Dependencies {
+  i18n: I18n;
+}
+
 @observer
-export class ClusterAccessibleNamespaces extends React.Component<ClusterAccessibleNamespacesProps> {
+class NonInjectedClusterAccessibleNamespaces extends React.Component<ClusterAccessibleNamespacesProps & Dependencies> {
   @observable namespaces = new Set(this.props.cluster.accessibleNamespaces);
 
-  constructor(props: ClusterAccessibleNamespacesProps) {
+  constructor(props: ClusterAccessibleNamespacesProps & Dependencies) {
     super(props);
     makeObservable(this);
   }
@@ -27,9 +35,9 @@ export class ClusterAccessibleNamespaces extends React.Component<ClusterAccessib
   render() {
     return (
       <>
-        <SubTitle title="Accessible Namespaces" id="accessible-namespaces" />
+        <SubTitle title="cluster-settings.accessible-namespaces" id="accessible-namespaces" />
         <EditableList
-          placeholder="Add new namespace..."
+          placeholder={this.props.i18n.t("cluster-settings.accessible-namespaces-placeholder")}
           add={(newNamespace) => {
             this.namespaces.add(newNamespace);
             this.props.cluster.accessibleNamespaces.replace([...this.namespaces]);
@@ -43,9 +51,16 @@ export class ClusterAccessibleNamespaces extends React.Component<ClusterAccessib
           inputTheme="round-black"
         />
         <small className="hint">
-          This setting is useful for manually specifying which namespaces you have access to. This is useful when you do not have permissions to list namespaces.
+          <TranslatedKeyText value="cluster-settings.accessible-namespaces-hint" />
         </small>
       </>
     );
   }
 }
+
+export const ClusterAccessibleNamespaces = withInjectables<Dependencies, ClusterAccessibleNamespacesProps>(NonInjectedClusterAccessibleNamespaces, {
+  getProps: (di, props) => ({
+    ...props,
+    i18n: di.inject(i18nInjectable),
+  }),
+});

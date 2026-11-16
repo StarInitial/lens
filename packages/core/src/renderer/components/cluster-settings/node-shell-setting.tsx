@@ -12,17 +12,25 @@ import { observer } from "mobx-react";
 import { Icon } from "@k8slens/icon";
 import { initialNodeShellImage } from "../../../common/cluster-types";
 import Gutter from "../gutter/gutter";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface ClusterNodeShellSettingProps {
   cluster: Cluster;
 }
 
+interface Dependencies {
+  i18n: I18n;
+}
+
 @observer
-export class ClusterNodeShellSetting extends React.Component<ClusterNodeShellSettingProps> {
+class NonInjectedClusterNodeShellSetting extends React.Component<ClusterNodeShellSettingProps & Dependencies> {
   @observable nodeShellImage = this.props.cluster.preferences?.nodeShellImage || "";
   @observable imagePullSecret = this.props.cluster.preferences?.imagePullSecret || "";
 
-  constructor(props: ClusterNodeShellSettingProps) {
+  constructor(props: ClusterNodeShellSettingProps & Dependencies) {
     super(props);
     makeObservable(this);
   }
@@ -35,13 +43,15 @@ export class ClusterNodeShellSetting extends React.Component<ClusterNodeShellSet
   }
 
   render() {
+    const { t } = this.props.i18n;
+
     return (
       <>
         <section>
-          <SubTitle title="Node shell image" id="node-shell-image"/>
+          <SubTitle title="cluster-settings.node-shell-image" id="node-shell-image"/>
           <Input
             theme="round-black"
-            placeholder={`Default image: ${initialNodeShellImage}`}
+            placeholder={t("cluster-settings.node-shell-image-placeholder", { image: initialNodeShellImage })}
             value={this.nodeShellImage}
             onChange={value => this.nodeShellImage = value}
             iconRight={
@@ -51,21 +61,21 @@ export class ClusterNodeShellSetting extends React.Component<ClusterNodeShellSet
                     smallest
                     material="close"
                     onClick={() => this.nodeShellImage = ""}
-                    tooltip="Reset"
+                    tooltip={t("cluster-settings.reset")}
                   />
                 )
                 : undefined
             }
           />
           <small className="hint">
-            Node shell image. Used for creating node shell pod.
+            <TranslatedKeyText value="cluster-settings.node-shell-image-hint" />
           </small>
         </section>
         <Gutter />
         <section>
-          <SubTitle title="Image pull secret" id="image-pull-secret"/>
+          <SubTitle title="cluster-settings.image-pull-secret" id="image-pull-secret"/>
           <Input
-            placeholder="Specify a secret name..."
+            placeholder={t("cluster-settings.image-pull-secret-placeholder")}
             theme="round-black"
             value={this.imagePullSecret}
             onChange={value => this.imagePullSecret = value}
@@ -76,17 +86,24 @@ export class ClusterNodeShellSetting extends React.Component<ClusterNodeShellSet
                     smallest
                     material="close"
                     onClick={() => this.imagePullSecret = ""}
-                    tooltip="Clear"
+                    tooltip={t("cluster-settings.clear")}
                   />
                 )
                 : undefined
             }
           />
           <small className="hint">
-            Name of a pre-existing secret in the kube-system namespace. An optional setting. Used for pulling image from a private registry.
+            <TranslatedKeyText value="cluster-settings.image-pull-secret-hint" />
           </small>
         </section>
       </>
     );
   }
 }
+
+export const ClusterNodeShellSetting = withInjectables<Dependencies, ClusterNodeShellSettingProps>(NonInjectedClusterNodeShellSetting, {
+  getProps: (di, props) => ({
+    ...props,
+    i18n: di.inject(i18nInjectable),
+  }),
+});

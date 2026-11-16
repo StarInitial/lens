@@ -12,16 +12,24 @@ import { SubTitle } from "../layout/sub-title";
 import type { Cluster } from "../../../common/cluster/cluster";
 import { observable, reaction, makeObservable } from "mobx";
 import { ClusterMetricsResourceType } from "../../../common/cluster-types";
+import { withInjectables } from "@ogre-tools/injectable-react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface ClusterMetricsSettingProps {
   cluster: Cluster;
 }
 
+interface Dependencies {
+  i18n: I18n;
+}
+
 @observer
-export class ClusterMetricsSetting extends React.Component<ClusterMetricsSettingProps> {
+class NonInjectedClusterMetricsSetting extends React.Component<ClusterMetricsSettingProps & Dependencies> {
   @observable hiddenMetrics = observable.set<string>();
 
-  constructor(props: ClusterMetricsSettingProps) {
+  constructor(props: ClusterMetricsSettingProps & Dependencies) {
     super(props);
     makeObservable(this);
   }
@@ -63,7 +71,7 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
         <Select
           id="cluster-metric-resource-type-input"
           className="box grow"
-          placeholder="Select metrics to hide..."
+          placeholder={this.props.i18n.t("cluster-settings.hide-metrics-placeholder")}
           isMulti
           isSearchable
           onMenuClose={this.save}
@@ -87,12 +95,12 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
         />
         <Button
           primary
-          label="Hide all metrics"
+          label={<TranslatedKeyText value="cluster-settings.hide-all-metrics" />}
           onClick={this.onChangeButton}
         />
         <Button
           primary
-          label="Reset"
+          label={<TranslatedKeyText value="cluster-settings.reset" />}
           onClick={this.reset}
         />
       </>
@@ -100,10 +108,9 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
   }
 
   render() {
-
     return (
       <div className="MetricsSelec0 mb-5">
-        <SubTitle title={"Hide metrics from the UI"}/>
+        <SubTitle title={"cluster-settings.hide-metrics"}/>
         <div className="flex gaps">
           {this.renderMetricsSelect()}
         </div>
@@ -111,3 +118,10 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
     );
   }
 }
+
+export const ClusterMetricsSetting = withInjectables<Dependencies, ClusterMetricsSettingProps>(NonInjectedClusterMetricsSetting, {
+  getProps: (di, props) => ({
+    ...props,
+    i18n: di.inject(i18nInjectable),
+  }),
+});

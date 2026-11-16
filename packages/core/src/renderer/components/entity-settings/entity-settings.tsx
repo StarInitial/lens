@@ -16,6 +16,8 @@ import { withInjectables } from "@ogre-tools/injectable-react";
 import currentCatalogEntityForSettingsInjectable from "./current-entity.injectable";
 import type { ActiveEntitySettings } from "./active-tabs.injectable";
 import activeEntitySettingsTabInjectable from "./active-tabs.injectable";
+import { useTranslation } from "../../i18n/i18n-context";
+import { translateName } from "../../i18n/translated-text";
 
 interface Dependencies {
   entity: IComputedValue<CatalogEntity | undefined>;
@@ -51,6 +53,7 @@ const NonInjectedCatalogEntitySettings = observer((props: CatalogEntitySettingsP
     entity,
   } = props;
   const { tabId, setting, groups } = activeEntitySettingsTab.get();
+  const { t } = useTranslation();
 
   const renderNavigation = () => (
     <>
@@ -77,13 +80,13 @@ const NonInjectedCatalogEntitySettings = observer((props: CatalogEntitySettingsP
           groups.map(({ tabs, title }) => (
             <React.Fragment key={title}>
               <hr />
-              <div className="header">{title}</div>
+              <div className="header">{translateName(t, "cluster-settings.groups.", title)}</div>
               {
                 tabs.map((setting) => (
                   <Tab
                     key={setting.id}
                     value={setting.id}
-                    label={setting.title}
+                    label={translateName(t, "cluster-settings.", setting.title)}
                     data-testid={`${setting.id}-tab`}
                   />
                 ))
@@ -105,7 +108,7 @@ const NonInjectedCatalogEntitySettings = observer((props: CatalogEntitySettingsP
         tabId && setting
           ? (
             <section>
-              <h2 data-testid={`${tabId}-header`}>{setting.title}</h2>
+              <h2 data-testid={`${tabId}-header`}>{translateName(t, "cluster-settings.", setting.title)}</h2>
               <section>
                 <setting.components.View entity={entity} />
               </section>
@@ -116,7 +119,7 @@ const NonInjectedCatalogEntitySettings = observer((props: CatalogEntitySettingsP
               className="flex items-center"
               data-preference-page-does-not-exist-test={true}
             >
-              No settings found for
+              {t("cluster-settings.no-settings-found")}
               {" "}
               {entity.apiVersion}
               /
