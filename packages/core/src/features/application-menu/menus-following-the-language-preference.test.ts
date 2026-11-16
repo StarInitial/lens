@@ -53,7 +53,7 @@ describe("menus following the language preference", () => {
   });
 
   it("translates the application menu to English by default", () => {
-    expect(getTopLevelLabels()).toEqual(["File", "Edit", "View"]);
+    expect(getTopLevelLabels()).toEqual(["File", "Edit", "View", "About"]);
   });
 
   it("translates the file menu to English by default", () => {
@@ -80,7 +80,12 @@ describe("menus following the language preference", () => {
       "file",
       "edit",
       "view",
+      "about-menu",
     ]);
+  });
+
+  it("offers the about dialog in the place the help menu used to be", () => {
+    expect(getLabelsOfSubMenu("about-menu")).toEqual([`About ${productName}`]);
   });
 
   describe("when the language preference is simplified Chinese", () => {
@@ -95,7 +100,11 @@ describe("menus following the language preference", () => {
     });
 
     it("translates the top level of the application menu", () => {
-      expect(getTopLevelLabels()).toEqual(["文件", "编辑", "视图"]);
+      expect(getTopLevelLabels()).toEqual(["文件", "编辑", "视图", "关于"]);
+    });
+
+    it("translates the about dialog entry", () => {
+      expect(getLabelsOfSubMenu("about-menu")).toEqual([`关于 ${productName}`]);
     });
 
     it("translates the items of the file menu", () => {

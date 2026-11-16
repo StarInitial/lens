@@ -133,9 +133,11 @@ cannot use `useTranslation()`. Instead:
   `labelKey` to `getApplicationMenuOperationSystemActionInjectable` so that they
   follow the language of the application instead.
 * the tray no longer offers an "About" entry, and the top level Help menu was
-  removed completely (welcome page, documentation, support and about). "About"
-  now lives in the macOS application menu only; "Check for Updates..." moved
-  from Help to the File menu on Windows and Linux.
+  removed completely (welcome page, documentation, support and about). In its
+  place Windows and Linux get a top level "About" menu holding nothing but the
+  about dialog, which on macOS stays in the application menu where the platform
+  expects it; "Check for Updates..." moved from Help to the File menu on Windows
+  and Linux.
 * `getSystemLocale()` gained an `Intl.DateTimeFormat().resolvedOptions().locale`
   fallback, because the main process has no `navigator` and Windows/macOS do not
   set `LC_ALL`/`LANG`. On those systems the menu follows the OS locale when the

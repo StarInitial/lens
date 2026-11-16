@@ -212,6 +212,7 @@ export const en: TranslationDictionary = {
   "menu.extensions": "Extensions",
   "menu.close-window": "Close Window",
   "menu.quit": "Quit",
+  "menu.about-menu": "About",
   "menu.about": "About {{productName}}",
   "menu.check-for-updates": "Check for Updates...",
   "menu.catalog": "Catalog",

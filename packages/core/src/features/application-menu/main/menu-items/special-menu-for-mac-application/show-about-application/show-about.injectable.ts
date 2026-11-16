@@ -8,7 +8,6 @@ import isWindowsInjectable from "../../../../../../common/vars/is-windows.inject
 import appNameInjectable from "../../../../../../common/vars/app-name.injectable";
 import productNameInjectable from "../../../../../../common/vars/product-name.injectable";
 import extensionApiVersionInjectable from "../../../../../../common/vars/extension-api-version.injectable";
-import applicationCopyrightInjectable from "../../../../../../common/vars/application-copyright.injectable";
 import specificVersionsInjectable from "./about-bundled-extensions.injectable";
 import { buildVersionInitializable } from "../../../../../vars/build-version/common/token";
 
@@ -22,7 +21,6 @@ const showAboutInjectable = getInjectable({
     const isWindows = di.inject(isWindowsInjectable);
     const appName = di.inject(appNameInjectable);
     const productName = di.inject(productNameInjectable);
-    const applicationCopyright = di.inject(applicationCopyrightInjectable);
     const specificVersions = di.inject(specificVersionsInjectable);
 
     return () => {
@@ -32,7 +30,6 @@ const showAboutInjectable = getInjectable({
         `Electron: ${process.versions.electron}`,
         `Chrome: ${process.versions.chrome}`,
         `Node: ${process.versions.node}`,
-        applicationCopyright,
       ];
 
       if (specificVersions.length > 0) {

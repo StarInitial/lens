@@ -206,6 +206,7 @@ export const zhCN: TranslationDictionary = {
   "menu.extensions": "扩展",
   "menu.close-window": "关闭窗口",
   "menu.quit": "退出",
+  "menu.about-menu": "关于",
   "menu.about": "关于 {{productName}}",
   "menu.check-for-updates": "检查更新…",
   "menu.catalog": "资源目录",
