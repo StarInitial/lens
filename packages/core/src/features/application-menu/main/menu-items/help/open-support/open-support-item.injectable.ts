@@ -3,6 +3,8 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 import { getInjectable } from "@ogre-tools/injectable";
+import { computed } from "mobx";
+import i18nInjectable from "../../../../../../common/i18n/i18n.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
 import { supportUrl } from "../../../../../../common/vars";
 import openLinkInBrowserInjectable from "../../../../../../common/utils/open-link-in-browser.injectable";
@@ -14,13 +16,14 @@ const openSupportItemInjectable = getInjectable({
   instantiate: (di) => {
     const openLinkInBrowser = di.inject(openLinkInBrowserInjectable);
     const logger = di.inject(loggerInjectionToken);
+    const i18n = di.inject(i18nInjectable);
 
     return {
       kind: "clickable-menu-item" as const,
       parentId: "help",
       id: "open-support",
       orderNumber: 30,
-      label: "Support",
+      label: computed(() => i18n.t("menu.support")),
 
       // TODO: Convert to async/await
       onClick: () => {

@@ -6,6 +6,7 @@ import { getInjectable } from "@ogre-tools/injectable";
 import { Menu } from "electron";
 import type { MenuItemConstructorOptions } from "electron";
 import type { MenuItemOpts } from "./application-menu-items.injectable";
+import type { IComputedValue } from "mobx";
 import type { Composite } from "../../../common/utils/composite/get-composite/get-composite";
 import type { ApplicationMenuItemTypes } from "./menu-items/application-menu-item-injection-token";
 import { pipeline } from "@ogre-tools/fp";
@@ -37,6 +38,9 @@ export const getApplicationMenuTemplate = (composite: Composite<ApplicationMenuI
   return topLevelMenus.map(toHierarchicalElectronMenuItem);
 };
 
+const resolveLabel = (label: string | IComputedValue<string>): string =>
+  typeof label === "string" ? label : label.get();
+
 const toHierarchicalElectronMenuItem = (
   composite: Composite<ApplicationMenuItemTypes>,
 ): MenuItemOpts => {
@@ -50,7 +54,7 @@ const toHierarchicalElectronMenuItem = (
       return {
         ...(id ? { id } : {}),
         ...(role ? { role } : {}),
-        label,
+        label: resolveLabel(label),
 
         submenu: pipeline(
           composite.children,
@@ -66,7 +70,7 @@ const toHierarchicalElectronMenuItem = (
 
       return {
         ...(id ? { id } : {}),
-        label,
+        label: resolveLabel(label),
 
         submenu: pipeline(
           composite.children,
@@ -82,7 +86,7 @@ const toHierarchicalElectronMenuItem = (
 
       return {
         ...(id ? { id } : {}),
-        ...(label ? { label } : {}),
+        ...(label ? { label: resolveLabel(label) } : {}),
         ...(keyboardShortcut ? { accelerator: keyboardShortcut }: {}),
         /**
          * Electron 44 widened the second argument of a menu `click` handler from
@@ -98,7 +102,7 @@ const toHierarchicalElectronMenuItem = (
       const { label, keyboardShortcut, actionName } = value;
 
       return {
-        ...(label ? { label } : {}),
+        ...(label ? { label: resolveLabel(label) } : {}),
         ...(keyboardShortcut ? { accelerator: keyboardShortcut } : {}),
         role: actionName,
       };

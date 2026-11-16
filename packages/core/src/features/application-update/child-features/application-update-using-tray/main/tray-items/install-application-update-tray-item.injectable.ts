@@ -4,6 +4,7 @@
  */
 import { getInjectable } from "@ogre-tools/injectable";
 import { computed } from "mobx";
+import i18nInjectable from "../../../../../../common/i18n/i18n.injectable";
 import { trayMenuItemInjectionToken } from "../../../../../../main/tray/tray-menu-item/tray-menu-item-injection-token";
 import discoveredUpdateVersionInjectable from "../../../../common/discovered-update-version.injectable";
 import { withErrorSuppression } from "../../../../../../common/utils/with-error-suppression/with-error-suppression";
@@ -20,6 +21,7 @@ const installApplicationUpdateTrayItemInjectable = getInjectable({
     const discoveredVersionState = di.inject(discoveredUpdateVersionInjectable);
     const withErrorLoggingFor = di.inject(withErrorLoggingInjectable);
     const updateIsReadyToBeInstalled = di.inject(updateIsReadyToBeInstalledInjectable);
+    const i18n = di.inject(i18nInjectable);
 
     return {
       id: "install-update",
@@ -29,7 +31,7 @@ const installApplicationUpdateTrayItemInjectable = getInjectable({
       label: computed(() => {
         const versionToBeInstalled = discoveredVersionState.value.get()?.version;
 
-        return `Install update ${versionToBeInstalled}`;
+        return i18n.t("tray.install-update", { version: versionToBeInstalled ?? "" });
       }),
 
       enabled: computed(() => true),

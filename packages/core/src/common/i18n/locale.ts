@@ -55,8 +55,10 @@ export const isLocalePreference = (value: unknown): value is LocalePreference =>
 /**
  * The locale of the environment as a BCP 47 tag, for example `zh-CN`, `en-US`
  * or `zh-Hans-CN`. In the renderer this is the Chromium locale, in the main
- * process this is the POSIX locale of the environment. It deliberately does not
- * depend on Electron so that it can be used by both processes.
+ * process this is the POSIX locale of the environment or, when that is not set,
+ * the default locale of `Intl` (which follows the operating system). It
+ * deliberately does not depend on Electron so that it can be used by both
+ * processes.
  */
 export const getSystemLocale = (): string | undefined => {
   if (typeof navigator !== "undefined" && typeof navigator.language === "string") {
@@ -64,10 +66,24 @@ export const getSystemLocale = (): string | undefined => {
   }
 
   if (typeof process !== "undefined") {
-    return process.env.LC_ALL ?? process.env.LC_MESSAGES ?? process.env.LANG;
+    const fromEnvironment = process.env.LC_ALL ?? process.env.LC_MESSAGES ?? process.env.LANG;
+
+    if (fromEnvironment) {
+      return fromEnvironment;
+    }
   }
 
-  return undefined;
+  /**
+   * In the main process there is no `navigator` and the POSIX locale variables
+   * are usually not set on Windows or macOS. Electron ships a full ICU, so the
+   * default locale of `Intl` is the locale of the operating system, which is
+   * what the tray and the application menu have to follow.
+   */
+  try {
+    return new Intl.DateTimeFormat().resolvedOptions().locale;
+  } catch {
+    return undefined;
+  }
 };
 
 /**

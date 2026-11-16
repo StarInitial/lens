@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 import { getInjectable } from "@ogre-tools/injectable";
+import i18nInjectable from "../../../../../../common/i18n/i18n.injectable";
 import { trayMenuItemInjectionToken } from "../../../../../../main/tray/tray-menu-item/tray-menu-item-injection-token";
 import navigateToPreferencesInjectable from "../../../../common/navigate-to-preferences.injectable";
 import { computed } from "mobx";
@@ -16,11 +17,12 @@ const openPreferencesTrayItemInjectable = getInjectable({
   instantiate: (di) => {
     const navigateToPreferences = di.inject(navigateToPreferencesInjectable);
     const withErrorLoggingFor = di.inject(withErrorLoggingInjectable);
+    const i18n = di.inject(i18nInjectable);
 
     return {
       id: "open-preferences",
       parentId: null,
-      label: computed(() => "Preferences"),
+      label: computed(() => i18n.t("tray.preferences")),
       orderNumber: 20,
       enabled: computed(() => true),
       visible: computed(() => true),

@@ -4,6 +4,8 @@
  */
 import { getInjectable } from "@ogre-tools/injectable";
 
+import { computed } from "mobx";
+import i18nInjectable from "../../../../../common/i18n/i18n.injectable";
 import applicationMenuItemInjectionToken from "../../../../application-menu/main/menu-items/application-menu-item-injection-token";
 import processCheckingForUpdatesInjectable from "../../../main/process-checking-for-updates.injectable";
 import showApplicationWindowInjectable from "../../../../../main/start-main-application/lens-window/show-application-window.injectable";
@@ -20,13 +22,14 @@ const checkForUpdatesMenuItemInjectable = getInjectable({
     const updatingIsEnabled = di.inject(updatingIsEnabledInjectable);
     const isMac = di.inject(isMacInjectable);
     const showMessagePopup = di.inject(showMessagePopupInjectable);
+    const i18n = di.inject(i18nInjectable);
 
     return {
       kind: "clickable-menu-item" as const,
       id: "check-for-updates",
       parentId: isMac ? "mac" : "help",
       orderNumber: isMac ? 20 : 50,
-      label: "Check for Updates...",
+      label: computed(() => i18n.t("menu.check-for-updates")),
       isShown: updatingIsEnabled,
 
       onClick: async () => {
@@ -36,9 +39,9 @@ const checkForUpdatesMenuItemInjectable = getInjectable({
           await showApplicationWindow();
         } else {
           showMessagePopup(
-            "No Updates Available",
-            "You're all good",
-            "You're on the latest version,\nthanks for staying on the ball.",
+            i18n.t("update.no-updates-available.title"),
+            i18n.t("update.no-updates-available.heading"),
+            i18n.t("update.no-updates-available.message"),
             {
               textWidth: 300,
             },

@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 import { getInjectable } from "@ogre-tools/injectable";
+import i18nInjectable from "../../../../common/i18n/i18n.injectable";
 import { trayMenuItemInjectionToken } from "../tray-menu-item-injection-token";
 import showApplicationWindowInjectable from "../../../start-main-application/lens-window/show-application-window.injectable";
 import { computed } from "mobx";
@@ -18,11 +19,12 @@ const openAppTrayItemInjectable = getInjectable({
     const productName = di.inject(productNameInjectable);
     const showApplicationWindow = di.inject(showApplicationWindowInjectable);
     const withErrorLoggingFor = di.inject(withErrorLoggingInjectable);
+    const i18n = di.inject(i18nInjectable);
 
     return {
       id: "open-app",
       parentId: null,
-      label: computed(() => `Open ${productName}`),
+      label: computed(() => i18n.t("tray.open-app", { productName })),
       orderNumber: 10,
       enabled: computed(() => true),
       visible: computed(() => true),

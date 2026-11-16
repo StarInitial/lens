@@ -11,6 +11,7 @@ export const actionForUndo = getApplicationMenuOperationSystemActionInjectable({
   parentId: "edit",
   orderNumber: 10,
   actionName: "undo",
+  labelKey: "menu.undo",
 });
 
 export const actionForRedo = getApplicationMenuOperationSystemActionInjectable({
@@ -18,6 +19,7 @@ export const actionForRedo = getApplicationMenuOperationSystemActionInjectable({
   parentId: "edit",
   orderNumber: 20,
   actionName: "redo",
+  labelKey: "menu.redo",
 });
 
 export const separator1 = getApplicationMenuSeparatorInjectable({
@@ -31,6 +33,7 @@ export const actionForCut = getApplicationMenuOperationSystemActionInjectable({
   parentId: "edit",
   orderNumber: 40,
   actionName: "cut",
+  labelKey: "menu.cut",
 });
 
 export const actionForCopy = getApplicationMenuOperationSystemActionInjectable({
@@ -38,6 +41,7 @@ export const actionForCopy = getApplicationMenuOperationSystemActionInjectable({
   parentId: "edit",
   orderNumber: 50,
   actionName: "copy",
+  labelKey: "menu.copy",
 });
 
 export const actionForPaste = getApplicationMenuOperationSystemActionInjectable({
@@ -45,6 +49,7 @@ export const actionForPaste = getApplicationMenuOperationSystemActionInjectable(
   parentId: "edit",
   orderNumber: 60,
   actionName: "paste",
+  labelKey: "menu.paste",
 });
 
 export const actionForDelete = getApplicationMenuOperationSystemActionInjectable({
@@ -52,6 +57,7 @@ export const actionForDelete = getApplicationMenuOperationSystemActionInjectable
   parentId: "edit",
   orderNumber: 70,
   actionName: "delete",
+  labelKey: "menu.delete",
 });
 
 export const separator2 = getApplicationMenuSeparatorInjectable({
@@ -65,5 +71,6 @@ export const actionForSelectAll = getApplicationMenuOperationSystemActionInjecta
   parentId: "edit",
   orderNumber: 90,
   actionName: "selectAll",
+  labelKey: "menu.select-all",
 });
 

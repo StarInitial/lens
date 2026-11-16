@@ -4,6 +4,7 @@
  */
 import { getInjectionToken } from "@ogre-tools/injectable";
 import type { BrowserWindow, KeyboardEvent, MenuItemConstructorOptions, MenuItem as ElectronMenuItem } from "electron";
+import type { IComputedValue } from "mobx";
 import type { SetOptional } from "type-fest";
 import type { ChildOfParentComposite, ParentOfChildComposite } from "../../../../common/utils/composite/interfaces";
 import type { MaybeShowable } from "../../../../common/utils/composable-responsibilities/showable/showable";
@@ -20,7 +21,12 @@ export interface ElectronClickable {
 }
 
 export interface Labeled {
-  label: string;
+  /**
+   * The application menu is re-populated reactively, so a label can either be a
+   * plain string or a `computed` value, for example to follow the current
+   * language.
+   */
+  label: string | IComputedValue<string>;
 }
 
 export interface MaybeLabeled extends SetOptional<Labeled, "label"> {}

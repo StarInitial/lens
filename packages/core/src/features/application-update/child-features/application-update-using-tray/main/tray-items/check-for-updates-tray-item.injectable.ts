@@ -5,6 +5,7 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { computed } from "mobx";
 import updatingIsEnabledInjectable from "../../../updating-is-enabled/main/updating-is-enabled.injectable";
+import i18nInjectable from "../../../../../../common/i18n/i18n.injectable";
 import { trayMenuItemInjectionToken } from "../../../../../../main/tray/tray-menu-item/tray-menu-item-injection-token";
 import showApplicationWindowInjectable from "../../../../../../main/start-main-application/lens-window/show-application-window.injectable";
 import discoveredUpdateVersionInjectable from "../../../../common/discovered-update-version.injectable";
@@ -31,6 +32,7 @@ const checkForUpdatesTrayItemInjectable = getInjectable({
     const processCheckingForUpdates = di.inject(processCheckingForUpdatesInjectable);
     const withErrorLoggingFor = di.inject(withErrorLoggingInjectable);
     const showMessagePopup = di.inject(showMessagePopupInjectable);
+    const i18n = di.inject(i18nInjectable);
 
     return {
       id: "check-for-updates",
@@ -45,14 +47,17 @@ const checkForUpdatesTrayItemInjectable = getInjectable({
 
           const roundedPercentage = Math.round(progressOfUpdateDownload.value.get().percentage);
 
-          return `Downloading update ${discoveredVersion.version} (${roundedPercentage}%)...`;
+          return i18n.t("tray.downloading-update", {
+            version: discoveredVersion.version,
+            percentage: roundedPercentage,
+          });
         }
 
         if (checkingForUpdatesState.value.get()) {
-          return "Checking for Updates...";
+          return i18n.t("tray.checking-for-updates");
         }
 
-        return "Check for Updates...";
+        return i18n.t("tray.check-for-updates");
       }),
 
       enabled: computed(() => !checkingForUpdatesState.value.get() && !downloadingUpdateState.value.get()),
@@ -67,9 +72,9 @@ const checkForUpdatesTrayItemInjectable = getInjectable({
             await showApplicationWindow();
           } else {
             showMessagePopup(
-              "No Updates Available",
-              "You're all good",
-              "You're on the latest version,\nthanks for staying on the ball.",
+              i18n.t("update.no-updates-available.title"),
+              i18n.t("update.no-updates-available.heading"),
+              i18n.t("update.no-updates-available.message"),
               {
                 textWidth: 300,
               },

@@ -12,6 +12,7 @@ export const actionForServices = getApplicationMenuOperationSystemActionInjectab
   parentId: "mac",
   orderNumber: 80,
   actionName: "services",
+  labelKey: "menu.services",
 });
 
 export const actionForHide = getApplicationMenuOperationSystemActionInjectable({
@@ -19,6 +20,7 @@ export const actionForHide = getApplicationMenuOperationSystemActionInjectable({
   parentId: "mac",
   orderNumber: 100,
   actionName: "hide",
+  labelKey: "menu.hide",
 });
 
 export const actionForHideOthers = getApplicationMenuOperationSystemActionInjectable({
@@ -26,6 +28,7 @@ export const actionForHideOthers = getApplicationMenuOperationSystemActionInject
   parentId: "mac",
   orderNumber: 110,
   actionName: "hideOthers",
+  labelKey: "menu.hide-others",
 });
 
 export const actionForUnhide = getApplicationMenuOperationSystemActionInjectable({
@@ -33,4 +36,5 @@ export const actionForUnhide = getApplicationMenuOperationSystemActionInjectable
   parentId: "mac",
   orderNumber: 120,
   actionName: "unhide",
+  labelKey: "menu.unhide",
 });

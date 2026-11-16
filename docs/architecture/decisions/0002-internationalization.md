@@ -107,8 +107,37 @@ translation exists.
   key (`sidebar.cluster`, …) and `SidebarItem` translates it; every other
   registration (for example `Pod` or `Deployment`) keeps its plain string and is
   rendered verbatim, so resource names stay untranslated by design.
+* The application menu and the tray menu follow the language as well; see
+  "Main process" below.
 * `LocaleDate` formats with the moment locale of the current language
   (`renderer/i18n/moment-locale.ts`).
+
+### Main process: application menu and tray
+
+The application menu and the tray menu are owned by the main process, so they
+cannot use `useTranslation()`. Instead:
+
+* `features/user-preferences/main/apply-language-preference.injectable.ts` is a
+  `beforeApplicationIsLoading` runnable (after `load-user-preferences-storage`)
+  that starts a MobX `reaction` from `userPreferencesState.locale` to
+  `i18n.setLocalePreference()`. Changing the language in Preferences therefore
+  reaches the main process through the existing user store sync and updates the
+  native menus without a restart.
+* every menu item label is a `computed` value, for example
+  `label: computed(() => i18n.t("menu.file"))`. `Labeled.label` accepts
+  `string | IComputedValue<string>`, `populate-application-menu` resolves it
+  while building the Electron template, and the existing menu `autorun` and tray
+  `reaction` re-populate the native menus when the label changes.
+* Electron role items (`undo`, `zoomIn`, …) would otherwise be labelled by
+  Electron in the language of the *operating system*. They pass an optional
+  `labelKey` to `getApplicationMenuOperationSystemActionInjectable` so that they
+  follow the language of the application instead.
+* the tray no longer offers an "About" entry; "About" lives in the Help menu and
+  in the macOS application menu only.
+* `getSystemLocale()` gained an `Intl.DateTimeFormat().resolvedOptions().locale`
+  fallback, because the main process has no `navigator` and Windows/macOS do not
+  set `LC_ALL`/`LANG`. On those systems the menu follows the OS locale when the
+  preference is `system`.
 
 ### Extension API
 
@@ -133,11 +162,9 @@ Harder / accepted costs:
 * `useTranslation()` requires an `I18nProvider` in the tree. A component rendered
   in isolation without the provider throws — the error message names the HOC
   file.
-* the main process (application menu, tray labels, native dialogs) is **not**
-  translated yet. The runtime lives in `common/` so it can be injected there, but
-  the menu is built once at startup (`populate-application-menu.injectable.ts`);
-  localizing it needs a rebuild on language change (IPC event) and is tracked as
-  follow-up work.
+* a native menu item that is created outside of the injectables (for example by
+  an extension through the legacy API) keeps its plain English label; only items
+  that pass a key are translated.
 * the translation browser does not exist; one can find untranslated strings by
   grepping JSX text, and `npm run check:i18n` (or
   `packages/core/src/common/i18n/translations.test.ts`) reports incomplete
