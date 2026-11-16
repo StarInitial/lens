@@ -7,7 +7,10 @@ import React from "react";
 import { reaction } from "mobx";
 import type { I18n, LocaleOption } from "../../common/i18n/i18n.injectable";
 import type { SupportedLocale } from "../../common/i18n/locale";
+import { defaultLocale, systemLocalePreference } from "../../common/i18n/locale";
 import type { TranslateParams } from "../../common/i18n/translation";
+import { translateIn } from "../../common/i18n/translation";
+import { translationCatalogs } from "../../common/i18n/translations";
 
 export const I18nContext = React.createContext<I18n | undefined>(undefined);
 
@@ -53,7 +56,10 @@ export const useTranslation = (): UseTranslation => {
   }, [i18n]);
 
   if (!i18n) {
-    throw new Error("useTranslation() has to be used within an <I18nProvider />, see i18n-provider-react-application-hoc.injectable.tsx");
+    // Rendered outside of the application tree (for example a component mounted
+    // in isolation, or by an extension). Text stays in the source locale instead
+    // of failing the render.
+    return fallbackTranslation;
   }
 
   return {
@@ -63,4 +69,15 @@ export const useTranslation = (): UseTranslation => {
     availableLocales: i18n.availableLocales,
     setLocalePreference: i18n.setLocalePreference,
   };
+};
+
+const fallbackTranslation: UseTranslation = {
+  t: (key, params) => translateIn({
+    dictionary: undefined,
+    fallbackDictionary: translationCatalogs[defaultLocale],
+  }, key, params),
+  locale: defaultLocale,
+  localePreference: systemLocalePreference,
+  availableLocales: [],
+  setLocalePreference: () => {},
 };

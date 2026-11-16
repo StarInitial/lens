@@ -13,6 +13,7 @@ import type { ItemObject } from "@k8slens/list-layout";
 import type { Filter } from "./page-filters/store";
 import type { HeaderCustomizer, HeaderPlaceholders, ItemListStore, SearchFilter } from "./list-layout";
 import { SearchInputUrl } from "../input";
+import { TranslatedItemCount, TranslatedText } from "../../i18n/translated-text";
 
 export interface ItemListLayoutHeaderProps<I extends ItemObject, PreLoadStores extends boolean> {
   getItems: () => I[];
@@ -57,15 +58,15 @@ export class ItemListLayoutHeader<I extends ItemObject, PreLoadStores extends bo
       if (getFilters().length > 0) {
         return (
           <>
-            <a onClick={toggleFilters}>Filtered</a>
+            <a onClick={toggleFilters}>
+              <TranslatedText namespace="common." value="Filtered" />
+            </a>
             {`: ${itemsCount} / ${allItemsCount}`}
           </>
         );
       }
 
-      return allItemsCount === 1
-        ? `${allItemsCount} item`
-        : `${allItemsCount} items`;
+      return <TranslatedItemCount count={allItemsCount} />;
     };
 
     const customizeHeaderFunctions = [customizeHeader].flat().filter(isDefined);

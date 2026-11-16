@@ -14,7 +14,7 @@ const namedCategoryColumnInjectable = getInjectable({
     priority: 0,
     renderCell: di.inject(renderNamedCategoryColumnCellInjectable),
     titleProps: {
-      title: "Name",
+      title: "catalog.columns.name",
       className: styles.entityName,
       id: "name",
       sortBy: "name",

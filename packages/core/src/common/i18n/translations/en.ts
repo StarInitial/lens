@@ -135,6 +135,43 @@ export const en: TranslationDictionary = {
   "welcome.heading": "Welcome to {{productName}}!",
   "welcome.description": "To get you started we have auto-detected your clusters in your kubeconfig file and added them to the catalog, your centralized view for managing all your cloud-native resources.",
   "welcome.menu.browse-clusters-in-catalog": "Browse Clusters in Catalog",
+  "common.filtered": "Filtered",
+  "common.items-count-one": "{{count}} item",
+  "common.items-count": "{{count}} items",
+  "common.search": "Search...",
+
+  "catalog.title": "Catalog",
+  "catalog.browse": "Browse",
+  "catalog.categories": "Categories",
+  "catalog.browse-all": "Browse All",
+  "catalog.view-details": "View Details",
+  "catalog.add-to-hotbar": "Add to Hotbar",
+  "catalog.remove-from-hotbar": "Remove from Hotbar",
+
+  "catalog.categories.general": "General",
+  "catalog.categories.clusters": "Clusters",
+  "catalog.categories.web-links": "Web Links",
+
+  "catalog.columns.name": "Name",
+  "catalog.columns.kind": "Kind",
+  "catalog.columns.source": "Source",
+  "catalog.columns.labels": "Labels",
+  "catalog.columns.status": "Status",
+
+  "catalog.entities.catalog": "Catalog",
+  "catalog.entities.welcome-page": "Welcome Page",
+  "catalog.entities.preferences": "Preferences",
+  "catalog.entities.kubernetes-documentation": "Kubernetes Documentation",
+  "catalog.kinds.general": "General",
+  "catalog.kinds.web-link": "WebLink",
+  "catalog.kinds.kubernetes-cluster": "KubernetesCluster",
+
+  "catalog.sources.app": "app",
+  "catalog.sources.local": "local",
+
+  "catalog.phase.active": "active",
+  "catalog.phase.available": "available",
+  "catalog.phase.disconnected": "disconnected",
 };
 
 export default en;

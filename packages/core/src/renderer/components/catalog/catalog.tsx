@@ -21,6 +21,7 @@ import type { CatalogEntityStore } from "./catalog-entity-store.injectable";
 import { CatalogMenu } from "./catalog-menu";
 import { HotbarToggleMenuItem } from "./hotbar-toggle-menu-item";
 import { withInjectables } from "@ogre-tools/injectable-react";
+import { TranslatedText } from "../../i18n/translated-text";
 import type { EmitAppEvent } from "../../../common/app-event-bus/emit-event.injectable";
 import emitAppEventInjectable from "../../../common/app-event-bus/emit-event.injectable";
 import catalogCategoryRegistryInjectable from "../../../common/catalog/category-registry.injectable";
@@ -208,7 +209,7 @@ class NonInjectedCatalog extends React.Component<Dependencies> {
           data-testid={`open-details-menu-item-for-${entity.getId()}`}
           onClick={() => this.props.showEntityDetails(entity.getId())}
         >
-          View Details
+          <TranslatedText namespace="catalog." value="View Details" />
         </MenuItem>
         {
           this.menuItems
@@ -222,8 +223,8 @@ class NonInjectedCatalog extends React.Component<Dependencies> {
         <HotbarToggleMenuItem
           key="hotbar-toggle"
           entity={entity}
-          addContent="Add to Hotbar"
-          removeContent="Remove from Hotbar"
+          addContent={<TranslatedText namespace="catalog." value="Add to Hotbar" />}
+          removeContent={<TranslatedText namespace="catalog." value="Remove from Hotbar" />}
         />
       </MenuActions>
     );
@@ -267,7 +268,9 @@ class NonInjectedCatalog extends React.Component<Dependencies> {
       <ItemListLayout<CatalogEntity, false>
         className={styles.Catalog}
         tableId={tableId}
-        renderHeaderTitle={activeCategory?.metadata.name ?? "Browse All"}
+        renderHeaderTitle={activeCategory
+          ? <TranslatedText namespace="catalog.categories." value={activeCategory.metadata.name} />
+          : <TranslatedText namespace="catalog." value="Browse All" />}
         isSelectable={false}
         isConfigurable={true}
         preloadStores={false}

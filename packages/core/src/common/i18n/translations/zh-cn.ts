@@ -129,6 +129,43 @@ export const zhCN: TranslationDictionary = {
   "welcome.heading": "欢迎使用 {{productName}}！",
   "welcome.description": "为了让你快速上手，我们已经自动检测到 kubeconfig 文件中的集群，并把它们添加到集群目录中——这是集中管理所有云原生资源的地方。",
   "welcome.menu.browse-clusters-in-catalog": "在集群目录中浏览集群",
+  "common.filtered": "已筛选",
+  "common.items-count-one": "{{count}} 项",
+  "common.items-count": "{{count}} 项",
+  "common.search": "搜索…",
+
+  "catalog.title": "目录",
+  "catalog.browse": "浏览",
+  "catalog.categories": "分类",
+  "catalog.browse-all": "全部浏览",
+  "catalog.view-details": "查看详情",
+  "catalog.add-to-hotbar": "添加到快捷栏",
+  "catalog.remove-from-hotbar": "从快捷栏移除",
+
+  "catalog.categories.general": "通用",
+  "catalog.categories.clusters": "集群",
+  "catalog.categories.web-links": "网页链接",
+
+  "catalog.columns.name": "名称",
+  "catalog.columns.kind": "类型",
+  "catalog.columns.source": "来源",
+  "catalog.columns.labels": "标签",
+  "catalog.columns.status": "状态",
+
+  "catalog.entities.catalog": "目录",
+  "catalog.entities.welcome-page": "欢迎页",
+  "catalog.entities.preferences": "偏好设置",
+  "catalog.entities.kubernetes-documentation": "Kubernetes 文档",
+  "catalog.kinds.general": "通用",
+  "catalog.kinds.web-link": "网页链接",
+  "catalog.kinds.kubernetes-cluster": "Kubernetes 集群",
+
+  "catalog.sources.app": "应用",
+  "catalog.sources.local": "本地",
+
+  "catalog.phase.active": "活跃",
+  "catalog.phase.available": "可用",
+  "catalog.phase.disconnected": "已断开",
 };
 
 export default zhCN;

@@ -9,6 +9,7 @@ import type { RegisteredAdditionalCategoryColumn } from "../custom-category-colu
 import { KubeObject } from "@k8slens/kube-object";
 import { getInjectable } from "@ogre-tools/injectable";
 import getLabelBadgesInjectable from "../get-label-badges.injectable";
+import { TranslatedSpan, TranslatedText } from "../../../i18n/translated-text";
 
 const defaultCategoryColumnsInjectable = getInjectable({
   id: "default-category-columns",
@@ -19,9 +20,9 @@ const defaultCategoryColumnsInjectable = getInjectable({
       {
         id: "source",
         priority: 10,
-        renderCell: entity => entity.getSource(),
+        renderCell: entity => <TranslatedText namespace="catalog.sources." value={entity.getSource()} />,
         titleProps: {
-          title: "Source",
+          title: "catalog.columns.source",
           className: styles.sourceCell,
           id: "source",
           sortBy: "source",
@@ -36,7 +37,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
         renderCell: getLabelBadges,
         titleProps: {
           id: "labels",
-          title: "Labels",
+          title: "catalog.columns.labels",
           className: `${styles.labelsCell} scrollable`,
           "data-testid": "catalog-labels-column",
         },
@@ -46,12 +47,15 @@ const defaultCategoryColumnsInjectable = getInjectable({
         id: "status",
         priority: 30,
         renderCell: entity => (
-          <span key="phase" className={entity.status.phase}>
-            {entity.status.phase}
-          </span>
+          <TranslatedSpan
+            key="phase"
+            namespace="catalog.phase."
+            value={entity.status.phase}
+            className={entity.status.phase}
+          />
         ),
         titleProps: {
-          title: "Status",
+          title: "catalog.columns.status",
           className: styles.statusCell,
           id: "status",
           sortBy: "status",

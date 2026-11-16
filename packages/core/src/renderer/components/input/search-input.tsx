@@ -14,6 +14,8 @@ import { Input } from "./input";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import isMacInjectable from "../../../common/vars/is-mac.injectable";
 import autoBindReact from "auto-bind/react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
 
 export interface SearchInputProps extends InputProps {
   compact?: boolean; // show only search-icon when not focused
@@ -26,11 +28,11 @@ const defaultProps: Partial<SearchInputProps> = {
   autoFocus: true,
   bindGlobalFocusHotkey: true,
   showClearIcon: true,
-  placeholder: "Search...",
 };
 
 interface Dependencies {
   isMac: boolean;
+  i18n: I18n;
 }
 
 @observer
@@ -77,7 +79,7 @@ class NonInjectedSearchInput extends React.Component<SearchInputProps & Dependen
   }
 
   render() {
-    const { className, compact, onClear, showClearIcon, bindGlobalFocusHotkey, value, isMac, ...inputProps } = this.props;
+    const { className, compact, onClear, showClearIcon, bindGlobalFocusHotkey, value, isMac, i18n, ...inputProps } = this.props;
     let rightIcon = <Icon small material="search"/>;
 
     if (showClearIcon && value) {
@@ -93,6 +95,7 @@ class NonInjectedSearchInput extends React.Component<SearchInputProps & Dependen
     return (
       <Input
         {...inputProps}
+        placeholder={inputProps.placeholder ?? i18n.t("common.search")}
         className={cssNames("SearchInput", className, { compact })}
         value={value}
         onKeyDown={this.onKeyDown}
@@ -108,5 +111,6 @@ export const SearchInput = withInjectables<Dependencies, SearchInputProps>(NonIn
   getProps: (di, props) => ({
     ...props,
     isMac: di.inject(isMacInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 });

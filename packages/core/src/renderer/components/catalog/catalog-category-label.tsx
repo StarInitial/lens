@@ -4,6 +4,7 @@
  */
 import React from "react";
 import type { CatalogCategory } from "../../../common/catalog/catalog-entity";
+import { TranslatedText } from "../../i18n/translated-text";
 
 interface CatalogCategoryLabelProps {
   category: CatalogCategory;
@@ -17,7 +18,9 @@ export const CatalogCategoryLabel = ({ category }: CatalogCategoryLabelProps) =>
 
   return (
     <div className="flex">
-      <div>{category.metadata.name}</div>
+      <div>
+        <TranslatedText namespace="catalog.categories." value={category.metadata.name} />
+      </div>
       {badge ? (<div className="flex items-center">{badge}</div>) : null}
     </div>
   );

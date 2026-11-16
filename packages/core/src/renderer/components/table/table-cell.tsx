@@ -11,6 +11,7 @@ import { Icon } from "@k8slens/icon";
 import { Checkbox } from "../checkbox";
 import autoBindReact from "auto-bind/react";
 import type { TableCellProps } from "@k8slens/list-layout";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export type TableCellElem = React.ReactElement<TableCellProps>;
 
@@ -83,7 +84,11 @@ export class TableCell extends React.Component<TableCellProps> {
       nowrap: _nowrap,
       sorting: _sort && typeof sortBy === "string",
     });
-    const content = title || children;
+    // Column titles are translation keys (or plain text of extensions, which the
+    // fallback keeps untouched).
+    const content = typeof title === "string"
+      ? <TranslatedKeyText value={title} />
+      : (title || children);
 
     return (
       <div

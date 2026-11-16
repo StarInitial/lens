@@ -10,6 +10,7 @@ import { Avatar } from "../../avatar";
 import type { RegisteredAdditionalCategoryColumn } from "../custom-category-columns";
 import { Icon } from "@k8slens/icon";
 import { prevDefault } from "@k8slens/utilities";
+import { TranslatedText } from "../../../i18n/translated-text";
 
 const renderNamedCategoryColumnCellInjectable = getInjectable({
   id: "render-named-category-column-cell",
@@ -42,7 +43,9 @@ const renderNamedCategoryColumnCellInjectable = getInjectable({
           >
             {entity.spec.icon?.material && <Icon material={entity.spec.icon?.material} small/>}
           </Avatar>
-          <span>{entity.getName()}</span>
+          <span>
+            <TranslatedText namespace="catalog.entities." value={entity.getName()} />
+          </span>
           <Icon
             small
             className={styles.pinIcon}
