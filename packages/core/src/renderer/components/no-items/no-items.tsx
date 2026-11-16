@@ -8,6 +8,7 @@ import "./no-items.scss";
 import React from "react";
 import type { IClassName, StrictReactNode } from "@k8slens/utilities";
 import { cssNames } from "@k8slens/utilities";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface NoItemsProps {
   className?: IClassName;
@@ -16,11 +17,12 @@ export interface NoItemsProps {
 
 export function NoItems(props: NoItemsProps) {
   const { className, children } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={cssNames("NoItems flex box grow", className)}>
       <div className="box center">
-        {children || "Item list is empty"}
+        {children || t("common.item-list-is-empty")}
       </div>
     </div>
   );

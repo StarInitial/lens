@@ -22,7 +22,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
         priority: 10,
         renderCell: entity => <TranslatedText namespace="catalog.sources." value={entity.getSource()} />,
         titleProps: {
-          title: "catalog.columns.source",
+          title: "Source",
           className: styles.sourceCell,
           id: "source",
           sortBy: "source",
@@ -37,7 +37,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
         renderCell: getLabelBadges,
         titleProps: {
           id: "labels",
-          title: "catalog.columns.labels",
+          title: "Labels",
           className: `${styles.labelsCell} scrollable`,
           "data-testid": "catalog-labels-column",
         },
@@ -55,7 +55,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
           />
         ),
         titleProps: {
-          title: "catalog.columns.status",
+          title: "Status",
           className: styles.statusCell,
           id: "status",
           sortBy: "status",

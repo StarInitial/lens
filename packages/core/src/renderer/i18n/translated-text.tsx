@@ -76,6 +76,26 @@ export const TranslatedKeyText = ({ value }: TranslatedKeyTextProps) => {
   return <>{t(value)}</>;
 };
 
+export interface TranslatedColumnTitleProps {
+  /**
+   * A column title as it is declared, for example `Age`. Titles are looked up
+   * under `columns.<key>`; unknown (or resource kind) titles stay untouched.
+   */
+  value: string;
+}
+
+/**
+ * Renders a table column title. Resource kinds (`Pods`, `Replicas`, ...) have no
+ * entry in the catalogs and are therefore shown exactly as declared.
+ */
+export const TranslatedColumnTitle = ({ value }: TranslatedColumnTitleProps) => {
+  const { t } = useTranslation();
+  const key = `columns.${toKeySegment(value)}`;
+  const translated = t(key);
+
+  return <>{translated === key ? value : translated}</>;
+};
+
 export interface TranslatedItemCountProps {
   count: number;
 }

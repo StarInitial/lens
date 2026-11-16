@@ -11,7 +11,7 @@ import { Icon } from "@k8slens/icon";
 import { Checkbox } from "../checkbox";
 import autoBindReact from "auto-bind/react";
 import type { TableCellProps } from "@k8slens/list-layout";
-import { TranslatedKeyText } from "../../i18n/translated-text";
+import { TranslatedColumnTitle } from "../../i18n/translated-text";
 
 export type TableCellElem = React.ReactElement<TableCellProps>;
 
@@ -84,10 +84,11 @@ export class TableCell extends React.Component<TableCellProps> {
       nowrap: _nowrap,
       sorting: _sort && typeof sortBy === "string",
     });
-    // Column titles are translation keys (or plain text of extensions, which the
-    // fallback keeps untouched).
+    // Column titles are looked up in the `columns` namespace of the catalogs;
+    // titles without an entry (resource kinds, extension columns) stay as they
+    // are.
     const content = typeof title === "string"
-      ? <TranslatedKeyText value={title} />
+      ? <TranslatedColumnTitle value={title} />
       : (title || children);
 
     return (

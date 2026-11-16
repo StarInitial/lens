@@ -18,7 +18,7 @@ const workloadsOverviewSidebarItemInjectable = getInjectable({
 
     return {
       parentId: workloadsSidebarItemInjectable.id,
-      title: "Overview",
+      title: "sidebar.workloads-overview",
       onClick: di.inject(navigateToWorkloadsOverviewInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

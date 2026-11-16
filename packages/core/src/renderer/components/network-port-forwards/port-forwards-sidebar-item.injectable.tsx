@@ -18,7 +18,7 @@ const portForwardsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: networkSidebarItemInjectable.id,
-      title: "Port Forwarding",
+      title: "sidebar.port-forwarding",
       onClick: di.inject(navigateToPortForwardsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

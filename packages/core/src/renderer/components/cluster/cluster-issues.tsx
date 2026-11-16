@@ -17,6 +17,8 @@ import { Spinner } from "@k8slens/spinner";
 import type { ApiManager } from "../../../common/k8s-api/api-manager";
 import { KubeObjectAge } from "../kube-object/age";
 import { withInjectables } from "@ogre-tools/injectable-react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
 import type { NodeStore } from "../nodes/store";
 import type { EventStore } from "../events/store";
 import apiManagerInjectable from "../../../common/k8s-api/api-manager/manager.injectable";
@@ -50,6 +52,7 @@ enum sortBy {
 }
 
 interface Dependencies {
+  i18n: I18n;
   activeTheme: IComputedValue<LensTheme>;
   nodeStore: NodeStore;
   eventStore: EventStore;
@@ -143,7 +146,7 @@ class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Depe
             big
             sticker
           />
-          <p className={styles.title}>No issues found</p>
+          <p className={styles.title}>{this.props.i18n.t("cluster.no-issues-found")}</p>
           <p>Everything is fine in the Cluster</p>
         </div>
       );
@@ -171,10 +174,19 @@ class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Depe
           className={cssNames("box grow", this.props.activeTheme.get().type)}
         >
           <TableHead nowrap>
-            <TableCell className="message">Message</TableCell>
-            <TableCell className="object" sortBy={sortBy.object}>Object</TableCell>
-            <TableCell className="kind" sortBy={sortBy.type}>Type</TableCell>
-            <TableCell className="timestamp" sortBy={sortBy.age}>Age</TableCell>
+            <TableCell className="message" title="Message" />
+            <TableCell
+              className="object"
+              sortBy={sortBy.object}
+              title="Object" />
+            <TableCell
+              className="kind"
+              sortBy={sortBy.type}
+              title="Type" />
+            <TableCell
+              className="timestamp"
+              sortBy={sortBy.age}
+              title="Age" />
           </TableHead>
         </Table>
       </>
@@ -197,6 +209,7 @@ export const ClusterIssues = withInjectables<Dependencies, ClusterIssuesProps>(N
     apiManager: di.inject(apiManagerInjectable),
     eventStore: di.inject(eventStoreInjectable),
     nodeStore: di.inject(nodeStoreInjectable),
+    i18n: di.inject(i18nInjectable),
     kubeSelectedUrlParam: di.inject(kubeSelectedUrlParamInjectable),
     toggleKubeDetailsPane: di.inject(toggleKubeDetailsPaneInjectable),
   }),

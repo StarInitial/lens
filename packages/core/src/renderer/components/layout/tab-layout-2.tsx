@@ -12,6 +12,7 @@ import { cssNames } from "@k8slens/utilities";
 import { Tab, Tabs } from "../tabs";
 import { ErrorBoundary } from "@k8slens/error-boundary";
 import type { SidebarItemDeclaration } from "@k8slens/cluster-sidebar";
+import { TranslatedKeyText } from "../../i18n/translated-text";
 
 export interface TabLayoutProps {
   tabs?: SidebarItemDeclaration[];
@@ -39,7 +40,7 @@ export const TabLayout = observer(
               <Tab
                 onClick={onClick}
                 key={id}
-                label={title}
+                label={typeof title === "string" ? <TranslatedKeyText value={title} /> : title}
                 active={isActive.get()}
                 data-is-active-test={isActive.get()}
                 data-testid={`tab-link-for-${id}`}

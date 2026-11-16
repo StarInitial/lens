@@ -55,6 +55,7 @@ describe("<SidebarItem/> translation", () => {
     const topLevel = {
       "sidebar.nodes": "节点",
       "sidebar.workloads": "工作负载",
+      "sidebar.workloads-overview": "概览",
       "sidebar.config": "配置",
       "sidebar.network": "网络",
       "sidebar.storage": "存储",
@@ -63,6 +64,7 @@ describe("<SidebarItem/> translation", () => {
       "sidebar.helm": "Helm",
       "sidebar.access-control": "访问控制",
       "sidebar.custom-resources": "自定义资源",
+      "sidebar.port-forwarding": "端口转发",
     };
 
     for (const [key, expected] of Object.entries(topLevel)) {

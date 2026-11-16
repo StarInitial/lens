@@ -18,7 +18,7 @@ const defaultBrowseAllColumns: RegisteredAdditionalCategoryColumn[] = [
     titleProps: {
       id: "kind",
       sortBy: "kind",
-      title: "catalog.columns.kind",
+      title: "Kind",
       "data-testid": "catalog-kind-column",
     },
     sortCallback: entity => entity.kind,

@@ -12,6 +12,7 @@ import { components } from "react-select";
 import type { NamespaceStore } from "./store";
 import { Select } from "../select";
 import { withInjectables } from "@ogre-tools/injectable-react";
+import { useTranslation } from "../../i18n/i18n-context";
 import type { NamespaceSelectFilterModel, NamespaceSelectFilterOption, SelectAllNamespaces } from "./namespace-select-filter-model/namespace-select-filter-model";
 import namespaceSelectFilterModelInjectable from "./namespace-select-filter-model/namespace-select-filter-model.injectable";
 import namespaceStoreInjectable from "./store.injectable";
@@ -66,16 +67,18 @@ interface PlaceholderDependencies {
 }
 
 const NonInjectedPlaceholder = observer(({ namespaceStore, ...props }: CustomPlaceholderProps & PlaceholderDependencies) => {
+  const { t } = useTranslation();
+
   const getPlaceholder = () => {
     const namespaces = namespaceStore.contextNamespaces;
 
     if (namespaceStore.areAllSelectedImplicitly || namespaces.length === 0) {
-      return "All namespaces";
+      return t("namespaces.all");
     }
 
     const prefix = namespaces.length === 1
-      ? "Namespace"
-      : "Namespaces";
+      ? t("namespaces.one")
+      : t("namespaces.many");
 
     return `${prefix}: ${namespaces.join(", ")}`;
   };
