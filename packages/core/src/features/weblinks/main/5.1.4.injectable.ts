@@ -3,10 +3,9 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
-import { docsUrl, forumsUrl } from "../../../common/vars";
 import { getInjectable } from "@ogre-tools/injectable";
 import { weblinkStoreMigrationInjectionToken } from "../common/migration-token";
-import * as links from "./links";
+import * as links from "../common/links";
 import type { WeblinkData } from "../common/storage.injectable";
 
 const v514WeblinkStoreMigrationInjectable = getInjectable({
@@ -18,11 +17,6 @@ const v514WeblinkStoreMigrationInjectable = getInjectable({
       const weblinks = (Array.isArray(weblinksRaw) ? weblinksRaw : []) as WeblinkData[];
 
       weblinks.push(
-        { id: "https://k8slens.dev", name: links.lensWebsiteLinkName, url: "https://k8slens.dev" },
-        { id: docsUrl, name: links.lensDocumentationWeblinkName, url: docsUrl },
-        { id: forumsUrl, name: links.lensForumsWeblinkName, url: forumsUrl },
-        { id: "https://twitter.com/k8slens", name: links.lensTwitterWeblinkName, url: "https://twitter.com/k8slens" },
-        { id: "https://medium.com/k8slens", name: links.lensBlogWeblinkName, url: "https://medium.com/k8slens" },
         { id: "https://kubernetes.io/docs/home/", name: links.kubernetesDocumentationWeblinkName, url: "https://kubernetes.io/docs/home/" },
       );
 
