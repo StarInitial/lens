@@ -35,7 +35,7 @@ const setupLensProxyInjectable = getInjectable({
         logger.info("🔌 Starting LensProxy");
         await lensProxy.listen(); // lensProxy.port available
       } catch (error: any) {
-        showErrorPopup("Lens Error", `Could not start proxy: ${error?.message || "unknown error"}`);
+        showErrorPopup("Error", `Could not start proxy: ${error?.message || "unknown error"}`);
 
         return forceAppExit();
       }
@@ -66,12 +66,12 @@ const setupLensProxyInjectable = getInjectable({
           : "/etc/hosts";
         const message = [
           `Failed connection test: ${error}`,
-          "Check to make sure that no other versions of Lens are running",
+          "Check to make sure that no other versions are running",
           `Check ${hostsPath} to make sure that it is clean and that the localhost loopback is at the top and set to 127.0.0.1`,
           "If you have HTTP_PROXY or http_proxy set in your environment, make sure that the localhost and the ipv4 loopback address 127.0.0.1 are added to the NO_PROXY environment variable.",
         ];
 
-        showErrorPopup("Lens Proxy Error", message.join("\n\n"));
+        showErrorPopup("Proxy Error", message.join("\n\n"));
 
         return forceAppExit();
       }

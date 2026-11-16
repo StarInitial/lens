@@ -40,10 +40,9 @@ export const en: TranslationDictionary = {
   "preferences.application.theme.title": "Theme",
   "preferences.application.theme.system": "Sync with computer",
   "preferences.application.language.title": "Language",
-  "preferences.application.language.description": "The language of the user interface of Lens.",
   "preferences.application.language.system": "System default",
   "preferences.application.startup.title": "Start-up",
-  "preferences.application.startup.open-at-login": "Automatically start Lens on login",
+  "preferences.application.startup.open-at-login": "Automatically start on login",
   "preferences.application.timezone.title": "Locale Timezone",
   "preferences.application.extension-registry.title": "Extension Install Registry",
   "preferences.application.extension-registry.default-url": "Default Url",
@@ -73,7 +72,7 @@ export const en: TranslationDictionary = {
   "preferences.terminal.font-size.title": "Font size",
   "preferences.terminal.shell-path.title": "Terminal Shell Path",
   "preferences.terminal.theme.title": "Terminal theme",
-  "preferences.terminal.theme.match": "Match Lens Theme",
+  "preferences.terminal.theme.match": "Match app theme",
 
   "preferences.kubernetes.kubeconfig-sync.header": "Kubeconfig Syncs",
   "preferences.kubernetes.kubeconfig-sync.synced-items": "Synced Items",
@@ -124,7 +123,7 @@ export const en: TranslationDictionary = {
 
   "preferences.proxy.certificate-trust.title": "Certificate Trust",
   "preferences.proxy.certificate-trust.allow": "Allow untrusted Certificate Authorities",
-  "preferences.proxy.certificate-trust.hint": "This will make Lens to trust ANY certificate authority without any validations. Needed with some corporate proxies that do certificate re-writing. Does not affect cluster communications!",
+  "preferences.proxy.certificate-trust.hint": "This will make the application trust ANY certificate authority without any validations. Needed with some corporate proxies that do certificate re-writing. Does not affect cluster communications!",
   "preferences.proxy.http-proxy.title": "HTTP Proxy",
   "preferences.proxy.http-proxy.placeholder": "Type HTTP proxy url (example: http://proxy.acme.org:8080)",
   "preferences.proxy.http-proxy.hint": "Proxy is used only for non-cluster communication.",
@@ -135,9 +134,6 @@ export const en: TranslationDictionary = {
 
   "welcome.heading": "Welcome to {{productName}}!",
   "welcome.description": "To get you started we have auto-detected your clusters in your kubeconfig file and added them to the catalog, your centralized view for managing all your cloud-native resources.",
-  "welcome.feedback-prefix": "If you have any questions or feedback, please join our ",
-  "welcome.forums-link": "Lens Forums",
-  "welcome.feedback-suffix": ".",
   "welcome.menu.browse-clusters-in-catalog": "Browse Clusters in Catalog",
 };
 

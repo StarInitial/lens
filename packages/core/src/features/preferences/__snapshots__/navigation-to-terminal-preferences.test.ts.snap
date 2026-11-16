@@ -399,7 +399,7 @@ exports[`preferences - navigation to terminal preferences given in preferences, 
                     class="Switch"
                     data-testid="switch"
                   >
-                    Automatically start Lens on login
+                    Automatically start on login
                     <input
                       role="switch"
                       type="checkbox"
@@ -1037,7 +1037,7 @@ exports[`preferences - navigation to terminal preferences given in preferences, 
                         <div
                           class="Select__single-value css-1dimb5e-singleValue"
                         >
-                          Match Lens Theme
+                          Match app theme
                         </div>
                         <div
                           class="Select__input-container css-qbdosj-Input"

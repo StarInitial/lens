@@ -10,7 +10,6 @@ import type { IComputedValue } from "mobx";
 import type { CarouselProps } from "react-material-ui-carousel";
 import LegacyCarousel from "react-material-ui-carousel";
 import { Icon } from "@k8slens/icon";
-import { forumsUrl } from "../../../common/vars";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import welcomeMenuItemsInjectable from "./welcome-menu-items/welcome-menu-items.injectable";
 import type { WelcomeMenuRegistration } from "./welcome-menu-items/welcome-menu-registration";
@@ -91,18 +90,6 @@ const NonInjectedWelcome = observer(({
 
             <p>
               {t("welcome.description")}
-              <br />
-              <br />
-              {t("welcome.feedback-prefix")}
-              <a
-                href={forumsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="link"
-              >
-                {t("welcome.forums-link")}
-              </a>
-              {t("welcome.feedback-suffix")}
             </p>
 
             <ul

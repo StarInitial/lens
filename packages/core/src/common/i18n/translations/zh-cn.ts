@@ -34,10 +34,9 @@ export const zhCN: TranslationDictionary = {
   "preferences.application.theme.title": "主题",
   "preferences.application.theme.system": "与系统同步",
   "preferences.application.language.title": "语言",
-  "preferences.application.language.description": "Lens 界面的显示语言。",
   "preferences.application.language.system": "跟随系统",
   "preferences.application.startup.title": "启动",
-  "preferences.application.startup.open-at-login": "登录时自动启动 Lens",
+  "preferences.application.startup.open-at-login": "登录时自动启动",
   "preferences.application.timezone.title": "本地时区",
   "preferences.application.extension-registry.title": "扩展安装源",
   "preferences.application.extension-registry.default-url": "默认地址",
@@ -67,7 +66,7 @@ export const zhCN: TranslationDictionary = {
   "preferences.terminal.font-size.title": "字号",
   "preferences.terminal.shell-path.title": "终端 Shell 路径",
   "preferences.terminal.theme.title": "终端主题",
-  "preferences.terminal.theme.match": "跟随 Lens 主题",
+  "preferences.terminal.theme.match": "跟随应用主题",
 
   "preferences.kubernetes.kubeconfig-sync.header": "Kubeconfig 同步",
   "preferences.kubernetes.kubeconfig-sync.synced-items": "已同步项",
@@ -118,7 +117,7 @@ export const zhCN: TranslationDictionary = {
 
   "preferences.proxy.certificate-trust.title": "证书信任",
   "preferences.proxy.certificate-trust.allow": "允许不受信任的证书颁发机构",
-  "preferences.proxy.certificate-trust.hint": "这将使 Lens 在没有任何校验的情况下信任任意证书颁发机构。某些会重写证书的企业代理需要此设置。不会影响与集群的通信！",
+  "preferences.proxy.certificate-trust.hint": "这将使应用在没有任何校验的情况下信任任意证书颁发机构。某些会重写证书的企业代理需要此设置。不会影响与集群的通信！",
   "preferences.proxy.http-proxy.title": "HTTP 代理",
   "preferences.proxy.http-proxy.placeholder": "输入 HTTP 代理地址（例如：http://proxy.acme.org:8080）",
   "preferences.proxy.http-proxy.hint": "代理仅用于非集群通信。",
@@ -129,9 +128,6 @@ export const zhCN: TranslationDictionary = {
 
   "welcome.heading": "欢迎使用 {{productName}}！",
   "welcome.description": "为了让你快速上手，我们已经自动检测到 kubeconfig 文件中的集群，并把它们添加到集群目录中——这是集中管理所有云原生资源的地方。",
-  "welcome.feedback-prefix": "如果你有任何疑问或反馈，欢迎加入我们的 ",
-  "welcome.forums-link": "Lens 论坛",
-  "welcome.feedback-suffix": "。",
   "welcome.menu.browse-clusters-in-catalog": "在集群目录中浏览集群",
 };
 

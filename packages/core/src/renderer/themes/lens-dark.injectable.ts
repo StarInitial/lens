@@ -10,7 +10,7 @@ const lensDarkThemeInjectable = getInjectable({
   instantiate: () => ({
     name: "Dark",
     type: "dark" as const,
-    description: "Original Lens dark theme",
+    description: "Original dark theme",
     author: "Mirantis",
     monacoTheme: "clouds-midnight" as const,
     colors: {

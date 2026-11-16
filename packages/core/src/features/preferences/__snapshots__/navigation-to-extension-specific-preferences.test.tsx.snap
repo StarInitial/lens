@@ -412,7 +412,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                       class="Switch"
                       data-testid="switch"
                     >
-                      Automatically start Lens on login
+                      Automatically start on login
                       <input
                         role="switch"
                         type="checkbox"
@@ -2825,7 +2825,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     class="Switch"
                     data-testid="switch"
                   >
-                    Automatically start Lens on login
+                    Automatically start on login
                     <input
                       role="switch"
                       type="checkbox"
@@ -3629,7 +3629,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     class="Switch"
                     data-testid="switch"
                   >
-                    Automatically start Lens on login
+                    Automatically start on login
                     <input
                       role="switch"
                       type="checkbox"

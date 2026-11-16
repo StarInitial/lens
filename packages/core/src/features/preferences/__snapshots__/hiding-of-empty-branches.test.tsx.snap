@@ -399,7 +399,7 @@ exports[`preferences - hiding-of-empty-branches, given in preferences page given
                     class="Switch"
                     data-testid="switch"
                   >
-                    Automatically start Lens on login
+                    Automatically start on login
                     <input
                       role="switch"
                       type="checkbox"
@@ -1193,7 +1193,7 @@ exports[`preferences - hiding-of-empty-branches, given in preferences page given
                     class="Switch"
                     data-testid="switch"
                   >
-                    Automatically start Lens on login
+                    Automatically start on login
                     <input
                       role="switch"
                       type="checkbox"
@@ -1999,7 +1999,7 @@ exports[`preferences - hiding-of-empty-branches, given in preferences page given
                     class="Switch"
                     data-testid="switch"
                   >
-                    Automatically start Lens on login
+                    Automatically start on login
                     <input
                       role="switch"
                       type="checkbox"

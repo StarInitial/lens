@@ -19,7 +19,7 @@ import Gutter from "../gutter/gutter";
 const ExtensionsNotice = () => (
   <Notice className={styles.notice}>
     <p>
-      {"Add new features via Lens Extensions. Check out the "}
+      {"Add new features via extensions. Check out the "}
       <a
         href={`${docsUrl}/extensions/lens-extensions`}
         target="_blank"

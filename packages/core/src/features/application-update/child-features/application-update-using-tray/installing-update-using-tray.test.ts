@@ -178,7 +178,7 @@ describe("installing update using tray", () => {
           expect(showMessagePopupMock).toHaveBeenCalledWith(
             "No Updates Available",
             "You're all good",
-            "You've got the latest version of Lens,\nthanks for staying on the ball.",
+            "You're on the latest version,\nthanks for staying on the ball.",
             { "textWidth": 300 },
           );
         });
