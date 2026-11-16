@@ -7,6 +7,8 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react";
 import type { ChartDataSets } from "../chart";
 import { BarChart } from "../chart";
+import { translateChartDatasets } from "../chart/translate-datasets";
+import { useTranslation } from "../../i18n/i18n-context";
 import { normalizeMetrics, isMetricsEmpty } from "../../../common/k8s-api/endpoints/metrics.api";
 import { NoMetrics } from "../resource-metrics/no-metrics";
 import { ResourceMetricsContext } from "../resource-metrics";
@@ -14,6 +16,7 @@ import { type MetricsTab, metricTabOptions } from "../chart/options";
 
 export const IngressCharts = observer(() => {
   const { metrics, tab, object } = useContext(ResourceMetricsContext) ?? {};
+  const { t } = useTranslation();
 
   if (!metrics || !object || !tab) return null;
   if (isMetricsEmpty(metrics)) return <NoMetrics/>;
@@ -29,7 +32,7 @@ export const IngressCharts = observer(() => {
     responseDurationSeconds,
   ] = values;
 
-  const datasets: Partial<Record<MetricsTab, ChartDataSets[]>> = {
+  const datasets: Partial<Record<MetricsTab, ChartDataSets[]>> = translateChartDatasets(t, {
     Network: [
       {
         id: `${id}-bytesSentSuccess`,
@@ -62,7 +65,7 @@ export const IngressCharts = observer(() => {
         data: responseDurationSeconds.map(([x, y]) => ({ x, y })),
       },
     ],
-  };
+  });
 
   return (
     <BarChart

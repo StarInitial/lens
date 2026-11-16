@@ -6,6 +6,8 @@
 import React, { useContext } from "react";
 import type { ChartDataSets } from "../chart";
 import { BarChart } from "../chart";
+import { translateChartDatasets } from "../chart/translate-datasets";
+import { useTranslation } from "../../i18n/i18n-context";
 import { isMetricsEmpty, normalizeMetrics } from "../../../common/k8s-api/endpoints/metrics.api";
 import { NoMetrics } from "../resource-metrics/no-metrics";
 import { ResourceMetricsContext } from "../resource-metrics";
@@ -27,6 +29,7 @@ const NonInjectedNodeCharts = observer(({
   activeTheme,
 }: Dependencies & NodeChartsProps) => {
   const { metrics, tab, object } = useContext(ResourceMetricsContext) ?? {};
+  const { t } = useTranslation();
 
   if (!metrics || !object || !tab) return null;
   if (isMetricsEmpty(metrics)) return <NoMetrics/>;
@@ -49,7 +52,7 @@ const NonInjectedNodeCharts = observer(({
     fsUsage,
   } = mapValues(metrics, metric => normalizeMetrics(metric).data.result[0].values);
 
-  const datasets: Partial<Record<MetricsTab, ChartDataSets[]>> = {
+  const datasets: Partial<Record<MetricsTab, ChartDataSets[]>> = translateChartDatasets(t, {
     CPU: [
       {
         id: `${id}-cpuUsage`,
@@ -149,7 +152,7 @@ const NonInjectedNodeCharts = observer(({
         data: podCapacity.map(([x, y]) => ({ x, y })),
       },
     ],
-  };
+  });
 
   return (
     <BarChart

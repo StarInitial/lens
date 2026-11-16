@@ -12,6 +12,7 @@ import type { NavigateToEntitySettings } from "../../../common/front-end-routing
 import { withInjectables } from "@ogre-tools/injectable-react";
 import navigateToEntitySettingsInjectable from "../../../common/front-end-routing/routes/entity-settings/navigate-to-entity-settings.injectable";
 import hostedClusterInjectable from "../../cluster-frame-context/hosted-cluster.injectable";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface ClusterNoMetricsProps {
   className: string;
@@ -23,6 +24,8 @@ interface Dependencies {
 }
 
 export function NonInjectedClusterNoMetrics({ className, navigateToEntitySettings, clusterId }: Dependencies & ClusterNoMetricsProps) {
+  const { t } = useTranslation();
+
   function openMetricSettingsPage() {
     if (clusterId) {
       navigateToEntitySettings(clusterId, "metrics");
@@ -32,8 +35,8 @@ export function NonInjectedClusterNoMetrics({ className, navigateToEntitySetting
   return (
     <div className={cssNames(styles.ClusterNoMetrics, className)} data-testid="no-metrics-message">
       <Icon material="info"/>
-      <p>Metrics are not available due to missing or invalid Prometheus configuration.</p>
-      <p><span className={styles.link} onClick={openMetricSettingsPage}>Open cluster settings</span></p>
+      <p>{t("details.cluster-metrics-not-available")}</p>
+      <p><span className={styles.link} onClick={openMetricSettingsPage}>{t("details.open-cluster-settings")}</span></p>
     </div>
   );
 }

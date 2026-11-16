@@ -7,6 +7,8 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react";
 import type { ChartDataSets } from "../chart";
 import { BarChart, memoryOptions } from "../chart";
+import { translateChartDatasetList } from "../chart/translate-datasets";
+import { useTranslation } from "../../i18n/i18n-context";
 import { isMetricsEmpty, normalizeMetrics } from "../../../common/k8s-api/endpoints/metrics.api";
 import { NoMetrics } from "../resource-metrics/no-metrics";
 import { ResourceMetricsContext } from "../resource-metrics";
@@ -25,6 +27,7 @@ const NonInjectedVolumeClaimDiskChart = observer(({
   activeTheme,
 }: Dependencies & VolumeClaimDiskChartProps) => {
   const { metrics, tab, object } = useContext(ResourceMetricsContext) ?? {};
+  const { t } = useTranslation();
 
   if (!metrics || !object || !tab) return null;
   if (isMetricsEmpty(metrics)) return <NoMetrics/>;
@@ -35,7 +38,7 @@ const NonInjectedVolumeClaimDiskChart = observer(({
   const usage = normalizeMetrics(diskUsage).data.result[0].values;
   const capacity = normalizeMetrics(diskCapacity).data.result[0].values;
 
-  const datasets: ChartDataSets[] = [
+  const datasets: ChartDataSets[] = translateChartDatasetList(t, [
     {
       id: `${id}-diskUsage`,
       label: `Usage`,
@@ -50,7 +53,7 @@ const NonInjectedVolumeClaimDiskChart = observer(({
       borderColor: chartCapacityColor,
       data: capacity.map(([x, y]) => ({ x, y })),
     },
-  ];
+  ]);
 
   return (
     <BarChart

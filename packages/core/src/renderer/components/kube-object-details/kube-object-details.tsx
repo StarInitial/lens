@@ -19,6 +19,7 @@ import hideDetailsInjectable from "../kube-detail-params/hide-details.injectable
 import kubeObjectDetailItemsInjectable from "./kube-object-detail-items/kube-object-detail-items.injectable";
 import type { CurrentKubeObject } from "./current-kube-object-in-details.injectable";
 import currentKubeObjectInDetailsInjectable from "./current-kube-object-in-details.injectable";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface KubeObjectDetailsProps<Kube extends KubeObject = KubeObject> {
   className?: string;
@@ -40,6 +41,7 @@ const NonInjectedKubeObjectDetails = observer((props: Dependencies) => {
 
   const currentKubeObject = kubeObject.value.get();
   const isLoading = kubeObject.pending.get();
+  const { t } = useTranslation();
 
   return (
     <Drawer
@@ -56,7 +58,7 @@ const NonInjectedKubeObjectDetails = observer((props: Dependencies) => {
       {isLoading && <Spinner center/>}
       {currentKubeObject?.error && (
         <div className="box center">
-          Resource loading has failed:
+          {t("details.resource-loading-failed")}
           <b>{currentKubeObject.error}</b>
         </div>
       )}

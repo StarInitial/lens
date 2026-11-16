@@ -109,6 +109,18 @@ translation exists.
   rendered verbatim, so resource names stay untranslated by design.
 * The application menu and the tray menu follow the language as well; see
   "Main process" below.
+* The object details panel is translated at its declaration: `DrawerItem` and
+  `DrawerItemLabels` translate a `name` that is a string through
+  `translateName(t, "details.", name)`, which falls back to the declaration when
+  the catalogs have no entry. Every detail item (pods, nodes, volumes, ...) is
+  therefore covered by adding `details.*` entries, while resource kind labels
+  (`Pods`, `Secrets`, `Service`, ...), custom resource fields and user data keep
+  their spelling without any further work.
+* The metrics block of the details panel translates with the same mechanism:
+  the tab labels use `details.metric-tabs.*`, `NoMetrics` and `ClusterNoMetrics`
+  use `details.metrics-not-available` / `details.cluster-metrics-not-available`,
+  and `translateChartDatasets` translates the `label` and `tooltip` of the chart
+  datasets through `charts.*` / `charts.tooltips.*`.
 * `LocaleDate` formats with the moment locale of the current language
   (`renderer/i18n/moment-locale.ts`).
 

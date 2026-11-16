@@ -23,6 +23,7 @@ import type { SelectedNodeRoleForMetrics } from "./overview/selected-node-role-f
 import clusterOverviewMetricsInjectable from "./cluster-metrics.injectable";
 import selectedMetricsTypeInjectable from "./overview/selected-metrics-type.injectable";
 import selectedNodeRoleForMetricsInjectable from "./overview/selected-node-role-for-metrics.injectable";
+import { useTranslation } from "../../i18n/i18n-context";
 
 interface Dependencies {
   clusterOverviewMetrics: IAsyncComputed<ClusterMetricData | undefined>;
@@ -37,6 +38,7 @@ const NonInjectedClusterMetrics = observer((props: Dependencies) => {
     selectedNodeRoleForMetrics,
   } = props;
 
+  const { t } = useTranslation();
   const metrics = clusterOverviewMetrics.value.get();
   const [plugins] = useState([new ZebraStripesPlugin()]);
   const { memoryCapacity, cpuCapacity } = getMetricLastPoints(metrics ?? {});
@@ -51,7 +53,7 @@ const NonInjectedClusterMetrics = observer((props: Dependencies) => {
 
   const datasets = [{
     id: metricType + metricNodeRole,
-    label: `${metricType.toUpperCase()} usage`,
+    label: t("charts.metric-usage", { metric: metricType.toUpperCase() }),
     borderColor: colors[metricType],
     data,
   }];

@@ -4,6 +4,7 @@
  */
 
 import React from "react";
+import type { TranslateParams } from "../../common/i18n/translation";
 import { useTranslation } from "./i18n-context";
 
 /**
@@ -18,6 +19,21 @@ export const toKeySegment = (value: string): string =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+export type TranslateFunction = (key: string, params?: TranslateParams) => string;
+
+/**
+ * Translates a label which the source declares in its own language, for example
+ * the `Created` of a `DrawerItem`. Values without a catalog entry (resource
+ * kinds, field names of custom resources, user data, ...) are returned as they
+ * are declared, so nothing has to be translated to stay readable.
+ */
+export const translateName = (t: TranslateFunction, namespace: string, value: string): string => {
+  const key = `${namespace}${toKeySegment(value)}`;
+  const translated = t(key);
+
+  return translated === key ? value : translated;
+};
 
 export interface TranslatedTextProps {
   /** For example `catalog.kinds.` */

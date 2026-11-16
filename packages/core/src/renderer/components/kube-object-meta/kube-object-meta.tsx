@@ -21,6 +21,7 @@ import apiManagerInjectable from "../../../common/k8s-api/api-manager/manager.in
 import { loggerInjectionToken } from "@k8slens/logger";
 import type { NamespaceApi } from "@k8slens/kube-api";
 import { namespaceApiInjectable } from "@k8slens/kube-api-specifics";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface KubeObjectMetaProps {
   object: KubeObject;
@@ -47,6 +48,7 @@ const NonInjectedKubeObjectMeta = observer((props : Dependencies & KubeObjectMet
     logger,
     namespaceApi,
   } = props;
+  const { t } = useTranslation();
 
   if (!object) {
     return null;
@@ -71,7 +73,9 @@ const NonInjectedKubeObjectMeta = observer((props : Dependencies & KubeObjectMet
     <>
       <DrawerItem name="Created" hidden={isHidden("creationTimestamp") || !creationTimestamp}>
         <KubeObjectAge object={object} compact={false} />
-        {" ago "}
+        {" "}
+        {t("details.ago")}
+        {" "}
         {creationTimestamp && <LocaleDate date={creationTimestamp} />}
       </DrawerItem>
       <DrawerItem name="Name" hidden={isHidden("name")}>

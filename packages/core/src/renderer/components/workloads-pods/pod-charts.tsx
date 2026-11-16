@@ -9,6 +9,8 @@ import React, { useContext } from "react";
 import { isMetricsEmpty, normalizeMetrics } from "../../../common/k8s-api/endpoints/metrics.api";
 import type { ChartDataSets } from "../chart";
 import { BarChart } from "../chart";
+import { translateChartDatasets } from "../chart/translate-datasets";
+import { useTranslation } from "../../i18n/i18n-context";
 import type { MetricsTab } from "../chart/options";
 import { metricTabOptions } from "../chart/options";
 import type { AtLeastOneMetricTab } from "../resource-metrics";
@@ -24,6 +26,7 @@ export const podMetricTabs: AtLeastOneMetricTab = [
 
 export const PodCharts = observer(() => {
   const { metrics, tab, object } = useContext(ResourceMetricsContext) ?? {};
+  const { t } = useTranslation();
 
   if (!metrics || !object || !tab) return null;
   if (isMetricsEmpty(metrics)) return <NoMetrics/>;
@@ -39,7 +42,7 @@ export const PodCharts = observer(() => {
     networkTransmit,
   } = mapValues(metrics, metric => normalizeMetrics(metric).data.result[0].values);
 
-  const datasets: Partial<Record<MetricsTab, ChartDataSets[]>> = {
+  const datasets: Partial<Record<MetricsTab, ChartDataSets[]>> = translateChartDatasets(t, {
     CPU: [
       {
         id: `${id}-cpuUsage`,
@@ -97,7 +100,7 @@ export const PodCharts = observer(() => {
         data: fsReads.map(([x, y]) => ({ x, y })),
       },
     ],
-  };
+  });
 
   return (
     <BarChart

@@ -7,6 +7,8 @@ import "./drawer-item.scss";
 import React from "react";
 import type { StrictReactNode } from "@k8slens/utilities";
 import { cssNames } from "@k8slens/utilities";
+import { useTranslation } from "../../i18n/i18n-context";
+import { translateName } from "../../i18n/translated-text";
 
 export interface DrawerItemProps extends React.HTMLAttributes<HTMLDivElement> {
   name: StrictReactNode;
@@ -31,6 +33,8 @@ export function DrawerItem({
   className,
   ...elemProps
 }: DrawerItemProps) {
+  const { t } = useTranslation();
+
   if (hidden) {
     return null;
   }
@@ -41,7 +45,13 @@ export function DrawerItem({
       className={cssNames("DrawerItem", className, { labelsOnly })}
       title={title}
     >
-      <span className="name">{name}</span>
+      <span className="name">
+        {
+          typeof name === "string"
+            ? translateName(t, "details.", name)
+            : name
+        }
+      </span>
       <span className="value">{children}</span>
     </div>
   );

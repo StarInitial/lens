@@ -15,6 +15,8 @@ import type { MetricData } from "../../../common/k8s-api/endpoints/metrics.api";
 import type { IAsyncComputed } from "@ogre-tools/injectable-react";
 import { isComputed } from "mobx";
 import { observer } from "mobx-react-lite";
+import { useTranslation } from "../../i18n/i18n-context";
+import { translateName } from "../../i18n/translated-text";
 
 export type AtLeastOneMetricTab = [MetricsTab, ...MetricsTab[]];
 
@@ -46,6 +48,7 @@ export const ResourceMetrics = observer(<Keys extends string>({
   metrics,
 }: ResourceMetricsProps<Keys>) => {
   const [tab, setTab] = useState<MetricsTab>(tabs[0]);
+  const { t } = useTranslation();
 
   return (
     <div className={cssNames("ResourceMetrics flex column", className)}>
@@ -60,7 +63,7 @@ export const ResourceMetrics = observer(<Keys extends string>({
             <Radio
               key={index}
               className="box grow"
-              label={tab}
+              label={translateName(t, "details.metric-tabs.", tab)}
               value={tab} />
           ))}
         </RadioGroup>
