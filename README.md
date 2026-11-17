@@ -1,11 +1,11 @@
-# Lens Desktop Core ("OpenLens")
+# StarLens
 
 [![Build Status](https://github.com/lensapp/lens/actions/workflows/test.yml/badge.svg)](https://github.com/lensapp/lens/actions/workflows/test.yml)
 <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Discourse_icon.svg" width=25>[Explore our Forums](https://forums.k8slens.dev)
 
 ## The Repository
 
-This repository is where Team Lens develops the core of the [Lens Desktop](https://k8slens.dev) product together with the community.
+StarLens is a Kubernetes IDE built on the Lens Desktop Core.
 
 The core is a library, powered by [Electron](https://www.electronjs.org/) and [React](https://reactjs.org/). Unlike generic Electron + React frameworks / boilerplates, it is very opinionated for creating Lens Desktop-like applications and has support for Lens Extensions.
 
@@ -13,7 +13,7 @@ In the future, this library will be streamlined to become more customizable and 
 
 This source code is available to everyone under the [MIT license](./LICENSE).
 
-## Lens Desktop
+## StarLens
 
 [Lens Desktop](https://k8slens.dev) is built on top of the Lens Desktop Core with Team Lens built extensions released under a traditional [Terms Of Service](https://k8slens.dev/licenses/tos).
 

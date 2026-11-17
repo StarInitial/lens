@@ -1,7 +1,7 @@
 {
   "name": "@k8slens/extensions",
-  "productName": "OpenLens extensions",
-  "description": "OpenLens - Open Source Kubernetes IDE: extensions",
+  "productName": "StarLens extensions",
+  "description": "StarLens - Open Source Kubernetes IDE: extensions",
   "version": "6.5.0",
   "copyright": "© 2022 OpenLens Authors",
   "license": "MIT",
