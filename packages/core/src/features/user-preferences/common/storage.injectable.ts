@@ -38,6 +38,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
 
         state.allowErrorReporting = descriptors.allowErrorReporting.fromStore(preferences.allowErrorReporting);
         state.allowUntrustedCAs = descriptors.allowUntrustedCAs.fromStore(preferences.allowUntrustedCAs);
+        state.accentColor = descriptors.accentColor.fromStore(preferences.accentColor);
         state.colorTheme = descriptors.colorTheme.fromStore(preferences.colorTheme);
         state.downloadBinariesPath = descriptors.downloadBinariesPath.fromStore(preferences.downloadBinariesPath);
         state.downloadKubectlBinaries = descriptors.downloadKubectlBinaries.fromStore(preferences.downloadKubectlBinaries);
@@ -50,6 +51,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
         state.locale = descriptors.locale.fromStore(preferences.locale);
         state.localeTimezone = descriptors.localeTimezone.fromStore(preferences.localeTimezone);
         state.openAtLogin = descriptors.openAtLogin.fromStore(preferences.openAtLogin);
+        state.reduceMotion = descriptors.reduceMotion.fromStore(preferences.reduceMotion);
         state.shell = descriptors.shell.fromStore(preferences.shell);
         state.syncKubeconfigEntries = descriptors.syncKubeconfigEntries.fromStore(preferences.syncKubeconfigEntries);
         state.terminalConfig = descriptors.terminalConfig.fromStore(preferences.terminalConfig);
@@ -63,6 +65,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
         preferences: {
           allowErrorReporting: descriptors.allowErrorReporting.toStore(state.allowErrorReporting),
           allowUntrustedCAs: descriptors.allowUntrustedCAs.toStore(state.allowUntrustedCAs),
+          accentColor: descriptors.accentColor.toStore(state.accentColor),
           colorTheme: descriptors.colorTheme.toStore(state.colorTheme),
           downloadBinariesPath: descriptors.downloadBinariesPath.toStore(state.downloadBinariesPath),
           downloadKubectlBinaries: descriptors.downloadKubectlBinaries.toStore(state.downloadKubectlBinaries),
@@ -75,6 +78,7 @@ const userPreferencesPersistentStorageInjectable = getInjectable({
           locale: descriptors.locale.toStore(state.locale),
           localeTimezone: descriptors.localeTimezone.toStore(state.localeTimezone),
           openAtLogin: descriptors.openAtLogin.toStore(state.openAtLogin),
+          reduceMotion: descriptors.reduceMotion.toStore(state.reduceMotion),
           shell: descriptors.shell.toStore(state.shell),
           syncKubeconfigEntries: descriptors.syncKubeconfigEntries.toStore(state.syncKubeconfigEntries),
           terminalConfig: descriptors.terminalConfig.toStore(state.terminalConfig),

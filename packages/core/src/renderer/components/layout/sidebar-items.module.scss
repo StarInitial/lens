@@ -6,15 +6,36 @@
   user-select: none;
 
   > .navItem {
+    position: relative;
     display: flex;
     gap: 8px;
     text-decoration: none;
-    padding: 6px 8px 6px 10px;
+    padding: 7px 10px;
+    min-height: 34px;
+    margin: 2px 0;
+    border-radius: 5px;
     cursor: pointer;
+    transition:
+      background-color var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1)),
+      color var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1)),
+      transform var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1));
 
-    &:global(.active), &:hover {
+    > :global(.Icon) {
+      transition: transform var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1));
+    }
+
+    &:global(.active) {
       background: var(--blue);
-      color: var(--sidebarActiveColor);
+      color: #ffffff;
+      transform: translateX(2px);
+
+      > :global(.Icon) {
+        transform: scale(1.08);
+      }
+    }
+
+    &:hover:not(:global(.active)) {
+      background: var(--sidebarItemHoverBackground);
     }
 
     span {
@@ -27,7 +48,29 @@
   }
 
   .subMenu {
+    max-height: 900px;
+    opacity: 1;
+    overflow: hidden;
+    transform: translateY(0);
+    visibility: visible;
+    transition:
+      max-height 240ms cubic-bezier(.2, .75, .25, 1),
+      opacity 160ms ease,
+      transform 200ms cubic-bezier(.2, .75, .25, 1),
+      visibility 0s;
     border-left: 4px solid transparent;
+
+    &.collapsed {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-5px);
+      visibility: hidden;
+      transition:
+        max-height 220ms cubic-bezier(.4, 0, .6, 1),
+        opacity 140ms ease,
+        transform 180ms ease,
+        visibility 0s linear 220ms;
+    }
 
     &.active {
       border-color: var(--blue);
@@ -41,7 +84,12 @@
         padding-top: 4px;
         padding-bottom: 4px;
 
-        &:global(.active), &:hover {
+        &:global(.active) {
+          color: var(--sidebarSubmenuActiveColor);
+          background: none;
+        }
+
+        &:hover:not(:global(.active)) {
           color: var(--sidebarSubmenuActiveColor);
           background: none;
         }

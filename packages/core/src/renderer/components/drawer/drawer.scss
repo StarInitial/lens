@@ -51,7 +51,7 @@
 
   .drawer-title {
     background: var(--blue);
-    color: var(--drawerTitleText);
+    color: #ffffff;
     padding: $padding $padding * 2.5;
     word-break: break-all;
     position: relative;
@@ -75,7 +75,7 @@
     }
 
     .MenuActions.toolbar .Icon {
-      color: var(--drawerTitleText);
+      color: #ffffff;
     }
 
     .Menu {

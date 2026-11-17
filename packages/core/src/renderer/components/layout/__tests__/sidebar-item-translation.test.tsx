@@ -5,6 +5,7 @@
 
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
+import { fireEvent } from "@testing-library/react";
 import { computed } from "mobx";
 import { MemoryRouter } from "react-router-dom";
 import { getDiForUnitTesting } from "../../../getDiForUnitTesting";
@@ -82,5 +83,35 @@ describe("<SidebarItem/> translation", () => {
     const result = renderItem("Something provided by an extension", "zh-CN");
 
     expect(result.getByText("Something provided by an extension")).toBeInTheDocument();
+  });
+
+  it("keeps an expandable submenu mounted and announces its expanded state", () => {
+    const di = getDiForUnitTesting();
+    const render = renderFor(di);
+    const child = {
+      ...getSidebarItem("Pods"),
+      id: "pods-item",
+      parentId: "workloads-item",
+    };
+    const parent = {
+      ...getSidebarItem("sidebar.workloads"),
+      id: "workloads-item",
+      children: [child],
+    };
+    const result = render(
+      <MemoryRouter>
+        <SidebarItem item={parent} />
+      </MemoryRouter>,
+    );
+    const parentLink = result.getByTestId("link-for-workloads-item");
+    const submenu = result.getByTestId("pods-item").parentElement;
+
+    expect(parentLink).toHaveAttribute("aria-expanded", "false");
+    expect(submenu).toHaveAttribute("aria-hidden", "true");
+
+    fireEvent.click(parentLink);
+
+    expect(parentLink).toHaveAttribute("aria-expanded", "true");
+    expect(submenu).toHaveAttribute("aria-hidden", "false");
   });
 });

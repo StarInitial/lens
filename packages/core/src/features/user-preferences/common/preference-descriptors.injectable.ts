@@ -15,6 +15,20 @@ import { defaultExtensionRegistryUrlLocation, defaultEditorConfig, defaultTermin
 import type { LocalePreference } from "../../../common/i18n/locale";
 import { isLocalePreference, systemLocalePreference } from "../../../common/i18n/locale";
 
+export const defaultAccentColor = "#3d90ce";
+
+export const accentColorFromStore = (value: string | undefined): string => (
+  typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value)
+    ? value.toLowerCase()
+    : defaultAccentColor
+);
+
+export const accentColorToStore = (value: string): string | undefined => (
+  /^#[0-9a-f]{6}$/i.test(value) && value.toLowerCase() !== defaultAccentColor
+    ? value.toLowerCase()
+    : undefined
+);
+
 export type PreferenceDescriptors = ReturnType<typeof userPreferenceDescriptorsInjectable["instantiate"]>;
 
 const userPreferenceDescriptorsInjectable = getInjectable({
@@ -40,6 +54,14 @@ const userPreferenceDescriptorsInjectable = getInjectable({
         toStore: val => !val || val === defaultThemeId
           ? undefined
           : val,
+      }),
+      accentColor: getPreferenceDescriptor<string>({
+        fromStore: accentColorFromStore,
+        toStore: accentColorToStore,
+      }),
+      reduceMotion: getPreferenceDescriptor<boolean>({
+        fromStore: val => val ?? false,
+        toStore: val => val ? true : undefined,
       }),
       terminalTheme: getPreferenceDescriptor<string>({
         fromStore: val => val || "",

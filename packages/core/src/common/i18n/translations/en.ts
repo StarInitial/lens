@@ -39,6 +39,10 @@ export const en: TranslationDictionary = {
 
   "preferences.application.theme.title": "Theme",
   "preferences.application.theme.system": "Sync with computer",
+  "preferences.application.theme.accent": "Accent color",
+  "preferences.application.theme.accent-default": "OpenLens blue",
+  "preferences.application.theme.accent-custom": "Custom color",
+  "preferences.application.theme.reduce-motion": "Reduce interface motion",
   "preferences.application.language.title": "Language",
   "preferences.application.language.system": "System default",
   "preferences.application.startup.title": "Start-up",

@@ -26,7 +26,7 @@ const preferencesCatalogEntityInjectable = getInjectable({
         path: url,
         icon: {
           material: "settings",
-          background: "#3d90ce",
+          background: "var(--primary)",
         },
       },
       status: {

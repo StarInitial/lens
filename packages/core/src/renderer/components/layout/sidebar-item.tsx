@@ -6,6 +6,7 @@
 import styles from  "./sidebar-items.module.scss";
 
 import React from "react";
+import { cssNames } from "@k8slens/utilities";
 import { observer } from "mobx-react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@k8slens/icon";
@@ -45,12 +46,15 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
     });
   };
   const renderSubMenu = () => {
-    if (!isExpandable || !expanded) {
+    if (!isExpandable) {
       return null;
     }
 
     return (
-      <div className={styles.subMenu}>
+      <div
+        className={cssNames(styles.subMenu, { [styles.collapsed]: !expanded })}
+        aria-hidden={!expanded}
+      >
         {item.children.map((child) => (
           <SidebarItem key={child.id} item={child} />
         ))}
@@ -73,6 +77,7 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
         to={""}
         isActive={() => isActive}
         className={styles.navItem}
+        aria-expanded={isExpandable ? expanded : undefined}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();

@@ -26,7 +26,7 @@ const welcomeCatalogEntityInjectable = getInjectable({
         path: url,
         icon: {
           material: "home",
-          background: "#3d90ce",
+          background: "var(--primary)",
         },
       },
       status: {

@@ -1,0 +1,149 @@
+/**
+ * Copyright (c) OpenLens Authors. All rights reserved.
+ * Licensed under MIT License. See LICENSE in root directory for more information.
+ */
+
+:root {
+  --border-radius: 6px;
+  --motion-fast: 140ms;
+  --motion-normal: 200ms;
+  --motion-ease: cubic-bezier(.2, .75, .25, 1);
+}
+
+body {
+  background: var(--mainBackground);
+}
+
+.topBar {
+  border-bottom: 1px solid var(--borderFaintColor);
+}
+
+.TabLayout > .Tabs {
+  border-bottom: 1px solid var(--borderFaintColor);
+}
+
+.TabLayout main {
+  margin: 16px;
+}
+
+.Tabs .Tab:not(.disabled):after {
+  height: 2px;
+  transition: opacity var(--motion-fast) var(--motion-ease), width var(--motion-normal) var(--motion-ease);
+}
+
+.TableHead {
+  border-bottom: 1px solid var(--borderColor);
+}
+
+.TableRow {
+  transition: background-color var(--motion-fast) var(--motion-ease);
+}
+
+.TableRow:not(.selected):hover {
+  background-color: var(--tableBgcSelected);
+}
+
+.Button.primary {
+  color: var(--accentForeground);
+}
+
+.Select__option--is-focused {
+  color: var(--accentForeground) !important;
+  background: var(--primary) !important;
+}
+
+.Select__control,
+.Button,
+.Checkbox .box,
+.Switch {
+  transition: background-color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease);
+}
+
+.Dialog,
+.Drawer {
+  border-color: var(--borderColor);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, .24);
+}
+
+.lens-accent-settings {
+  margin-top: 24px;
+  padding-top: 4px;
+  border-top: 1px solid var(--borderFaintColor);
+}
+
+.lens-accent-settings .SubTitle {
+  margin-top: 0;
+  padding-top: 16px;
+}
+
+.lens-accent-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 18px;
+}
+
+.lens-accent-swatch {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--contentColor);
+  border-radius: 50%;
+  background: var(--accent-swatch);
+  box-shadow: 0 0 0 1px var(--borderColor);
+  cursor: pointer;
+  transition: transform var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast) var(--motion-ease);
+}
+
+.lens-accent-swatch:hover {
+  transform: scale(1.08);
+}
+
+.lens-accent-swatch[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.lens-accent-swatch:focus-visible,
+.lens-accent-custom input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.lens-accent-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 4px;
+  color: var(--textColorSecondary);
+  cursor: pointer;
+}
+
+.lens-accent-custom input {
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  background: var(--contentColor);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+:root[data-reduce-motion="true"] *,
+:root[data-reduce-motion="true"] *::before,
+:root[data-reduce-motion="true"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+}

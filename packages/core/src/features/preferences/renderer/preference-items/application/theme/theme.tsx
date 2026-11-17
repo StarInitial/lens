@@ -13,6 +13,10 @@ import { lensThemeDeclarationInjectionToken } from "../../../../../../renderer/t
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
+import { Checkbox } from "../../../../../../renderer/components/checkbox";
+import { defaultAccentColor } from "../../../../../user-preferences/common/preference-descriptors.injectable";
+
+const accentColors = ["#3d90ce", "#3f83f8", "#8b5cf6", "#e84665", "#0ca678", "#d28a12", "#e76f2e"];
 
 interface Dependencies {
   state: UserPreferencesState;
@@ -49,6 +53,40 @@ const NonInjectedTheme = observer(({
         }
         themeName="lens"
       />
+      <div className="lens-accent-settings">
+        <SubTitle title="preferences.application.theme.accent" />
+        <div
+          className="lens-accent-swatches"
+          role="group"
+          aria-label={t("preferences.application.theme.accent")}
+        >
+          {accentColors.map(color => (
+            <button
+              key={color}
+              type="button"
+              className="lens-accent-swatch"
+              style={{ "--accent-swatch": color } as React.CSSProperties}
+              aria-label={color === defaultAccentColor ? t("preferences.application.theme.accent-default") : color}
+              aria-pressed={state.accentColor.toLowerCase() === color}
+              onClick={() => (state.accentColor = color)}
+            />
+          ))}
+          <label className="lens-accent-custom">
+            <span>{t("preferences.application.theme.accent-custom")}</span>
+            <input
+              type="color"
+              value={/^#[0-9a-f]{6}$/i.test(state.accentColor) ? state.accentColor : defaultAccentColor}
+              onChange={event => (state.accentColor = event.target.value)}
+              aria-label={t("preferences.application.theme.accent-custom")}
+            />
+          </label>
+        </div>
+        <Checkbox
+          label={t("preferences.application.theme.reduce-motion")}
+          value={state.reduceMotion}
+          onChange={value => (state.reduceMotion = value)}
+        />
+      </div>
     </section>
   );
 });

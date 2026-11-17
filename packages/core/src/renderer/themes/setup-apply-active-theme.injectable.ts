@@ -9,6 +9,7 @@ import { beforeFrameStartsSecondInjectionToken } from "../before-frame-starts/to
 import initUserStoreInjectable from "../../features/user-preferences/renderer/load-storage.injectable";
 import activeThemeInjectable from "./active.injectable";
 import applyLensThemeInjectable from "./apply-lens-theme.injectable";
+import userPreferencesStateInjectable from "../../features/user-preferences/common/state.injectable";
 
 const setupApplyActiveThemeInjectable = getInjectable({
   id: "setup-apply-active-theme",
@@ -16,10 +17,15 @@ const setupApplyActiveThemeInjectable = getInjectable({
     run: () => {
       const activeTheme = di.inject(activeThemeInjectable);
       const applyLensTheme = di.inject(applyLensThemeInjectable);
+      const preferences = di.inject(userPreferencesStateInjectable);
 
       reaction(
-        () => activeTheme.get(),
-        applyLensTheme,
+        () => ({
+          theme: activeTheme.get(),
+          accentColor: preferences.accentColor,
+          reduceMotion: preferences.reduceMotion,
+        }),
+        ({ theme, accentColor, reduceMotion }) => applyLensTheme(theme, accentColor, reduceMotion),
         {
           fireImmediately: true,
         },

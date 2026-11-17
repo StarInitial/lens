@@ -12,8 +12,8 @@ html {
   --select-menu-bgc: #{$menuBackgroundColor};
   --select-menu-border-color: var(--halfGray);
   --select-option-selected-color: var(--inputOptionHoverColor);
-  --select-option-focused-bgc: var(--colorInfo);
-  --select-option-focused-color: var(--textColorAccent);
+  --select-option-focused-bgc: var(--primary);
+  --select-option-focused-color: var(--accentForeground);
 
   .Select {
     position: relative;
@@ -187,7 +187,7 @@ html {
 
       :focus-within {
         &.Select__control {
-          box-shadow: 0 0 0 1px var(--colorInfo);
+          box-shadow: 0 0 0 1px var(--primary);
         }
       }
 
