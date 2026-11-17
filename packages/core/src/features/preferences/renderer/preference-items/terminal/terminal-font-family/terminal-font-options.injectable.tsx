@@ -11,6 +11,8 @@ import { defaultTerminalFontFamily } from "../../../../../../common/vars";
 import type { SelectOption } from "../../../../../../renderer/components/select";
 import { terminalFontInjectionToken } from "../../../../../terminal/renderer/fonts/token";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
+import type { I18n } from "../../../../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../../../../common/i18n/i18n.injectable";
 
 export interface TerminalFontPreferencePresenter {
   readonly options: IComputedValue<SelectOption<string>[]>;
@@ -23,9 +25,19 @@ const terminalFontPreferencePresenterInjectable = getInjectable({
   instantiate: (di): TerminalFontPreferencePresenter => {
     const state = di.inject(userPreferencesStateInjectable);
     const terminalFonts = di.injectMany(terminalFontInjectionToken);
+    const i18n: I18n = di.inject(i18nInjectable);
 
     return {
-      options: computed(() => terminalFonts.map(font => ({
+      options: computed(() => [{
+        // Keep the default (the system monospace stack) selectable, otherwise the list has no entry for it.
+        label: (
+          <span style={{ fontFamily: defaultTerminalFontFamily, fontSize: state.terminalConfig.fontSize }}>
+            {i18n.t("preferences.terminal.font-family.system-monospace")}
+          </span>
+        ),
+        value: defaultTerminalFontFamily,
+        isSelected: state.terminalConfig.fontFamily === defaultTerminalFontFamily,
+      }, ...terminalFonts.map(font => ({
         label: (
           <span
             style={{
@@ -38,7 +50,7 @@ const terminalFontPreferencePresenterInjectable = getInjectable({
         ),
         value: font.name,
         isSelected: state.terminalConfig.fontFamily === font.name,
-      }))),
+      }))]),
       current: computed(() => state.terminalConfig.fontFamily),
       onSelection: action(selection => {
         state.terminalConfig.fontFamily = selection?.value ?? defaultTerminalFontFamily;

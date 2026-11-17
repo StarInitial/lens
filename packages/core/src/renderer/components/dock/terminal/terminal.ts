@@ -68,7 +68,14 @@ export class Terminal {
   }
 
   get fontFamily() {
-    return this.dependencies.terminalConfig.get().fontFamily;
+    const configured = this.dependencies.terminalConfig.get().fontFamily;
+
+    // Append real monospace faces unless the configured family already ends in a generic: a font that is
+    // not installed would otherwise fall back to a proportional face, and xterm measures the character
+    // cell from "M" of that face, which draws every other glyph small with wide gaps between them.
+    return /\b(monospace|sans-serif|serif)\b/.test(configured)
+      ? configured
+      : `${configured}, Menlo, Consolas, "DejaVu Sans Mono", monospace`;
   }
 
   get fontSize() {
@@ -86,7 +93,16 @@ export class Terminal {
       cursorBlink: true,
       cursorStyle: "bar",
       fontSize: this.fontSize,
+      // xterm defaults to a line height of 1, which packs the rows so tightly that the glyphs look lost
+      // in the gaps at small font sizes.
+      lineHeight: 1.2,
       fontFamily: this.fontFamily,
+      // xterm's canvas renderer draws the glyphs with the font size scaled for the device pixel ratio but
+      // sizes the canvas with it as well, and on Windows displays scaled above 100% those two disagree:
+      // the glyphs end up about 20% smaller than the cells they sit in, which reads as small characters
+      // with wide gaps between them. The DOM renderer draws real text with the configured font, so the
+      // terminal matches the rest of the interface (including the pod logs view).
+      rendererType: "dom",
     });
     // enable terminal addons
     this.xterm.loadAddon(this.fitAddon);
@@ -133,12 +149,42 @@ export class Terminal {
         this.api.sendTerminalSize(cols, rows);
       }),
     );
+
+    this.remeasureWhenFontIsReady();
   }
+
+  /**
+   * xterm measures the character cell with whatever font is available when it opens, while the bundled
+   * terminal fonts are registered asynchronously. Re-applying the family once the font is loaded makes
+   * xterm measure again, so text is not drawn small with wide gaps between the characters.
+   */
+  private remeasureWhenFontIsReady = () => {
+    const fonts = document.fonts;
+
+    if (!fonts?.load) {
+      return;
+    }
+
+    void fonts.load(`${this.fontSize}px ${this.fontFamily}`)
+      .catch(() => undefined)
+      .then(() => {
+        this.xterm.options.fontFamily = this.fontFamily;
+        this.fit();
+      });
+  };
 
   destroy() {
     this.disposer();
     this.xterm.dispose();
   }
+
+  /**
+   * Clears the visible screen without touching the shell's own buffer or scrollback history, so the caller
+   * can hand a blank screen over to whatever runs next (e.g. a container shell started via kubectl).
+   */
+  clearView = () => {
+    this.xterm.write("[2J[H");
+  };
 
   fit = () => this.fitAddon.fit();
 
@@ -220,8 +266,9 @@ export class Terminal {
   setFontFamily = (fontFamily: string) => {
     this.dependencies.logger.info(`[TERMINAL]: set fontFamily to ${fontFamily}`);
 
-    this.xterm.options.fontFamily = fontFamily;
+    this.xterm.options.fontFamily = this.fontFamily;
     this.fit();
+    this.remeasureWhenFontIsReady();
 
     // provide css-variable within `:root {}`
     document.documentElement.style.setProperty("--font-terminal", fontFamily);

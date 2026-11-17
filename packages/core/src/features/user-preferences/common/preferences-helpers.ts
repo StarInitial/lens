@@ -4,7 +4,7 @@
  */
 
 import type { editor } from "monaco-editor";
-import { defaultFontSize, defaultTerminalFontFamily, defaultEditorFontFamily } from "../../../common/vars";
+import { defaultFontSize, defaultTerminalFontSize, defaultTerminalFontFamily, defaultEditorFontFamily } from "../../../common/vars";
 import type { PreferenceDescriptors } from "./preference-descriptors.injectable";
 
 export interface KubeconfigSyncEntry extends KubeconfigSyncValue {
@@ -19,9 +19,35 @@ export interface TerminalConfig {
 }
 
 export const defaultTerminalConfig: TerminalConfig = {
-  fontSize: defaultFontSize,
+  fontSize: defaultTerminalFontSize,
   fontFamily: defaultTerminalFontFamily,
 };
+
+/**
+ * The terminal defaults shipped before the switch to the system monospace stack. An earlier release
+ * persisted them on first run, so the stored value kept overriding every later default change and the
+ * terminal stayed at 12px with the bundled webfont while the rest of the UI used the normal font.
+ */
+const legacyDefaultTerminalConfig = {
+  fontSize: 12,
+  fontFamily: "RobotoMono",
+};
+
+/** True when the stored configuration is still the untouched old default rather than a user choice. */
+export const isLegacyDefaultTerminalConfig = (config: Partial<TerminalConfig> | undefined): boolean => (
+  config?.fontSize === legacyDefaultTerminalConfig.fontSize
+  && config.fontFamily === legacyDefaultTerminalConfig.fontFamily
+);
+
+/**
+ * Resolves the terminal configuration read from the preferences file against the current defaults. The
+ * old untouched default is dropped so an installation that never touched the setting picks up the current
+ * default instead of keeping the value an earlier release wrote down.
+ */
+export const terminalConfigFromStore = (stored: Partial<TerminalConfig> | undefined): TerminalConfig => ({
+  ...defaultTerminalConfig,
+  ...(isLegacyDefaultTerminalConfig(stored) ? undefined : stored),
+});
 
 export interface BaseEditorConfiguration extends Required<Pick<editor.IStandaloneEditorConstructionOptions, "minimap" | "tabSize" | "fontSize" | "fontFamily">> {
   lineNumbers: NonNullable<Exclude<editor.IStandaloneEditorConstructionOptions["lineNumbers"], Function>>;

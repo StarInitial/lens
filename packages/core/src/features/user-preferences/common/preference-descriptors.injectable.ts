@@ -11,7 +11,7 @@ import joinPathsInjectable from "../../../common/path/join-paths.injectable";
 import { defaultThemeId } from "../../../common/vars";
 import currentTimezoneInjectable from "../../../common/vars/current-timezone.injectable";
 import type { EditorConfiguration, ExtensionRegistry, KubeconfigSyncEntry, KubeconfigSyncValue, TerminalConfig } from "./preferences-helpers";
-import { defaultExtensionRegistryUrlLocation, defaultEditorConfig, defaultTerminalConfig, defaultPackageMirror, getPreferenceDescriptor, packageMirrors } from "./preferences-helpers";
+import { defaultExtensionRegistryUrlLocation, defaultEditorConfig, defaultTerminalConfig, defaultPackageMirror, getPreferenceDescriptor, packageMirrors, terminalConfigFromStore } from "./preferences-helpers";
 import type { LocalePreference } from "../../../common/i18n/locale";
 import { isLocalePreference, systemLocalePreference } from "../../../common/i18n/locale";
 
@@ -135,8 +135,12 @@ const userPreferenceDescriptorsInjectable = getInjectable({
         toStore: val => val,
       }),
       terminalConfig: getPreferenceDescriptor<Partial<TerminalConfig>, TerminalConfig>({
-        fromStore: val => merge(defaultTerminalConfig, val),
-        toStore: val => val,
+        fromStore: terminalConfigFromStore,
+        // Do not persist the default itself: otherwise the first run freezes the default of that moment
+        // into the store and later changes to the default never reach existing installations.
+        toStore: val => (val.fontSize === defaultTerminalConfig.fontSize && val.fontFamily === defaultTerminalConfig.fontFamily
+          ? undefined
+          : val),
       }),
       extensionRegistryUrl: getPreferenceDescriptor<ExtensionRegistry>({
         fromStore: val => val ?? {
