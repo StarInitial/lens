@@ -21,7 +21,7 @@
   "scripts": {
     "precompute-versions": "swc ./build/compute-versions.ts -o ./build/compute-versions.mjs",
     "compute-versions": "node ./build/compute-versions.mjs",
-    "prebuild": "npm run compute-versions",
+    "prebuild": "npm run compute-versions || echo \"WARN: could not refresh kubectl versions, reusing existing build/versions.json\"",
     "build": "lens-webpack-build",
     "dev": "webpack --mode=development --watch",
     "test": "jest --coverage --runInBand"

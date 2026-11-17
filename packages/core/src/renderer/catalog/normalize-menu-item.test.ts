@@ -15,7 +15,9 @@ describe("normalizing a catalog entity context menu item", () => {
   beforeEach(() => {
     di = getDiForUnitTesting();
 
-    di.override(withConfirmationInjectable, () => (fn) => fn);
+    di.override(withConfirmationInjectable, () => (params) => {
+      params.ok?.();
+    });
   });
 
   it("keeps the title of an item without a catalog entry", () => {
