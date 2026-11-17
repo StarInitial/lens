@@ -30,6 +30,12 @@ import kubeSelectedUrlParamInjectable from "../kube-detail-params/kube-selected-
 import toggleKubeDetailsPaneInjectable from "../kube-detail-params/toggle-details.injectable";
 import type { LensTheme } from "../../themes/lens-theme";
 import activeThemeInjectable from "../../themes/active.injectable";
+import { Button } from "@k8slens/button";
+import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@k8slens/notifications";
+import type { OpenConfirmDialog } from "../confirm-dialog/open.injectable";
+import openConfirmDialogInjectable from "../confirm-dialog/open.injectable";
+import type { DeleteWarningEvents } from "../../../features/clear-warnings/renderer/delete-warning-events.injectable";
+import deleteWarningEventsInjectable from "../../../features/clear-warnings/renderer/delete-warning-events.injectable";
 
 export interface ClusterIssuesProps {
   className?: string;
@@ -59,14 +65,50 @@ interface Dependencies {
   apiManager: ApiManager;
   kubeSelectedUrlParam: PageParam<string>;
   toggleKubeDetailsPane: ToggleKubeDetailsPane;
+  openConfirmDialog: OpenConfirmDialog;
+  deleteWarningEvents: DeleteWarningEvents;
+  showSuccessNotification: (message: string) => void;
+  showErrorNotification: (message: string) => void;
 }
 
 @observer
 class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Dependencies> {
+  private isClearingWarnings = false;
+
   constructor(props: ClusterIssuesProps & Dependencies) {
     super(props);
     makeObservable(this);
   }
+
+  private clearWarnings = () => {
+    const { i18n, openConfirmDialog, deleteWarningEvents, showSuccessNotification, showErrorNotification } = this.props;
+
+    openConfirmDialog({
+      labelOk: i18n.t("cluster.clear-warnings-ok"),
+      message: <p>{i18n.t("cluster.clear-warnings-confirm")}</p>,
+      ok: async () => {
+        this.isClearingWarnings = true;
+        this.forceUpdate();
+
+        try {
+          const { total, failed } = await deleteWarningEvents();
+
+          if (failed > 0) {
+            showErrorNotification(i18n.t("cluster.clear-warnings-partial", { failed, total }));
+          } else {
+            showSuccessNotification(i18n.t("cluster.clear-warnings-done", { count: total }));
+          }
+        } catch (error) {
+          showErrorNotification(i18n.t("cluster.clear-warnings-failed", {
+            message: error instanceof Error ? error.message : String(error),
+          }));
+        } finally {
+          this.isClearingWarnings = false;
+          this.forceUpdate();
+        }
+      },
+    });
+  };
 
   @computed get warnings(): Warning[] {
     return [
@@ -156,7 +198,17 @@ class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Depe
       <>
         <SubHeader className={styles.SubHeader}>
           <Icon material="error_outline"/>
-          {` Warnings: ${warnings.length}`}
+          {` ${this.props.i18n.t("cluster.warnings-count", { count: warnings.length })}`}
+          <Button
+            plain
+            className={styles.clearWarnings}
+            disabled={this.isClearingWarnings}
+            tooltip={this.props.i18n.t("cluster.clear-warnings-tooltip")}
+            onClick={this.clearWarnings}
+            label={this.isClearingWarnings
+              ? this.props.i18n.t("cluster.clear-warnings-busy")
+              : this.props.i18n.t("cluster.clear-warnings")}
+          />
         </SubHeader>
         <Table
           tableId="cluster_issues"
@@ -212,5 +264,9 @@ export const ClusterIssues = withInjectables<Dependencies, ClusterIssuesProps>(N
     i18n: di.inject(i18nInjectable),
     kubeSelectedUrlParam: di.inject(kubeSelectedUrlParamInjectable),
     toggleKubeDetailsPane: di.inject(toggleKubeDetailsPaneInjectable),
+    openConfirmDialog: di.inject(openConfirmDialogInjectable),
+    deleteWarningEvents: di.inject(deleteWarningEventsInjectable),
+    showSuccessNotification: di.inject(showSuccessNotificationInjectable),
+    showErrorNotification: di.inject(showErrorNotificationInjectable),
   }),
 });

@@ -30,6 +30,15 @@
       font-size: 130%;
       color: var(--colorError);
     }
+
+    .clearWarnings {
+      margin-left: auto;
+      margin-right: calc(var(--margin) * 2);
+      font-size: small;
+      font-weight: normal;
+      min-height: 24px;
+      padding: 0 10px;
+    }
   }
 
   .message {
