@@ -225,6 +225,7 @@ describe("KubeApi", () => {
         });
       });
     });
+
   });
 
   describe("deleting pods (namespace scoped resource)", () => {
@@ -352,6 +353,44 @@ describe("KubeApi", () => {
           expect(await deleteRequest).toBeDefined();
         });
       });
+    });
+  });
+
+  describe("deleting with options", () => {
+    it("sends DeleteOptions in the request body", async () => {
+      const api = new PodApi({ logger, maybeKubeApi: kubeJsonApi });
+      const deleteRequest = api.delete({
+        name: "foo",
+        namespace: "test",
+        deleteOptions: {
+          gracePeriodSeconds: 0,
+          propagationPolicy: "Background",
+        },
+      });
+
+      await flushPromises();
+
+      expect(fetchMock.mock.lastCall).toMatchObject([
+        "http://127.0.0.1:9999/api-kube/api/v1/namespaces/test/pods/foo?propagationPolicy=Background",
+        {
+          method: "delete",
+          body: JSON.stringify({
+            kind: "DeleteOptions",
+            apiVersion: "v1",
+            gracePeriodSeconds: 0,
+            propagationPolicy: "Background",
+          }),
+        },
+      ]);
+
+      await fetchMock.resolveSpecific(
+        ["http://127.0.0.1:9999/api-kube/api/v1/namespaces/test/pods/foo?propagationPolicy=Background"],
+        createMockResponseFromString(
+          "http://127.0.0.1:9999/api-kube/api/v1/namespaces/test/pods/foo?propagationPolicy=Background",
+          "{}",
+        ),
+      );
+      await deleteRequest;
     });
   });
 

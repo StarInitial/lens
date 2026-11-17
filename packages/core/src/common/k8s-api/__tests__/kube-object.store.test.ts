@@ -35,6 +35,39 @@ class FakeKubeObjectStore extends KubeObjectStore<KubeObject> {
 }
 
 describe("KubeObjectStore", () => {
+  it("deletes an object with explicit delete options", async () => {
+    const api = {
+      isNamespaced: true,
+      delete: jest.fn().mockResolvedValue(undefined),
+    };
+    const object = new KubeObject({
+      apiVersion: "v1",
+      kind: "Foo",
+      metadata: {
+        name: "some-obj-name",
+        resourceVersion: "1",
+        uid: "some-uid",
+        namespace: "default",
+        selfLink: "/some/self/link",
+      },
+    });
+    const store = new FakeKubeObjectStore(() => [], api);
+
+    await store.removeWithOptions(object, {
+      gracePeriodSeconds: 0,
+      propagationPolicy: "Background",
+    });
+
+    expect(api.delete).toHaveBeenCalledWith({
+      name: "some-obj-name",
+      namespace: "default",
+      deleteOptions: {
+        gracePeriodSeconds: 0,
+        propagationPolicy: "Background",
+      },
+    });
+  });
+
   it("should remove an object from the list of items after it is not returned from listing the same namespace again", async () => {
     const loadItems = jest.fn();
     const obj = new KubeObject({

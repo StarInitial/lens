@@ -8,7 +8,7 @@ import type { Disposer } from "@k8slens/utilities";
 import { waitUntilDefined, includes, rejectPromiseBy, object } from "@k8slens/utilities";
 import type { KubeJsonApiDataFor, KubeObject } from "@k8slens/kube-object";
 import { KubeStatus } from "@k8slens/kube-object";
-import type { IKubeWatchEvent, KubeApiQueryParams, KubeApi, KubeApiWatchCallback } from "@k8slens/kube-api";
+import type { DeleteOptions, IKubeWatchEvent, KubeApiQueryParams, KubeApi, KubeApiWatchCallback } from "@k8slens/kube-api";
 import { ItemStore } from "../item.store";
 import { parseKubeApi } from "@k8slens/kube-api";
 import type { RequestInit } from "@k8slens/node-fetch";
@@ -361,13 +361,19 @@ export class KubeObjectStore<
     return newItem;
   }
 
-  async patch(item: K, patch: JsonPatch): Promise<K> {
+  async patch(item: K, patch: JsonPatch): Promise<K>;
+  async patch(item: K, patch: PartialDeep<K>, strategy: "merge" | "strategic"): Promise<K>;
+  async patch(item: K, patch: JsonPatch | PartialDeep<K>, strategy: "json" | "merge" | "strategic" = "json"): Promise<K> {
+    if (strategy !== "json" && Array.isArray(patch)) {
+      throw new Error(`For '${strategy}' patch strategy, patch must be an object`);
+    }
+
     const rawItem = await this.api.patch(
       {
         name: item.getName(), namespace: item.getNs(),
       },
       patch,
-      "json",
+      strategy,
     );
 
     assert(rawItem, `Failed to patch ${item.getScopedName()} of ${item.kind} ${item.apiVersion}`);
@@ -393,6 +399,15 @@ export class KubeObjectStore<
     // Some k8s apis might implement special more fine-grained "delete" request for resources (e.g. pod.api.ts)
     // See also: https://kubernetes.io/docs/concepts/scheduling-eviction/api-eviction/
     await this.api.evict({ name: item.getName(), namespace: item.getNs() });
+    this.selectedItemsIds.delete(item.getId());
+  }
+
+  async removeWithOptions(item: K, deleteOptions?: DeleteOptions) {
+    await this.api.delete({
+      name: item.getName(),
+      namespace: item.getNs(),
+      deleteOptions,
+    });
     this.selectedItemsIds.delete(item.getId());
   }
 

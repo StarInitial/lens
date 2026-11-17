@@ -6,7 +6,7 @@ import React from "react";
 import type { RenderResult } from "@testing-library/react";
 import { screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { KubeObject } from "@k8slens/kube-object";
+import { KubeObject, Pod } from "@k8slens/kube-object";
 import userEvent from "@testing-library/user-event";
 import { getInjectable } from "@ogre-tools/injectable";
 import type { DiContainer } from "@ogre-tools/injectable";
@@ -30,6 +30,8 @@ import directoryForUserDataInjectable from "../../../common/app-paths/directory-
 import hostedClusterIdInjectable from "../../cluster-frame-context/hosted-cluster-id.injectable";
 import clustersStateInjectable from "../../../features/cluster/storage/common/state.injectable";
 import activeEntityIdInjectable from "../../api/catalog/entity/active-entity-id.injectable";
+import kubeObjectHandlersInjectable from "../../kube-object/handlers.injectable";
+import kubeObjectDeleteServiceInjectable from "./kube-object-delete-service.injectable";
 
 // TODO: make `animated={false}` not required to make tests deterministic
 describe("kube-object-menu", () => {
@@ -38,6 +40,7 @@ describe("kube-object-menu", () => {
 
   beforeEach(() => {
     di = getDiForUnitTesting();
+    di.override(kubeObjectHandlersInjectable, () => computed(() => new Map()));
 
     di.override(hostedClusterIdInjectable, () => "some-cluster-id");
     di.override(directoryForUserDataInjectable, () => "/some-directory-for-user-data");
@@ -64,9 +67,13 @@ describe("kube-object-menu", () => {
       apiManagerInjectable,
       () =>
         ({
-          getStore: (api: any) => void api,
-        } as ApiManager),
+          getStore: () => undefined,
+        } as unknown as ApiManager),
     );
+
+    const deleteMock = jest.fn().mockResolvedValue(undefined);
+
+    di.override(kubeObjectDeleteServiceInjectable, () => ({ delete: deleteMock }));
 
     di.override(hideDetailsInjectable, () => () => {});
 
@@ -284,6 +291,142 @@ describe("kube-object-menu", () => {
 
       expect(baseElement).toMatchSnapshot();
     });
+  });
+});
+
+describe("kube-object-menu force deletion", () => {
+  let di: DiContainer;
+  let render: DiRender;
+  let deleteServiceMock: jest.Mock;
+
+  beforeEach(() => {
+    di = getDiForUnitTesting();
+    di.override(kubeObjectHandlersInjectable, () => computed(() => new Map()));
+    render = renderFor(di);
+    deleteServiceMock = jest.fn().mockResolvedValue(undefined);
+    di.override(kubeObjectDeleteServiceInjectable, () => ({ delete: deleteServiceMock }));
+    di.override(apiManagerInjectable, () => ({ getStore: () => undefined } as unknown as ApiManager));
+    di.override(hideDetailsInjectable, () => () => {});
+    di.override(createEditResourceTabInjectable, () => () => "irrelevant");
+  });
+
+  const createPod = (data: Record<string, any> = {}) => new Pod({
+    apiVersion: "v1",
+    kind: "Pod",
+    metadata: {
+      uid: "some-uid",
+      name: "some-pod",
+      namespace: "default",
+      resourceVersion: "1",
+      selfLink: "/api/v1/namespaces/default/pods/some-pod",
+      ...data.metadata,
+    },
+    spec: { terminationGracePeriodSeconds: 30, ...data.spec },
+    status: { phase: "Running", ...data.status },
+  } as any);
+
+  it("shows and confirms force deletion for a running pod", async () => {
+    const pod = createPod();
+
+    render(
+      <div>
+        <ConfirmDialog animated={false} />
+        <KubeObjectMenu
+          object={pod}
+          toolbar={true}
+          removable={true}
+        />
+      </div>,
+    );
+
+    userEvent.click(await screen.findByTestId(`menu-action-force-delete-for-${pod.selfLink}`));
+    userEvent.click(await screen.findByTestId("confirm"));
+
+    await waitFor(() => expect(deleteServiceMock).toHaveBeenCalledWith(pod, "force_delete"));
+  });
+
+  it("does not offer force deletion for a completed pod", async () => {
+    const pod = createPod({
+      status: {
+        phase: "Succeeded",
+      },
+    });
+
+    render(
+      <KubeObjectMenu
+        object={pod}
+        toolbar={true}
+        removable={true}
+      />,
+    );
+
+    expect(screen.queryByTestId(`menu-action-force-delete-for-${pod.selfLink}`)).toBeNull();
+  });
+
+  it("offers force deletion for a terminating pod with active containers", async () => {
+    const pod = createPod({
+      metadata: {
+        deletionTimestamp: "2024-01-01T00:00:00Z",
+      },
+      status: {
+        phase: "Running",
+        containerStatuses: [
+          {
+            name: "main",
+            restartCount: 0,
+            state: {
+              running: {
+                startedAt: "2024-01-01T00:00:00Z",
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    render(
+      <KubeObjectMenu
+        object={pod}
+        toolbar={true}
+        removable={true}
+      />,
+    );
+
+    expect(screen.getByTestId(`menu-action-force-delete-for-${pod.selfLink}`)).toBeInTheDocument();
+    expect(screen.queryByTestId(`menu-action-delete-for-${pod.selfLink}`)).toBeNull();
+  });
+
+  it("confirms force finalization for a terminating resource with finalizers", async () => {
+    const object = KubeObject.create({
+      apiVersion: "v1",
+      kind: "ConfigMap",
+      metadata: {
+        uid: "some-uid",
+        name: "some-config-map",
+        namespace: "default",
+        resourceVersion: "1",
+        selfLink: "/api/v1/namespaces/default/configmaps/some-config-map",
+        deletionTimestamp: "2024-01-01T00:00:00Z",
+        finalizers: ["example.com/finalizer"],
+      },
+    });
+
+    render(
+      <div>
+        <ConfirmDialog animated={false} />
+        <KubeObjectMenu
+          object={object}
+          toolbar={true}
+          removable={true}
+        />
+      </div>,
+    );
+
+    userEvent.click(await screen.findByTestId(`menu-action-force-finalize-for-${object.selfLink}`));
+    userEvent.click(await screen.findByTestId("confirm"));
+
+    await waitFor(() => expect(deleteServiceMock).toHaveBeenCalledWith(object, "force_finalize"));
+    expect(screen.queryByTestId(`menu-action-delete-for-${object.selfLink}`)).toBeNull();
   });
 });
 

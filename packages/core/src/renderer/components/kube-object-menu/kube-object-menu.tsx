@@ -5,7 +5,8 @@
 
 import React from "react";
 import { cssNames } from "@k8slens/utilities";
-import type { KubeObject } from "@k8slens/kube-object";
+import type { KubeObject, Pod } from "@k8slens/kube-object";
+import { PodStatusPhase } from "@k8slens/kube-object";
 import type { MenuActionsProps } from "../menu";
 import { MenuItem, MenuActions } from "../menu";
 import identity from "lodash/identity";
@@ -20,13 +21,14 @@ import hideDetailsInjectable from "../kube-detail-params/hide-details.injectable
 import type { OnKubeObjectContextMenuOpen } from "./on-context-menu-open.injectable";
 import onKubeObjectContextMenuOpenInjectable from "./on-context-menu-open.injectable";
 import type { KubeObjectContextMenuItem } from "../../kube-object/handler";
-import type { IComputedValue } from "mobx";
-import { observable, runInAction } from "mobx";
+import { observable, reaction, runInAction, type IComputedValue, type IReactionDisposer } from "mobx";
 import type { WithConfirmation } from "../confirm-dialog/with-confirm.injectable";
 import type { Navigate } from "../../navigation/navigate.injectable";
 import { Icon } from "@k8slens/icon";
 import navigateInjectable from "../../navigation/navigate.injectable";
 import withConfirmationInjectable from "../confirm-dialog/with-confirm.injectable";
+import kubeObjectDeleteServiceInjectable from "./kube-object-delete-service.injectable";
+import type { DeleteType, KubeObjectDeleteService } from "./kube-object-delete-service.injectable";
 import { observer } from "mobx-react";
 
 export interface KubeObjectMenuProps<TKubeObject extends KubeObject> extends MenuActionsProps {
@@ -44,31 +46,105 @@ interface Dependencies {
   onContextMenuOpen: OnKubeObjectContextMenuOpen;
   withConfirmation: WithConfirmation;
   navigate: Navigate;
+  kubeObjectDeleteService: KubeObjectDeleteService;
 }
 
 @observer
 class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component<KubeObjectMenuProps<Kube> & Dependencies> {
   private menuItems = observable.array<KubeObjectContextMenuItem>();
+  private objectReactions: IReactionDisposer[] = [];
+
+  componentDidMount(): void {
+    this.watchObject(this.props.object);
+  }
 
   componentDidUpdate(prevProps: Readonly<KubeObjectMenuProps<Kube> & Dependencies>): void {
-    if (prevProps.object !== this.props.object && this.props.object) {
-      this.emitOnContextMenuOpen(this.props.object);
+    if (prevProps.object !== this.props.object) {
+      this.watchObject(this.props.object);
+
+      if (this.props.object) {
+        this.emitOnContextMenuOpen(this.props.object);
+      }
     }
   }
 
-  private renderRemoveMessage(object: KubeObject) {
+  componentWillUnmount(): void {
+    this.objectReactions.forEach(dispose => dispose());
+  }
+
+  private watchObject(object: KubeObject | null | undefined) {
+    this.objectReactions.forEach(dispose => dispose());
+    this.objectReactions = [];
+
+    if (object) {
+      this.objectReactions.push(
+        reaction(
+          () => object.metadata.deletionTimestamp,
+          () => this.emitOnContextMenuOpen(this.props.object),
+        ),
+        reaction(
+          () => object.getFinalizers(),
+          () => this.emitOnContextMenuOpen(this.props.object),
+        ),
+      );
+    }
+  }
+
+  private renderRemoveMessage(object: KubeObject, title = "Remove") {
     const breadcrumbParts = [object.getNs(), object.getName()];
     const breadcrumb = breadcrumbParts.filter(identity).join("/");
 
     return (
       <p>
-        {`Remove ${object.kind} `}
-        <b>{breadcrumb}</b>
+        {`${title} ${object.kind}`}
+        <b>{` ${breadcrumb}`}</b>
         {" from "}
         <b>{this.props.clusterName.get()}</b>
         ?
       </p>
     );
+  }
+
+  private getDeleteModes(object: KubeObject): DeleteType[] {
+    const hasDeletionTimestamp = Boolean(object.metadata.deletionTimestamp);
+    const hasFinalizers = object.getFinalizers().length > 0;
+
+    if (object.kind !== "Pod") {
+      return hasDeletionTimestamp && hasFinalizers ? ["force_finalize"] : ["delete"];
+    }
+
+    const pod = object as Pod;
+    const phase = pod.getStatusPhase();
+    const terminal = phase === PodStatusPhase.SUCCEEDED || phase === PodStatusPhase.FAILED || phase === "Unknown";
+
+    if (!hasDeletionTimestamp) {
+      return terminal || (pod.spec.terminationGracePeriodSeconds ?? 30) <= 0
+        ? ["delete"]
+        : ["force_delete", "delete"];
+    }
+
+    if (hasFinalizers) {
+      return ["force_finalize"];
+    }
+
+    if (terminal) {
+      return ["delete"];
+    }
+
+    const hasActiveContainers = pod.getContainerStatuses().some(status => status.state?.running || status.state?.waiting);
+
+    return hasActiveContainers || phase === PodStatusPhase.RUNNING ? ["force_delete"] : ["delete"];
+  }
+
+  private getDeleteConfig(deleteType: DeleteType) {
+    switch (deleteType) {
+      case "delete":
+        return { title: "Delete", icon: "delete", labelOk: "Remove" };
+      case "force_delete":
+        return { title: "Force Delete", icon: "delete_forever", labelOk: "Force Delete" };
+      case "force_finalize":
+        return { title: "Force Finalize", icon: "delete_sweep", labelOk: "Force Finalize" };
+    }
   }
 
   private renderMenuItems() {
@@ -95,9 +171,11 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
       onContextMenuOpen,
       navigate,
       updateAction,
+      kubeObjectDeleteService,
     } = this.props;
 
     const store = apiManager.getStore(object.selfLink);
+    const latestObject = store?.getByPath(object.selfLink) || object;
     const isEditable = editable ?? (Boolean(store?.patch) || Boolean(updateAction));
     const isRemovable = removable ?? (Boolean(store?.remove) || Boolean(removeAction));
 
@@ -105,24 +183,28 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
       this.menuItems.clear();
 
       if (isRemovable) {
-        this.menuItems.push({
-          id: "delete-kube-object",
-          title: "Delete",
-          icon: "delete",
-          onClick: withConfirmation({
-            message: this.renderRemoveMessage(object),
-            labelOk: "Remove",
-            ok: async () => {
-              hideDetails();
+        for (const deleteType of this.getDeleteModes(latestObject)) {
+          const config = this.getDeleteConfig(deleteType);
 
-              if (removeAction) {
-                await removeAction();
-              } else if (store?.remove) {
-                await store.remove(object);
-              }
-            },
-          }),
-        });
+          this.menuItems.push({
+            id: `delete-kube-object-${deleteType}`,
+            title: config.title,
+            icon: config.icon,
+            onClick: withConfirmation({
+              message: this.renderRemoveMessage(latestObject, config.title),
+              labelOk: config.labelOk,
+              ok: async () => {
+                hideDetails();
+
+                if (deleteType === "delete" && removeAction) {
+                  await removeAction();
+                } else {
+                  await kubeObjectDeleteService.delete(latestObject, deleteType);
+                }
+              },
+            }),
+          });
+        }
       }
 
       if (isEditable) {
@@ -214,5 +296,6 @@ export const KubeObjectMenu = withInjectables<Dependencies, KubeObjectMenuProps<
     onContextMenuOpen: di.inject(onKubeObjectContextMenuOpenInjectable),
     navigate: di.inject(navigateInjectable),
     withConfirmation: di.inject(withConfirmationInjectable),
+    kubeObjectDeleteService: di.inject(kubeObjectDeleteServiceInjectable),
   }),
 }) as <T extends KubeObject>(props: KubeObjectMenuProps<T>) => React.ReactElement;

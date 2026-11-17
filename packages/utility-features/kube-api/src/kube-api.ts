@@ -263,6 +263,11 @@ export type SpecificResourceDescriptor<Scope extends KubeObjectScope> = {
 export type NamespacedResourceDescriptor = SpecificResourceDescriptor<KubeObjectScope.Namespace>;
 export type ClusterScopedResourceDescriptor = SpecificResourceDescriptor<KubeObjectScope.Cluster>;
 
+export interface DeleteOptions {
+  gracePeriodSeconds?: number;
+  propagationPolicy?: PropagationPolicy;
+}
+
 export interface DeleteResourceDescriptor extends ResourceDescriptor {
   /**
    * This determines how child resources should be handled by kubernetes
@@ -270,6 +275,7 @@ export interface DeleteResourceDescriptor extends ResourceDescriptor {
    * @default "Background"
    */
   propagationPolicy?: PropagationPolicy;
+  deleteOptions?: DeleteOptions;
 }
 
 export interface KubeApiDependencies {
@@ -723,14 +729,22 @@ export class KubeApi<
     return this.delete(desc);
   }
 
-  async delete({ propagationPolicy = "Background", ...desc }: DeleteResourceDescriptor) {
+  async delete({ propagationPolicy = "Background", deleteOptions, ...desc }: DeleteResourceDescriptor) {
     await this.checkPreferredVersion();
     const apiUrl = this.formatUrlForNotListing(desc);
+    const deleteData = deleteOptions
+      ? {
+          kind: "DeleteOptions",
+          apiVersion: "v1",
+          ...deleteOptions,
+        }
+      : undefined;
 
     return this.request.del(apiUrl, {
       query: {
         propagationPolicy,
       },
+      data: deleteData,
     });
   }
 
