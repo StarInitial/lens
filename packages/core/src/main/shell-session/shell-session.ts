@@ -7,6 +7,7 @@ import type { Cluster } from "../../common/cluster/cluster";
 import type { Kubectl } from "../kubectl/kubectl";
 import type WebSocket from "ws";
 import { clearKubeconfigEnvVars } from "../utils/clear-kube-env-vars";
+import { ShellStartupNoiseFilter } from "./shell-startup-noise-filter";
 import path from "path";
 import os from "os";
 import type * as pty from "node-pty";
@@ -220,8 +221,25 @@ export abstract class ShellSession {
     }
 
     this.running = true;
-    shellProcess.onData(data => this.send({ type: TerminalChannels.STDOUT, data }));
+
+    // Drop PowerShell's PSReadLine startup warning: it depends on the machine and is pure noise for the
+    // terminal's user, so nothing is printed even when PSReadLine fails to load.
+    const startupNoiseFilter = new ShellStartupNoiseFilter();
+
+    shellProcess.onData(data => {
+      const filtered = startupNoiseFilter.push(data);
+
+      if (filtered) {
+        this.send({ type: TerminalChannels.STDOUT, data: filtered });
+      }
+    });
     shellProcess.onExit(({ exitCode }) => {
+      const remainingOutput = startupNoiseFilter.flush();
+
+      if (remainingOutput) {
+        this.send({ type: TerminalChannels.STDOUT, data: remainingOutput });
+      }
+
       this.dependencies.logger.info(`[SHELL-SESSION]: shell has exited for ${this.terminalId} closed with exitcode=${exitCode}`);
 
       // This might already be false because of the kill() within the websocket.on("close") handler
@@ -340,6 +358,16 @@ export abstract class ShellSession {
       env.PTYSHELL = shell || "powershell.exe";
       env.PATH = pathStr;
       env.LENS_SESSION = "true";
+      // PowerShell loads PSReadLine from PSModulePath. When that variable is missing from the inherited
+      // environment it cannot find the module and prints "Unable to load PSReadline module. Console is
+      // running without PSReadLine." on every new terminal. Restore the standard locations.
+      if (!env.PSModulePath) {
+        env.PSModulePath = process.env.PSModulePath
+          ?? [
+            path.join(env.SystemRoot ?? "C:\\Windows", "System32", "WindowsPowerShell", "v1.0", "Modules"),
+            path.join(env.ProgramFiles ?? "C:\\Program Files", "WindowsPowerShell", "Modules"),
+          ].join(path.delimiter);
+      }
       env.WSLENV = [
         env.WSLENV,
         "KUBECONFIG/up:LENS_SESSION/u",
