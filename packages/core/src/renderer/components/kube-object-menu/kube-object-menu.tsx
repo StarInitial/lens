@@ -30,6 +30,9 @@ import withConfirmationInjectable from "../confirm-dialog/with-confirm.injectabl
 import kubeObjectDeleteServiceInjectable from "./kube-object-delete-service.injectable";
 import type { DeleteType, KubeObjectDeleteService } from "./kube-object-delete-service.injectable";
 import { observer } from "mobx-react";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { translateName } from "../../i18n/translated-text";
 
 export interface KubeObjectMenuProps<TKubeObject extends KubeObject> extends MenuActionsProps {
   object: TKubeObject;
@@ -47,6 +50,7 @@ interface Dependencies {
   withConfirmation: WithConfirmation;
   navigate: Navigate;
   kubeObjectDeleteService: KubeObjectDeleteService;
+  i18n: I18n;
 }
 
 @observer
@@ -94,15 +98,12 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
     const breadcrumbParts = [object.getNs(), object.getName()];
     const breadcrumb = breadcrumbParts.filter(identity).join("/");
 
-    return (
-      <p>
-        {`${title} ${object.kind}`}
-        <b>{` ${breadcrumb}`}</b>
-        {" from "}
-        <b>{this.props.clusterName.get()}</b>
-        ?
-      </p>
-    );
+    return <p>{this.props.i18n.t("kube-menu.remove-confirmation", {
+      action: translateName(this.props.i18n.t, "actions.", title),
+      kind: object.kind,
+      name: breadcrumb,
+      cluster: this.props.clusterName.get() ?? "",
+    })}</p>;
   }
 
   private getDeleteModes(object: KubeObject): DeleteType[] {
@@ -192,7 +193,7 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
             icon: config.icon,
             onClick: withConfirmation({
               message: this.renderRemoveMessage(latestObject, config.title),
-              labelOk: config.labelOk,
+              labelOk: translateName(this.props.i18n.t, "actions.", config.labelOk),
               ok: async () => {
                 hideDetails();
 
@@ -249,10 +250,10 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
           <Icon
             {...item.icon}
             interactive={this.props.toolbar}
-            tooltip={item.title}
+            tooltip={translateName(this.props.i18n.t, "actions.", item.title)}
           />
           <span className="title">
-            {item.title}
+            {translateName(this.props.i18n.t, "actions.", item.title)}
           </span>
         </MenuItem>
       ))
@@ -297,5 +298,6 @@ export const KubeObjectMenu = withInjectables<Dependencies, KubeObjectMenuProps<
     navigate: di.inject(navigateInjectable),
     withConfirmation: di.inject(withConfirmationInjectable),
     kubeObjectDeleteService: di.inject(kubeObjectDeleteServiceInjectable),
+    i18n: di.inject(i18nInjectable),
   }),
 }) as <T extends KubeObject>(props: KubeObjectMenuProps<T>) => React.ReactElement;

@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-StarLens is an Electron and React Kubernetes IDE in an npm/Lerna monorepo. `packages/` contains the core application, feature modules, UI components, extension API, and shared tooling; package source generally lives in `src/`. `open-lens/` contains the desktop app, webpack configuration, static assets, and integration tests. Documentation and images live in `docs/`, operational scripts in `scripts/`, and manual scenarios in `scenarios/`.
+StarLens is an Electron and React Kubernetes IDE in an npm/Lerna monorepo. `packages/` contains the core application, feature modules, UI components, extension API, and shared tooling; package source generally lives in `src/`. `star-lens/` contains the desktop app, webpack configuration, static assets, and integration tests. Documentation and images live in `docs/`, operational scripts in `scripts/`, and manual scenarios in `scenarios/`.
 
 ## Build, Test, and Development Commands
 
@@ -21,7 +21,7 @@ Follow the affected package's ESLint and Prettier configuration. Shared settings
 
 ## Testing Guidelines
 
-Jest runs `*.test.js`, `*.test.ts`, and `*.test.tsx` files, usually beside the source or in `__tests__/`. Add focused tests for behavior changes and review snapshot updates. The shared package configuration requires 100% branch, function, line, and statement coverage for included source; individual packages may configure Jest differently. Integration tests are under `open-lens/integration/` and depend on an app build.
+Jest runs `*.test.js`, `*.test.ts`, and `*.test.tsx` files, usually beside the source or in `__tests__/`. Add focused tests for behavior changes and review snapshot updates. The shared package configuration requires 100% branch, function, line, and statement coverage for included source; individual packages may configure Jest differently. Integration tests are under `star-lens/integration/` and depend on an app build.
 
 ## Commit & Pull Request Guidelines
 

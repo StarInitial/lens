@@ -1,4 +1,5 @@
 static/build
+dist-updated/
 binaries/
 *.mjs
 *.mjs.map

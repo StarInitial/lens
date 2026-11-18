@@ -5,7 +5,7 @@
 
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { fireEvent } from "@testing-library/react";
+import { act, fireEvent } from "@testing-library/react";
 import { computed } from "mobx";
 import { MemoryRouter } from "react-router-dom";
 import { getDiForUnitTesting } from "../../../getDiForUnitTesting";
@@ -77,6 +77,25 @@ describe("<SidebarItem/> translation", () => {
     const result = renderItem("Pod", "zh-CN");
 
     expect(result.getByText("Pod")).toBeInTheDocument();
+  });
+
+  it("translates resource names and switches back to English", () => {
+    const di = getDiForUnitTesting();
+    const render = renderFor(di);
+    const i18n = di.inject(i18nInjectable);
+    const result = render(
+      <MemoryRouter>
+        <SidebarItem item={getSidebarItem("Pods")} />
+      </MemoryRouter>,
+    );
+
+    expect(result.getByText("Pods")).toBeInTheDocument();
+
+    act(() => i18n.setLocalePreference("zh-CN"));
+    expect(result.getByText("容器组")).toBeInTheDocument();
+
+    act(() => i18n.setLocalePreference("en"));
+    expect(result.getByText("Pods")).toBeInTheDocument();
   });
 
   it("keeps unknown labels untranslated", () => {

@@ -14,7 +14,7 @@ import { disposer } from "@k8slens/utilities";
 
 export const appPaths: Partial<Record<NodeJS.Platform, string>> = {
   "win32": "./dist/win-unpacked/StarLens.exe",
-  "linux": "./dist/linux-unpacked/open-lens",
+  "linux": "./dist/linux-unpacked/star-lens",
   "darwin": `./dist/mac${ process.arch === "arm64" ? "-arm64" : "" }/StarLens.app/Contents/MacOS/StarLens`,
 };
 

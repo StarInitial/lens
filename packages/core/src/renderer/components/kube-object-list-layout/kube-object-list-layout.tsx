@@ -31,6 +31,9 @@ import type { ClusterContext } from "../../cluster-frame-context/cluster-frame-c
 import type { GeneralKubeObjectListLayoutColumn, SpecificKubeListLayoutColumn } from "@k8slens/list-layout";
 import { kubeObjectListLayoutColumnInjectionToken } from "@k8slens/list-layout";
 import { sortBy } from "lodash";
+import type { I18n } from "../../../common/i18n/i18n.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { translateName } from "../../i18n/translated-text";
 
 export type KubeItemListStore<K extends KubeObject> = ItemListStore<K, false> & SubscribableStore & {
   getByPath: (path: string) => K | undefined;
@@ -63,6 +66,7 @@ interface Dependencies {
   kubeSelectedUrlParam: PageParam<string>;
   toggleKubeDetailsPane: ToggleKubeDetailsPane;
   generalColumns: GeneralKubeObjectListLayoutColumn[];
+  i18n: I18n;
 }
 
 const matchesApiFor = (api: SubscribableStore["api"]) => (column: GeneralKubeObjectListLayoutColumn) => (
@@ -203,7 +207,7 @@ class NonInjectedKubeObjectListLayout<
             ),
             searchProps: {
               ...searchProps,
-              placeholder: `Search ${resourceName}...`,
+              placeholder: this.props.i18n.t("kube-list.search", { resource: translateName(this.props.i18n.t, "resources.", resourceName) }),
             },
             info: (
               <>
@@ -247,6 +251,7 @@ export const KubeObjectListLayout = withInjectables<
     kubeSelectedUrlParam: di.inject(kubeSelectedUrlParamInjectable),
     toggleKubeDetailsPane: di.inject(toggleKubeDetailsPaneInjectable),
     generalColumns: di.injectMany(kubeObjectListLayoutColumnInjectionToken),
+    i18n: di.inject(i18nInjectable),
   }),
 }) as <
   K extends KubeObject,

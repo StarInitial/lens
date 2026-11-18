@@ -5,10 +5,10 @@
  *   node scripts/brand/generate-icons.mjs
  *
  * Writes:
- *   open-lens/build/icon.ico                   (16..256, Windows + Linux tray/pin)
- *   open-lens/build/icon.png                   (512, Linux)
- *   open-lens/build/icons/512x512.png          (macOS)
- *   open-lens/build/icons/512x512@2x.png       (macOS)
+ *   star-lens/build/icon.ico                   (16..256, Windows + Linux tray/pin)
+ *   star-lens/build/icon.png                   (512, Linux)
+ *   star-lens/build/icons/512x512.png          (macOS)
+ *   star-lens/build/icons/512x512@2x.png       (macOS)
  *   docs/img/favicon.ico, docs/custom_theme/img/favicon.ico
  *
  * The in-app glyph (packages/ui-components/icon/assets/logo-lens.svg) is the
@@ -126,10 +126,10 @@ const appFrames = [];
 for (const size of [16, 24, 32, 48, 64, 128, 256]) {
   appFrames.push(await frame(size));
 }
-write("open-lens/build/icon.ico", ico(appFrames));
-write("open-lens/build/icon.png", await render(tile(MARK), 512));
-write("open-lens/build/icons/512x512.png", await render(tile(MARK), 512));
-write("open-lens/build/icons/512x512@2x.png", await render(tile(MARK), 1024));
+write("star-lens/build/icon.ico", ico(appFrames));
+write("star-lens/build/icon.png", await render(tile(MARK), 512));
+write("star-lens/build/icons/512x512.png", await render(tile(MARK), 512));
+write("star-lens/build/icons/512x512@2x.png", await render(tile(MARK), 1024));
 
 const faviconFrames = [];
 for (const size of [16, 32, 48]) {

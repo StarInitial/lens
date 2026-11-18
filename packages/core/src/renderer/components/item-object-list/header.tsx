@@ -82,7 +82,7 @@ export class ItemListLayoutHeader<I extends ItemObject, PreLoadStores extends bo
     } = customizeHeaderFunctions.reduce<HeaderPlaceholders>(
       (prevPlaceholders, customizer) => customizer(prevPlaceholders),
       {
-        title: <h5 className="title">{renderedTitle}</h5>,
+        title: <h5 className="title">{typeof renderedTitle === "string" ? <TranslatedText namespace="resources." value={renderedTitle} /> : renderedTitle}</h5>,
         info: renderInfo(),
         searchProps: {},
       },

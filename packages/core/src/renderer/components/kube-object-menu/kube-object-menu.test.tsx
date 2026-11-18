@@ -32,6 +32,7 @@ import clustersStateInjectable from "../../../features/cluster/storage/common/st
 import activeEntityIdInjectable from "../../api/catalog/entity/active-entity-id.injectable";
 import kubeObjectHandlersInjectable from "../../kube-object/handlers.injectable";
 import kubeObjectDeleteServiceInjectable from "./kube-object-delete-service.injectable";
+import i18nInjectable from "../../../common/i18n/i18n.injectable";
 
 // TODO: make `animated={false}` not required to make tests deterministic
 describe("kube-object-menu", () => {
@@ -343,6 +344,25 @@ describe("kube-object-menu force deletion", () => {
     userEvent.click(await screen.findByTestId("confirm"));
 
     await waitFor(() => expect(deleteServiceMock).toHaveBeenCalledWith(pod, "force_delete"));
+  });
+
+  it("translates the force delete action and confirmation to Chinese", async () => {
+    di.inject(i18nInjectable).setLocalePreference("zh-CN");
+    const pod = createPod();
+
+    render(
+      <div>
+        <ConfirmDialog animated={false} />
+        <KubeObjectMenu object={pod} toolbar removable />
+      </div>,
+    );
+
+    const action = await screen.findByTestId(`menu-action-force-delete-for-${pod.selfLink}`);
+
+    expect(action).toHaveTextContent("强制删除");
+    userEvent.click(action);
+    expect(screen.getByTestId("confirmation-dialog")).toHaveTextContent("强制删除 Pod default/some-pod");
+    expect(screen.getByTestId("confirm")).toHaveTextContent("强制删除");
   });
 
   it("does not offer force deletion for a completed pod", async () => {

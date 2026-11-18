@@ -4,6 +4,8 @@
  */
 import { getInjectable } from "@ogre-tools/injectable";
 import { podListLayoutColumnInjectionToken } from "@k8slens/list-layout";
+import React from "react";
+import { TranslatedText } from "../../../i18n/translated-text";
 
 const columnId = "qos";
 
@@ -14,7 +16,7 @@ export const podsQosColumnInjectable = getInjectable({
     kind: "Pod",
     apiVersion: "v1",
     priority: 40,
-    content: (pod) => pod.getQosClass(),
+    content: (pod) => <TranslatedText namespace="qos." value={pod.getQosClass()} />,
     header: { title: "QoS", className: "qos", sortBy: columnId, id: columnId },
     sortingCallBack: (pod) => pod.getQosClass(),
   }),

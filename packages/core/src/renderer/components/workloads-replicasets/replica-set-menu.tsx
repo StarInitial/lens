@@ -10,6 +10,7 @@ import { Icon } from "@k8slens/icon";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import type { OpenReplicaSetScaleDialog } from "./scale-dialog/open.injectable";
 import openReplicaSetScaleDialogInjectable from "./scale-dialog/open.injectable";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface ReplicaSetMenuProps extends KubeObjectMenuProps<ReplicaSet> {
 
@@ -23,18 +24,20 @@ const NonInjectedReplicaSetMenu = ({
   object,
   toolbar,
   openReplicaSetScaleDialog,
-}: Dependencies & ReplicaSetMenuProps) => (
-  <>
+}: Dependencies & ReplicaSetMenuProps) => {
+  const { t } = useTranslation();
+
+  return <>
     <MenuItem onClick={() => openReplicaSetScaleDialog(object)}>
       <Icon
         material="open_with"
-        tooltip="Scale"
+        tooltip={t("actions.scale")}
         interactive={toolbar}
       />
-      <span className="title">Scale</span>
+      <span className="title">{t("actions.scale")}</span>
     </MenuItem>
-  </>
-);
+  </>;
+};
 
 export const ReplicaSetMenu = withInjectables<Dependencies, ReplicaSetMenuProps>(NonInjectedReplicaSetMenu, {
   getProps: (di, props) => ({

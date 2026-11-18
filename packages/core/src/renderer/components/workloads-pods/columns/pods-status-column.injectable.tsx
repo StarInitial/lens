@@ -5,6 +5,8 @@
 import { getInjectable } from "@ogre-tools/injectable";
 import { kebabCase } from "lodash";
 import { podListLayoutColumnInjectionToken } from "@k8slens/list-layout";
+import React from "react";
+import { TranslatedText } from "../../../i18n/translated-text";
 
 const columnId = "status";
 
@@ -16,7 +18,7 @@ export const podsStatusColumnInjectable = getInjectable({
     apiVersion: "v1",
     priority: 0,
     content: (pod) => ({
-      title: pod.getStatusMessage(),
+      children: <TranslatedText namespace="status." value={pod.getStatusMessage()} />,
       className: kebabCase(pod.getStatusMessage()),
     }),
     header: { title: "Status", className: "status", sortBy: columnId, id: columnId },

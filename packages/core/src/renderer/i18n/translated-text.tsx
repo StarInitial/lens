@@ -109,7 +109,14 @@ export const TranslatedColumnTitle = ({ value }: TranslatedColumnTitleProps) => 
   const key = `columns.${toKeySegment(value)}`;
   const translated = t(key);
 
-  return <>{translated === key ? value : translated}</>;
+  if (translated !== key) {
+    return <>{translated}</>;
+  }
+
+  const statusKey = `status.${toKeySegment(value)}`;
+  const status = t(statusKey);
+
+  return <>{status === statusKey ? value : status}</>;
 };
 
 export interface TranslatedItemCountProps {

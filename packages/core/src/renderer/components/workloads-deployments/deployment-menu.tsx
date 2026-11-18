@@ -16,6 +16,7 @@ import openConfirmDialogInjectable from "../confirm-dialog/open.injectable";
 import type { ShowCheckedErrorNotification } from "@k8slens/notifications";
 import { showCheckedErrorNotificationInjectable } from "@k8slens/notifications";
 import type { DeploymentApi } from "@k8slens/kube-api";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface DeploymentMenuProps extends KubeObjectMenuProps<Deployment> {}
 
@@ -33,15 +34,17 @@ const NonInjectedDeploymentMenu = ({
   toolbar,
   openConfirmDialog,
   showCheckedErrorNotification,
-}: Dependencies & DeploymentMenuProps) => (
-  <>
+}: Dependencies & DeploymentMenuProps) => {
+  const { t } = useTranslation();
+
+  return <>
     <MenuItem onClick={() => openDeploymentScaleDialog(object)}>
       <Icon
         material="open_with"
-        tooltip="Scale"
+        tooltip={t("actions.scale")}
         interactive={toolbar}
       />
-      <span className="title">Scale</span>
+      <span className="title">{t("actions.scale")}</span>
     </MenuItem>
     <MenuItem
       onClick={() => openConfirmDialog({
@@ -53,28 +56,22 @@ const NonInjectedDeploymentMenu = ({
               name: object.getName(),
             });
           } catch (err) {
-            showCheckedErrorNotification(err, "Unknown error occurred while restarting deployment");
+            showCheckedErrorNotification(err, t("deployment-menu.restart-error"));
           }
         },
-        labelOk: "Restart",
-        message: (
-          <p>
-            {"Are you sure you want to restart deployment "}
-            <b>{object.getName()}</b>
-            ?
-          </p>
-        ),
+        labelOk: t("actions.restart"),
+        message: <p>{t("deployment-menu.restart-confirmation", { name: object.getName() })}</p>,
       })}
     >
       <Icon
         material="autorenew"
-        tooltip="Restart"
+        tooltip={t("actions.restart")}
         interactive={toolbar}
       />
-      <span className="title">Restart</span>
+      <span className="title">{t("actions.restart")}</span>
     </MenuItem>
-  </>
-);
+  </>;
+};
 
 export const DeploymentMenu = withInjectables<Dependencies, DeploymentMenuProps>(NonInjectedDeploymentMenu, {
   getProps: (di, props) => ({

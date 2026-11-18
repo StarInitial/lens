@@ -14,6 +14,7 @@ import openConfirmDialogInjectable from "../confirm-dialog/open.injectable";
 import type { ShowCheckedErrorNotification } from "@k8slens/notifications";
 import { showCheckedErrorNotificationInjectable } from "@k8slens/notifications";
 import type { DaemonSetApi } from "@k8slens/kube-api";
+import { useTranslation } from "../../i18n/i18n-context";
 
 export interface DaemonSetMenuProps extends KubeObjectMenuProps<DaemonSet> {}
 
@@ -29,8 +30,10 @@ const NonInjectedDaemonSetMenu = ({
   toolbar,
   openConfirmDialog,
   showCheckedErrorNotification,
-}: Dependencies & DaemonSetMenuProps) => (
-  <>
+}: Dependencies & DaemonSetMenuProps) => {
+  const { t } = useTranslation();
+
+  return <>
     <MenuItem
       onClick={() => openConfirmDialog({
         ok: async () =>
@@ -41,28 +44,22 @@ const NonInjectedDaemonSetMenu = ({
               name: object.getName(),
             });
           } catch (err) {
-            showCheckedErrorNotification(err, "Unknown error occurred while restarting DaemonSet");
+            showCheckedErrorNotification(err, t("workload.restart-error", { kind: t("resources.daemon-sets") }));
           }
         },
-        labelOk: "Restart",
-        message: (
-          <p>
-            {"Are you sure you want to restart DaemonSet "}
-            <b>{object.getName()}</b>
-            ?
-          </p>
-        ),
+        labelOk: t("actions.restart"),
+        message: <p>{t("workload.restart-confirmation", { kind: t("resources.daemon-sets"), name: object.getName() })}</p>,
       })}
     >
       <Icon
         material="autorenew"
-        tooltip="Restart"
+        tooltip={t("actions.restart")}
         interactive={toolbar}
       />
-      <span className="title">Restart</span>
+      <span className="title">{t("actions.restart")}</span>
     </MenuItem>
-  </>
-);
+  </>;
+};
 
 export const DaemonSetMenu = withInjectables<Dependencies, DaemonSetMenuProps>(NonInjectedDaemonSetMenu, {
   getProps: (di, props) => ({

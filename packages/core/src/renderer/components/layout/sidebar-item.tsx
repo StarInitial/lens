@@ -17,6 +17,7 @@ import type { SidebarItemDeclaration } from "@k8slens/cluster-sidebar";
 import type { StorageLayer } from "../../utils/storage-helper";
 import type { I18n } from "../../../common/i18n/i18n.injectable";
 import i18nInjectable from "../../../common/i18n/i18n.injectable";
+import { translateName } from "../../i18n/translated-text";
 
 interface Dependencies {
   sidebarStorage: StorageLayer<SidebarStorageState>;
@@ -31,10 +32,10 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
   const { item, sidebarStorage, i18n } = props;
   const id = item.id;
 
-  // Only the labels that have an entry in the catalogs are translated; the rest
-  // (for example "Pods" or "Deployments") stay as they are.
   const title = typeof item.title === "string"
-    ? i18n.t(item.title)
+    ? (i18n.t(item.title) === item.title
+      ? translateName(i18n.t, "resources.", item.title)
+      : i18n.t(item.title))
     : item.title;
   const expanded = sidebarStorage.get().expanded[id] ?? false;
   const isExpandable = item.children.length > 0 && item.children.some(item => item.isVisible.get());

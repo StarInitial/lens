@@ -105,15 +105,7 @@ exports[`kube-object-menu given kube object when removing kube object renders 1`
         </i>
          
         <p>
-          Delete some-kind
-          <b>
-             some-namespace/some-name
-          </b>
-           from 
-          <b>
-            some-context-name
-          </b>
-          ?
+          Delete some-kind some-namespace/some-name from some-context-name?
         </p>
       </div>
       <div
@@ -238,15 +230,7 @@ exports[`kube-object-menu given kube object when rerendered with different kube 
         </i>
          
         <p>
-          Delete some-other-kind
-          <b>
-             some-other-namespace/some-other-name
-          </b>
-           from 
-          <b>
-            some-context-name
-          </b>
-          ?
+          Delete some-other-kind some-other-namespace/some-other-name from some-context-name?
         </p>
       </div>
       <div
@@ -334,15 +318,7 @@ exports[`kube-object-menu given kube object with namespace when removing kube ob
         </i>
          
         <p>
-          Delete some-kind
-          <b>
-             some-namespace/some-name
-          </b>
-           from 
-          <b>
-            some-context-name
-          </b>
-          ?
+          Delete some-kind some-namespace/some-name from some-context-name?
         </p>
       </div>
       <div
@@ -430,15 +406,7 @@ exports[`kube-object-menu given kube object without namespace when removing kube
         </i>
          
         <p>
-          Delete some-kind
-          <b>
-             some-name
-          </b>
-           from 
-          <b>
-            some-context-name
-          </b>
-          ?
+          Delete some-kind some-name from some-context-name?
         </p>
       </div>
       <div
