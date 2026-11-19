@@ -20,4 +20,13 @@
       color: var(--colorWarning);
     }
   }
+
+  // The "Events" block is a full ItemListLayout which brings its own page
+  // padding, so its card looked narrower and inset compared to the workload
+  // statuses card above. Drop the inline padding so both cards line up and
+  // keep the same width.
+  > .ItemListLayout {
+    padding-inline: 0;
+    background: transparent;
+  }
 }
