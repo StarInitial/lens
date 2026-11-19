@@ -99,7 +99,7 @@ The documentation site is built with `mkdocs`; `npm run mkdocs:serve-local` serv
 
 This is a personal build, so there is no public contribution or pull request workflow. Changes are committed with conventional commit subjects (`feat:`, `fix(scope):`, `chore:`) and pushed directly to `master`.
 
-Issues and suggestions are still welcome via the GitHub issue tracker, and the general expectations are described in [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md) and [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+Issues and suggestions are still welcome via the GitHub issue tracker.
 
 ## License
 
