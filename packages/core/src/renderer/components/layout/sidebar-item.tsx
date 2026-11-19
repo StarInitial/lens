@@ -55,10 +55,13 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
       <div
         className={cssNames(styles.subMenu, { [styles.collapsed]: !expanded })}
         aria-hidden={!expanded}
+        ref={element => element?.toggleAttribute("inert", !expanded)}
       >
-        {item.children.map((child) => (
-          <SidebarItem key={child.id} item={child} />
-        ))}
+        <div className={styles.subMenuContents}>
+          {item.children.map((child) => (
+            <SidebarItem key={child.id} item={child} />
+          ))}
+        </div>
       </div>
     );
   };
@@ -79,6 +82,8 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
         isActive={() => isActive}
         className={styles.navItem}
         aria-expanded={isExpandable ? expanded : undefined}
+        aria-current={isActive && !isExpandable ? "page" : undefined}
+        data-nav-active={isActive && !isExpandable}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -95,8 +100,8 @@ const NonInjectedSidebarItem = observer((props: SidebarItemProps & Dependencies)
         <span>{title}</span>
         {isExpandable && (
           <Icon
-            className={styles.expandIcon}
-            material={expanded ? "keyboard_arrow_up" : "keyboard_arrow_down"}
+            className={cssNames(styles.expandIcon, { [styles.expanded]: expanded })}
+            material="keyboard_arrow_down"
             data-testid={`expand-icon-for-${id}`}
           />
         )}

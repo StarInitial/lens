@@ -6,11 +6,13 @@
 
 .Drawer {
   --spacing: #{$padding * 3};
-  --icon-focus-color: white;
+  --icon-focus-color: var(--primary);
 
   position: absolute;
   background: var(--contentColor);
-  box-shadow: 0 0 $unit * 2 var(--boxShadow);
+  box-shadow: var(--shadow-overlay);
+  border-radius: 16px 0 0 16px;
+  border-left: 1px solid var(--borderFaintColor);
   z-index: $zIndex-drawer;
   height: 100%;
 
@@ -50,12 +52,14 @@
   }
 
   .drawer-title {
-    background: var(--blue);
-    color: #ffffff;
+    background: var(--contentColor);
+    color: var(--textColorAccent);
+    border-bottom: 1px solid var(--borderFaintColor);
+    border-top-left-radius: 16px;
     padding: $padding $padding * 2.5;
     word-break: break-all;
     position: relative;
-    min-height: 54px;
+    min-height: 72px;
 
     .drawer-title-text {
       font-weight: bold;
@@ -64,6 +68,10 @@
     }
 
     .drawer-title-text .Icon {
+      --size: 1em;
+      font-size: inherit;
+      width: 1em;
+      height: 1em;
       opacity: 0;
       font-weight: normal;
       margin-left: 8px;
@@ -74,8 +82,20 @@
       transition: opacity 250ms;
     }
 
+    .MenuActions.toolbar .Icon:not(:hover):not(.active) {
+      color: var(--textColorSecondary);
+    }
+
     .MenuActions.toolbar .Icon {
-      color: #ffffff;
+      --size: 16px;
+      --small-size: 16px;
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
+
+    .Icon.interactive:hover, .Icon.interactive.active {
+      color: white;
     }
 
     .Menu {
@@ -86,5 +106,6 @@
   .drawer-content {
     overflow: auto;
     padding: var(--spacing);
+    background: var(--mainBackground);
   }
 }

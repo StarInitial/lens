@@ -23,6 +23,7 @@ import { withInjectables } from "@ogre-tools/injectable-react";
 import catalogEntityRegistryInjectable from "../../api/catalog/entity/registry.injectable";
 import type { Hotbar } from "../../../features/hotbar/storage/common/hotbar";
 import activeHotbarInjectable from "../../../features/hotbar/storage/common/active.injectable";
+import { ActiveIndicator } from "../motion/active-indicator";
 
 export interface HotbarMenuProps {
   className?: IClassName;
@@ -42,6 +43,8 @@ const NonInjectedHotbarMenu = observer((props: Dependencies & HotbarMenuProps) =
 
   const [draggingOver, setDraggingOver] = useState(false);
   const hotbar = activeHotbar.get();
+  // Read this in the observer, rather than in react-beautiful-dnd's render prop.
+  const activeEntityId = entityRegistry.activeEntity?.getId();
 
   const getEntity = (item: HotbarItem | null) => {
     if (!item) {
@@ -89,6 +92,7 @@ const NonInjectedHotbarMenu = observer((props: Dependencies & HotbarMenuProps) =
         {(provided, snapshot) => (
           <HotbarCell
             index={index}
+            data-nav-active={Boolean(entity && activeEntityId === entity.getId())}
             key={entity ? entity.getId() : `cell${index}`}
             innerRef={provided.innerRef}
             className={cssNames(
@@ -157,6 +161,7 @@ const NonInjectedHotbarMenu = observer((props: Dependencies & HotbarMenuProps) =
   return (
     <div className={cssNames("HotbarMenu flex column", { draggingOver }, className)}>
       <div className="HotbarItems flex column gaps">
+        <ActiveIndicator selector='[data-nav-active="true"]' />
         <DragDropContext
           onDragStart={() => onDragStart()}
           onDragEnd={(result) => onDragEnd(result)}>

@@ -4,8 +4,8 @@
  */
 
 .StatusBar {
-  --status-bar-height: 21px;
-  color: var(--accentForeground);
+  --status-bar-height: 26px;
+  color: var(--textColorSecondary);
 
   grid-area: status-bar;
   height: var(--status-bar-height);
@@ -13,7 +13,8 @@
 
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
-  background-color: var(--primary);
+  background-color: var(--sidebarBackground);
+  border-top: 1px solid var(--borderFaintColor);
 
   &.status-warning {
     background-color: var(--colorWarning);

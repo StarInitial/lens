@@ -17,7 +17,10 @@ export const PreferencePageComponent = ({ children, id, title }: PreferencePageC
   const { t } = useTranslation();
 
   return (
-    <section id={id} data-preference-page-test={id}>
+    <section
+      className="preference-page"
+      id={id}
+      data-preference-page-test={id}>
       <h2 data-preference-page-title-test={true}>{t(title)}</h2>
 
       {children}

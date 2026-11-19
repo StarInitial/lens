@@ -89,17 +89,21 @@ export class ItemListLayoutHeader<I extends ItemObject, PreLoadStores extends bo
     );
 
     return (
-      <div className={cssNames("header flex gaps align-center", headerClassName)}>
-        {title}
-        {
-          info && (
-            <div className="info-panel box grow">
-              {info}
-            </div>
-          )
-        }
-        {filters}
-        {searchFilters.length > 0 && searchProps && <SearchInputUrl {...searchProps} />}
+      <div className={cssNames("header", headerClassName)}>
+        <div className="page-heading">
+          {title}
+          {
+            info && (
+              <div className="info-panel">
+                {info}
+              </div>
+            )
+          }
+        </div>
+        <div className="page-toolbar">
+          {filters}
+          {searchFilters.length > 0 && searchProps && <SearchInputUrl {...searchProps} />}
+        </div>
       </div>
     );
   }

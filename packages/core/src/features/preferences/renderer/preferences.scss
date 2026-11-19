@@ -8,3 +8,20 @@
     margin: auto;
   }
 }
+
+.Preferences .preference-page {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  > h2 { font-size: 24px; margin-bottom: 24px; }
+  > hr { display: none; }
+  > .preference-card {
+    padding: 24px;
+    margin-bottom: 16px;
+    background: var(--contentColor);
+    border: 1px solid var(--borderFaintColor);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+  }
+}

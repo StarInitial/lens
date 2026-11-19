@@ -13,6 +13,7 @@ import { MenuActions } from "../menu/menu-actions";
 import { ResizeDirection, ResizingAnchor } from "@k8slens/resizing-anchor";
 import { CreateResource } from "./create-resource/view";
 import { DockTabs } from "./dock-tabs";
+import { DockPanel } from "../motion/dock-panel";
 import type { DockStore, DockTab } from "./dock/store";
 import { TabKind } from "./dock/store";
 import { EditResource } from "./edit-resource/view";
@@ -121,15 +122,16 @@ class NonInjectedDock extends React.Component<DockProps & Dependencies> {
   renderTabContent() {
     const { isOpen, height, selectedTab } = this.props.dockStore;
 
-    if (!isOpen || !selectedTab) return null;
+    if (!selectedTab) return null;
 
     return (
-      <div
-        className={`tab-content ${selectedTab.kind}`}
-        style={{ flexBasis: height }}
-        data-testid={`dock-tab-content-for-${selectedTab.id}`}>
+      <DockPanel
+        open={isOpen}
+        height={height}
+        className={selectedTab.kind}
+        testId={`dock-tab-content-for-${selectedTab.id}`}>
         {this.renderTab(selectedTab)}
-      </div>
+      </DockPanel>
     );
   }
 

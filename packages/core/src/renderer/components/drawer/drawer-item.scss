@@ -9,7 +9,9 @@
   display: grid;
   grid-template-columns: minmax(var(--drawer-item-title-width), min-content) auto;
   border-bottom: 1px solid var(--borderFaintColor);
-  padding: $padding 0;
+  padding: 12px 0;
+  gap: 12px;
+  font-size: 13px;
 
   > .name {
     padding-right: $padding;

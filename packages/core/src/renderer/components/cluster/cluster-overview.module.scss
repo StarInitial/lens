@@ -5,8 +5,9 @@
 
 .ClusterOverview {
   position: relative;
-  height: 100%;
+  height: auto;
   min-height: 650px;
+  > * { border: 1px solid var(--borderFaintColor); border-radius: var(--radius-card); box-shadow: var(--shadow-card); overflow: hidden; }
   display: grid;
   grid-gap: calc(var(--margin) * 2);
   grid-template-areas:
@@ -18,8 +19,12 @@
           [row2-start] 1fr;
 
   @media (max-width: 1150px) {
-    grid-template-columns: minmax(500px, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 1fr;
     grid-template-areas: none;
   }
 }
+
+.overviewHeading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; span { color: var(--textColorSecondary); font-size: 12px; } }
+.summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+.summaryCard { padding: 20px; background: var(--contentColor); border: 1px solid var(--borderFaintColor); border-radius: 12px; box-shadow: var(--shadow-card); span { display: block; color: var(--textColorSecondary); font-size: 12px; } strong { display: block; margin-top: 8px; color: var(--textColorAccent); font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; } }

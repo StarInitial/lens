@@ -78,7 +78,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-child");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
 
       it("child page is shown", () => {
@@ -119,6 +119,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
         const child = rendered.queryByTestId("sidebar-item-some-child");
 
         expect(child).not.toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toBeNull();
       });
     });
 
@@ -148,7 +149,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-child");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
     });
 
@@ -175,7 +176,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-child");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
     });
 
@@ -201,7 +202,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-child");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
 
       describe("when a parent sidebar item is expanded", () => {
@@ -227,6 +228,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
           const child = rendered.queryByTestId("sidebar-item-some-child");
 
           expect(child).not.toBeNull();
+          expect(child?.closest('[aria-hidden="true"]')).toBeNull();
         });
 
         describe("when a child of the parent is selected", () => {
@@ -284,7 +286,7 @@ describe("cluster - sidebar and tab navigation for core", () => {
             expect(actual).toEqual({
               sidebar: {
                 expanded: { "sidebar-item-some-parent": true },
-                width: 200,
+                width: 248,
               },
             });
           });

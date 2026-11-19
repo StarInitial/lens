@@ -15,6 +15,9 @@ import { withInjectables } from "@ogre-tools/injectable-react";
 import type { SidebarStorageState } from "./sidebar-storage/sidebar-storage.injectable";
 import sidebarStorageInjectable, { defaultSidebarWidth } from "./sidebar-storage/sidebar-storage.injectable";
 import type { StorageLayer } from "../../utils/storage-helper";
+import type { IComputedValue } from "mobx";
+import currentPathInjectable from "../../routes/current-path.injectable";
+import { PageSurface } from "../motion/page-surface";
 
 export interface MainLayoutProps {
   sidebar: StrictReactNode;
@@ -31,6 +34,7 @@ export interface MainLayoutProps {
 
 interface Dependencies {
   sidebarStorage: StorageLayer<SidebarStorageState>;
+  currentPath: IComputedValue<string>;
 }
 
 @observer
@@ -60,9 +64,9 @@ class NonInjectedMainLayout extends React.Component<MainLayoutProps & Dependenci
           />
         </div>
 
-        <div className={styles.contents}>
+        <PageSurface className={styles.contents} route={this.props.currentPath.get()}>
           <ErrorBoundary>{children}</ErrorBoundary>
-        </div>
+        </PageSurface>
 
         <div className={styles.footer}>{footer}</div>
       </div>
@@ -74,6 +78,7 @@ export const MainLayout = withInjectables<Dependencies, MainLayoutProps>(NonInje
   getProps: (di, props) => ({
     ...props,
     sidebarStorage: di.inject(sidebarStorageInjectable),
+    currentPath: di.inject(currentPathInjectable),
   }),
 });
 

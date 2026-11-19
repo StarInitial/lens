@@ -1,111 +1,36 @@
+/**
+ * Copyright (c) OpenLens Authors. All rights reserved.
+ * Licensed under MIT License. See LICENSE in root directory for more information.
+ */
+
+@import "./sidebar-navigation";
+
 .SidebarItem {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   width: 100%;
+  min-width: 0;
   user-select: none;
+}
+.navItem { @include sidebar-navigation-row(":global(.Icon)", ":global(.active)"); }
 
-  > .navItem {
-    position: relative;
-    display: flex;
-    gap: 8px;
-    text-decoration: none;
-    padding: 7px 10px;
-    min-height: 34px;
-    margin: 2px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    transition:
-      background-color var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1)),
-      color var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1)),
-      transform var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1));
-
-    > :global(.Icon) {
-      transition: transform var(--motion-fast, 140ms) var(--motion-ease, cubic-bezier(.2, .75, .25, 1));
-    }
-
-    &:global(.active) {
-      background: var(--blue);
-      color: #ffffff;
-      transform: translateX(2px);
-
-      > :global(.Icon) {
-        transform: scale(1.08);
-      }
-    }
-
-    &:hover:not(:global(.active)) {
-      background: var(--sidebarItemHoverBackground);
-    }
-
-    span {
-      word-break: break-word;
-    }
-  }
-
-  .expandIcon {
-    margin-left: auto;
-  }
-
-  .subMenu {
-    max-height: 900px;
-    opacity: 1;
-    overflow: hidden;
-    transform: translateY(0);
-    visibility: visible;
-    transition:
-      max-height 240ms cubic-bezier(.2, .75, .25, 1),
-      opacity 160ms ease,
-      transform 200ms cubic-bezier(.2, .75, .25, 1),
-      visibility 0s;
-    border-left: 4px solid transparent;
-
-    &.collapsed {
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-5px);
-      visibility: hidden;
-      transition:
-        max-height 220ms cubic-bezier(.4, 0, .6, 1),
-        opacity 140ms ease,
-        transform 180ms ease,
-        visibility 0s linear 220ms;
-    }
-
-    &.active {
-      border-color: var(--blue);
-    }
-  
-    .SidebarItem {
-      color: var(--textColorPrimary);
-      padding-left: 25px;
-  
-      .navItem {
-        padding-top: 4px;
-        padding-bottom: 4px;
-
-        &:global(.active) {
-          color: var(--sidebarSubmenuActiveColor);
-          background: none;
-        }
-
-        &:hover:not(:global(.active)) {
-          color: var(--sidebarSubmenuActiveColor);
-          background: none;
-        }
-      }
-    }
-  }
-
-   // 3rd menu level
-  .subMenu .subMenu {
-    &.active {
-      border-color: transparent;
-    }
-
-    .SidebarItem {
-      padding-left: calc(var(--padding) / 2);
-    }
+.expandIcon { margin-left: auto; }
+.expanded { rotate: 180deg; }
+.subMenu {
+  display: grid;
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--motion-panel) var(--motion-ease), visibility 0s;
+  &.collapsed {
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows var(--motion-panel) var(--motion-ease), visibility 0s var(--motion-panel);
   }
 }
-
+.subMenuContents {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: 20px;
+  .navItem { min-height: 34px; padding-block: 7px; font-size: 13px; }
+}

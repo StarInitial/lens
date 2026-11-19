@@ -13,7 +13,9 @@ import { lensThemeDeclarationInjectionToken } from "../../../../../../renderer/t
 import type { UserPreferencesState } from "../../../../../user-preferences/common/state.injectable";
 import userPreferencesStateInjectable from "../../../../../user-preferences/common/state.injectable";
 import { useTranslation } from "../../../../../../renderer/i18n/i18n-context";
-import { Checkbox } from "../../../../../../renderer/components/checkbox";
+import { Switch } from "../../../../../../renderer/components/switch/switch";
+import activeThemeInjectable from "../../../../../../renderer/themes/active.injectable";
+import type { IComputedValue } from "mobx";
 import { defaultAccentColor } from "../../../../../user-preferences/common/preference-descriptors.injectable";
 
 const accentColors = ["#3d90ce", "#3f83f8", "#8b5cf6", "#e84665", "#0ca678", "#d28a12", "#e76f2e"];
@@ -22,12 +24,14 @@ interface Dependencies {
   state: UserPreferencesState;
   defaultTheme: LensTheme;
   themes: LensTheme[];
+  activeTheme: IComputedValue<LensTheme>;
 }
 
 const NonInjectedTheme = observer(({
   state,
   themes,
   defaultTheme,
+  activeTheme,
 }: Dependencies) => {
   const { t } = useTranslation();
   const themeOptions = [
@@ -65,7 +69,7 @@ const NonInjectedTheme = observer(({
               key={color}
               type="button"
               className="lens-accent-swatch"
-              style={{ "--accent-swatch": color } as React.CSSProperties}
+              style={{ "--accent-swatch": color === defaultAccentColor ? activeTheme.get().colors.primary : color } as React.CSSProperties}
               aria-label={color === defaultAccentColor ? t("preferences.application.theme.accent-default") : color}
               aria-pressed={state.accentColor.toLowerCase() === color}
               onClick={() => (state.accentColor = color)}
@@ -75,17 +79,18 @@ const NonInjectedTheme = observer(({
             <span>{t("preferences.application.theme.accent-custom")}</span>
             <input
               type="color"
-              value={/^#[0-9a-f]{6}$/i.test(state.accentColor) ? state.accentColor : defaultAccentColor}
+              value={state.accentColor === defaultAccentColor ? activeTheme.get().colors.primary : state.accentColor}
               onChange={event => (state.accentColor = event.target.value)}
               aria-label={t("preferences.application.theme.accent-custom")}
             />
           </label>
         </div>
-        <Checkbox
-          label={t("preferences.application.theme.reduce-motion")}
-          value={state.reduceMotion}
+        <Switch
+          checked={state.reduceMotion}
           onChange={value => (state.reduceMotion = value)}
-        />
+        >
+          {t("preferences.application.theme.reduce-motion")}
+        </Switch>
       </div>
     </section>
   );
@@ -95,6 +100,7 @@ export const Theme = withInjectables<Dependencies>(NonInjectedTheme, {
   getProps: (di) => ({
     state: di.inject(userPreferencesStateInjectable),
     defaultTheme: di.inject(defaultLensThemeInjectable),
+    activeTheme: di.inject(activeThemeInjectable),
     themes: di.injectMany(lensThemeDeclarationInjectionToken),
   }),
 });

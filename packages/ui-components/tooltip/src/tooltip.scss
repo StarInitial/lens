@@ -8,18 +8,19 @@
 
   position: fixed;
   margin: 0 !important;
-  background: var(--mainBackground);
+  background: var(--tooltipBackground);
   font-size: small;
   font-weight: normal;
-  border-radius: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--borderFaintColor);
   color: var(--textColorAccent);
   white-space: normal;
-  padding: .5em;
+  padding: 8px 12px;
   text-align: center;
   pointer-events: none;
   transition: opacity 150ms 150ms ease-in-out;
   z-index: 100000;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+  box-shadow: var(--shadow-overlay);
   left: 0;
   top: 0;
   opacity: 0;

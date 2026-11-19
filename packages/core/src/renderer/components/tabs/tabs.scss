@@ -4,6 +4,7 @@
  */
 
 .Tabs {
+  position: relative;
   display: flex;
   user-select: none;
   -webkit-user-select: none; /* safari */
@@ -18,7 +19,7 @@
   }
 
   &.center {
-    > :first-child {
+    > .Tab:first-of-type {
       margin-left: auto;
     }
 
@@ -40,6 +41,12 @@
   position: relative;
   padding: $padding $padding * 2;
   white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--textColorSecondary);
+  transition: color var(--motion-fast), background var(--motion-fast);
+  &:hover { background: var(--surface-hover); border-radius: 8px 8px 0 0; }
+  &:focus-visible { outline: 2px solid var(--primary); outline-offset: -3px; }
 
   &.disabled {
     pointer-events: none;
@@ -50,7 +57,7 @@
     cursor: pointer;
 
     &:after {
-      content: "";
+      content: none;
       position: absolute;
       right: 0;
       bottom: 0;

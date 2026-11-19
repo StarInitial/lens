@@ -3,16 +3,17 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+@import "./sidebar-navigation";
+
+.sidebar { width: 100%; min-height: 0; }
 .sidebarNav {
-  @apply flex overflow-auto flex-col;
-  width: var(--sidebar-width);
-  padding: 12px 10px 20px;
-
-  /* Shadow above scrolling content from https://gist.github.com/distinctgrey/7548778 */
-  background: var(--sidebarBackground);
+  @include sidebar-navigation-surface(":global(.lens-active-indicator)");
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  min-height: 0;
+  flex: 1;
+  padding: 8px 12px 24px;
+  scrollbar-gutter: stable;
 }
-
-.sidebarNav :global(.Icon) {
-  box-sizing: content-box;
-  border-radius: 50%;
-}
+.sidebarNav :global(.Icon) { box-sizing: content-box; }

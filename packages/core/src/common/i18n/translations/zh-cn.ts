@@ -34,7 +34,7 @@ export const zhCN: TranslationDictionary = {
   "preferences.application.theme.title": "主题",
   "preferences.application.theme.system": "与系统同步",
   "preferences.application.theme.accent": "强调色",
-  "preferences.application.theme.accent-default": "OpenLens 蓝色",
+  "preferences.application.theme.accent-default": "主题默认色",
   "preferences.application.theme.accent-custom": "自定义颜色",
   "preferences.application.theme.reduce-motion": "减少界面动效",
   "preferences.application.language.title": "语言",

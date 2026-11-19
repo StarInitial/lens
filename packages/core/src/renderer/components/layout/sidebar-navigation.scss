@@ -1,0 +1,60 @@
+/**
+ * Copyright (c) OpenLens Authors. All rights reserved.
+ * Licensed under MIT License. See LICENSE in root directory for more information.
+ */
+
+@mixin sidebar-navigation-row($icon: ".Icon", $active: ".active") {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 9px 12px;
+  margin: 2px 0;
+  border-radius: 10px;
+  color: var(--textColorSecondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--motion-fast);
+
+  // Hover below the shared selection pill; content above both backgrounds.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    transition: background-color var(--motion-fast);
+  }
+  > * { position: relative; z-index: 2; }
+  > :not(#{$icon}) { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  > #{$icon} {
+    --size: 16px;
+    --small-size: 16px;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: inherit;
+    transition: rotate var(--motion-normal) var(--motion-ease);
+  }
+  &#{$active} { color: var(--primary); font-weight: 600; }
+  &:hover { background: transparent; }
+  &:hover:not(#{$active}) { color: var(--textColorAccent); }
+  &:hover:not(#{$active})::before { background: var(--surface-hover); }
+  &:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+}
+
+@mixin sidebar-navigation-surface($indicator: ".lens-active-indicator") {
+  position: relative;
+  isolation: isolate;
+  > #{$indicator} { z-index: 1; }
+}

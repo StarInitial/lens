@@ -6,6 +6,7 @@
 import styles from "./cluster-overview.module.scss";
 
 import React from "react";
+import { TranslatedText } from "../../i18n/translated-text";
 import type { IComputedValue } from "mobx";
 import { disposeOnUnmount, observer } from "mobx-react";
 import type { NodeStore } from "../nodes/store";
@@ -66,11 +67,27 @@ class NonInjectedClusterOverview extends React.Component<Dependencies> {
   }
 
   render() {
-    const { eventStore, nodeStore, clusterMetricsAreVisible } = this.props;
+    const { eventStore, nodeStore, podStore, clusterMetricsAreVisible } = this.props;
     const isMetricsHidden = !clusterMetricsAreVisible.get();
 
     return (
       <TabLayout scrollable>
+        <header className={styles.overviewHeading}>
+          <h2><TranslatedText namespace="sidebar." value="cluster" /></h2>
+          <span>Kubernetes</span>
+        </header>
+        <div className={styles.summary}>
+          {[
+            { label: "Nodes", store: nodeStore },
+            { label: "Pods", store: podStore },
+            { label: "Events", store: eventStore },
+          ].map(({ label, store }) => (
+            <div className={styles.summaryCard} key={label}>
+              <span><TranslatedText namespace="resources." value={label} /></span>
+              <strong>{store.isLoaded ? store.items.length : "—"}</strong>
+            </div>
+          ))}
+        </div>
         <div className={styles.ClusterOverview} data-testid="cluster-overview-page">
           {
             (!nodeStore.isLoaded || !eventStore.isLoaded)

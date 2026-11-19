@@ -18,7 +18,7 @@ import type { WelcomeBannerRegistration } from "./welcome-banner-items/welcome-b
 import productNameInjectable from "../../../common/vars/product-name.injectable";
 import { useTranslation } from "../../i18n/i18n-context";
 
-export const defaultWidth = 320;
+export const defaultWidth = 520;
 
 // This is to fix some react 18 type errors
 const Carousel = LegacyCarousel as React.ComponentType<CarouselProps>;
@@ -44,7 +44,7 @@ const NonInjectedWelcome = observer(({
   );
 
   return (
-    <div className="flex justify-center Welcome align-center" data-testid="welcome-page">
+    <div className="flex justify-center Welcome align-center lens-page-surface" data-testid="welcome-page">
       <div
         style={{ width: `${maxWidth}px` }}
         data-testid="welcome-banner-container"
@@ -102,6 +102,14 @@ const NonInjectedWelcome = observer(({
                   key={index}
                   className="flex grid-12"
                   onClick={() => item.click()}
+                  tabIndex={0}
+                  role="button"
+                  onKeyDown={event => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      item.click();
+                    }
+                  }}
                 >
                   <Icon material={item.icon} className="box col-1" />
                   <a className="box col-10">

@@ -6,7 +6,12 @@
 .SidebarCluster {
   display: flex;
   align-items: center;
-  padding: calc(var(--padding) * 1.2);
+  padding: 20px 16px;
+  min-height: 88px;
+  gap: 10px;
+  border-bottom: 1px solid var(--borderFaintColor);
+  margin: 0 12px 8px;
+  border-radius: 12px;
   cursor: pointer;
 
   &:hover {
@@ -32,7 +37,7 @@
   color: var(--textColorAccent);
   display: -webkit-box;
   /* Simulate text-overflow:ellipsis styles but for multiple text lines */
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -43,7 +48,9 @@
 
 .avatar {
   font-weight: 500;
-  margin-right: calc(var(--margin) * 1.5);
+  margin-right: 0;
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .loadingAvatar {

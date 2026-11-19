@@ -123,14 +123,16 @@ describe("<SidebarItem/> translation", () => {
       </MemoryRouter>,
     );
     const parentLink = result.getByTestId("link-for-workloads-item");
-    const submenu = result.getByTestId("pods-item").parentElement;
+    const submenu = result.getByTestId("pods-item").parentElement?.parentElement;
 
     expect(parentLink).toHaveAttribute("aria-expanded", "false");
     expect(submenu).toHaveAttribute("aria-hidden", "true");
+    expect(submenu).toHaveAttribute("inert");
 
     fireEvent.click(parentLink);
 
     expect(parentLink).toHaveAttribute("aria-expanded", "true");
     expect(submenu).toHaveAttribute("aria-hidden", "false");
+    expect(submenu).not.toHaveAttribute("inert");
   });
 });

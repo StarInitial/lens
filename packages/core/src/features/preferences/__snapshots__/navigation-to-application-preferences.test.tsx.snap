@@ -84,9 +84,19 @@ exports[`preferences - navigation to application preferences given in preference
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -96,6 +106,7 @@ exports[`preferences - navigation to application preferences given in preference
                   Preferences
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -108,6 +119,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -120,6 +132,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -132,6 +145,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -144,6 +158,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -167,6 +182,7 @@ exports[`preferences - navigation to application preferences given in preference
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="application-page"
               id="application-page"
             >
@@ -176,6 +192,7 @@ exports[`preferences - navigation to application preferences given in preference
                 Application
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="theme"
               >
                 <section
@@ -261,12 +278,100 @@ exports[`preferences - navigation to application preferences given in preference
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="lens-accent-settings"
+                  >
+                    <div
+                      class="SubTitle"
+                    >
+                      Accent color
+                       
+                    </div>
+                    <div
+                      aria-label="Accent color"
+                      class="lens-accent-swatches"
+                      role="group"
+                    >
+                      <button
+                        aria-label="Theme default"
+                        aria-pressed="true"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #51c6ec;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#3f83f8"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #3f83f8;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#8b5cf6"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #8b5cf6;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e84665"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e84665;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#0ca678"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #0ca678;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#d28a12"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #d28a12;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e76f2e"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e76f2e;"
+                        type="button"
+                      />
+                      <label
+                        class="lens-accent-custom"
+                      >
+                        <span>
+                          Custom color
+                        </span>
+                        <input
+                          aria-label="Custom color"
+                          type="color"
+                          value="#51c6ec"
+                        />
+                      </label>
+                    </div>
+                    <label
+                      class="Switch"
+                      data-testid="switch"
+                    >
+                      Reduce interface motion
+                      <input
+                        role="switch"
+                        type="checkbox"
+                      />
+                    </label>
+                  </div>
                 </section>
               </div>
               <div
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="extension-install-registry"
               >
                 <section
@@ -384,6 +489,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="start-up"
               >
                 <section
@@ -411,6 +517,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="language"
               >
                 <section
@@ -500,6 +607,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="timezone"
               >
                 <section
@@ -630,8 +738,14 @@ exports[`preferences - navigation to application preferences given in preference
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -652,6 +766,7 @@ exports[`preferences - navigation to application preferences given in preference
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -672,42 +787,52 @@ exports[`preferences - navigation to application preferences given in preference
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -850,9 +975,19 @@ exports[`preferences - navigation to application preferences given in preference
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -862,6 +997,7 @@ exports[`preferences - navigation to application preferences given in preference
                   Preferences
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -874,6 +1010,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -886,6 +1023,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -898,6 +1036,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -910,6 +1049,7 @@ exports[`preferences - navigation to application preferences given in preference
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -933,6 +1073,7 @@ exports[`preferences - navigation to application preferences given in preference
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="application-page"
               id="application-page"
             >
@@ -942,6 +1083,7 @@ exports[`preferences - navigation to application preferences given in preference
                 Application
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="theme"
               >
                 <section
@@ -1027,12 +1169,100 @@ exports[`preferences - navigation to application preferences given in preference
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="lens-accent-settings"
+                  >
+                    <div
+                      class="SubTitle"
+                    >
+                      Accent color
+                       
+                    </div>
+                    <div
+                      aria-label="Accent color"
+                      class="lens-accent-swatches"
+                      role="group"
+                    >
+                      <button
+                        aria-label="Theme default"
+                        aria-pressed="true"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #51c6ec;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#3f83f8"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #3f83f8;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#8b5cf6"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #8b5cf6;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e84665"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e84665;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#0ca678"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #0ca678;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#d28a12"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #d28a12;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e76f2e"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e76f2e;"
+                        type="button"
+                      />
+                      <label
+                        class="lens-accent-custom"
+                      >
+                        <span>
+                          Custom color
+                        </span>
+                        <input
+                          aria-label="Custom color"
+                          type="color"
+                          value="#51c6ec"
+                        />
+                      </label>
+                    </div>
+                    <label
+                      class="Switch"
+                      data-testid="switch"
+                    >
+                      Reduce interface motion
+                      <input
+                        role="switch"
+                        type="checkbox"
+                      />
+                    </label>
+                  </div>
                 </section>
               </div>
               <div
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="extension-install-registry"
               >
                 <section
@@ -1150,6 +1380,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="start-up"
               >
                 <section
@@ -1177,6 +1408,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="language"
               >
                 <section
@@ -1266,6 +1498,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="timezone"
               >
                 <section
@@ -1355,6 +1588,7 @@ exports[`preferences - navigation to application preferences given in preference
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="preference-item-for-extension-some-test-extension-name-item-some-application-preference-item-id"
               >
                 <section
@@ -1427,8 +1661,14 @@ exports[`preferences - navigation to application preferences given in preference
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -1449,6 +1689,7 @@ exports[`preferences - navigation to application preferences given in preference
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -1469,42 +1710,52 @@ exports[`preferences - navigation to application preferences given in preference
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -1647,9 +1898,19 @@ exports[`preferences - navigation to application preferences given in some child
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -1659,6 +1920,7 @@ exports[`preferences - navigation to application preferences given in some child
                   Preferences
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -1671,6 +1933,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -1683,6 +1946,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -1695,6 +1959,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -1707,6 +1972,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -1730,6 +1996,7 @@ exports[`preferences - navigation to application preferences given in some child
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="proxy-page"
               id="proxy-page"
             >
@@ -1739,6 +2006,7 @@ exports[`preferences - navigation to application preferences given in some child
                 Proxy
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="http-proxy-url"
               >
                 <section>
@@ -1777,6 +2045,7 @@ exports[`preferences - navigation to application preferences given in some child
                 class="HorizontalLine size-sm"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="allow-untrusted-certificates"
               >
                 <section
@@ -1850,8 +2119,14 @@ exports[`preferences - navigation to application preferences given in some child
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -1872,6 +2147,7 @@ exports[`preferences - navigation to application preferences given in some child
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -1892,42 +2168,52 @@ exports[`preferences - navigation to application preferences given in some child
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -2070,9 +2356,19 @@ exports[`preferences - navigation to application preferences given in some child
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -2082,6 +2378,7 @@ exports[`preferences - navigation to application preferences given in some child
                   Preferences
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -2094,6 +2391,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -2106,6 +2404,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -2118,6 +2417,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -2130,6 +2430,7 @@ exports[`preferences - navigation to application preferences given in some child
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -2153,6 +2454,7 @@ exports[`preferences - navigation to application preferences given in some child
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="application-page"
               id="application-page"
             >
@@ -2162,6 +2464,7 @@ exports[`preferences - navigation to application preferences given in some child
                 Application
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="theme"
               >
                 <section
@@ -2247,12 +2550,100 @@ exports[`preferences - navigation to application preferences given in some child
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="lens-accent-settings"
+                  >
+                    <div
+                      class="SubTitle"
+                    >
+                      Accent color
+                       
+                    </div>
+                    <div
+                      aria-label="Accent color"
+                      class="lens-accent-swatches"
+                      role="group"
+                    >
+                      <button
+                        aria-label="Theme default"
+                        aria-pressed="true"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #51c6ec;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#3f83f8"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #3f83f8;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#8b5cf6"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #8b5cf6;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e84665"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e84665;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#0ca678"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #0ca678;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#d28a12"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #d28a12;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e76f2e"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e76f2e;"
+                        type="button"
+                      />
+                      <label
+                        class="lens-accent-custom"
+                      >
+                        <span>
+                          Custom color
+                        </span>
+                        <input
+                          aria-label="Custom color"
+                          type="color"
+                          value="#51c6ec"
+                        />
+                      </label>
+                    </div>
+                    <label
+                      class="Switch"
+                      data-testid="switch"
+                    >
+                      Reduce interface motion
+                      <input
+                        role="switch"
+                        type="checkbox"
+                      />
+                    </label>
+                  </div>
                 </section>
               </div>
               <div
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="extension-install-registry"
               >
                 <section
@@ -2370,6 +2761,7 @@ exports[`preferences - navigation to application preferences given in some child
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="start-up"
               >
                 <section
@@ -2397,6 +2789,7 @@ exports[`preferences - navigation to application preferences given in some child
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="language"
               >
                 <section
@@ -2486,6 +2879,7 @@ exports[`preferences - navigation to application preferences given in some child
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="timezone"
               >
                 <section
@@ -2616,8 +3010,14 @@ exports[`preferences - navigation to application preferences given in some child
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -2638,6 +3038,7 @@ exports[`preferences - navigation to application preferences given in some child
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -2658,42 +3059,52 @@ exports[`preferences - navigation to application preferences given in some child
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -2837,9 +3248,19 @@ exports[`preferences - navigation to application preferences given in some child
             <div
               class="sidebar"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator"
+                style="opacity: 0;"
+              />
               <div
                 class="Tabs flex column"
               >
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator line"
+                  style="opacity: 0;"
+                />
                 <div
                   data-preference-tab-group-test="general-tab-group"
                 >
@@ -2849,6 +3270,7 @@ exports[`preferences - navigation to application preferences given in some child
                     Preferences
                   </div>
                   <div
+                    aria-selected="true"
                     class="Tab flex gaps align-center active"
                     data-preference-tab-link-test="app"
                     role="tab"
@@ -2861,6 +3283,7 @@ exports[`preferences - navigation to application preferences given in some child
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="proxy"
                     role="tab"
@@ -2873,6 +3296,7 @@ exports[`preferences - navigation to application preferences given in some child
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="kubernetes"
                     role="tab"
@@ -2885,6 +3309,7 @@ exports[`preferences - navigation to application preferences given in some child
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="editor"
                     role="tab"
@@ -2897,6 +3322,7 @@ exports[`preferences - navigation to application preferences given in some child
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="terminal"
                     role="tab"
@@ -2920,6 +3346,7 @@ exports[`preferences - navigation to application preferences given in some child
               class="content"
             >
               <section
+                class="preference-page"
                 data-preference-page-test="application-page"
                 id="application-page"
               >
@@ -2929,6 +3356,7 @@ exports[`preferences - navigation to application preferences given in some child
                   Application
                 </h2>
                 <div
+                  class="preference-card"
                   data-preference-item-test="theme"
                 >
                   <section
@@ -3014,12 +3442,100 @@ exports[`preferences - navigation to application preferences given in some child
                         </div>
                       </div>
                     </div>
+                    <div
+                      class="lens-accent-settings"
+                    >
+                      <div
+                        class="SubTitle"
+                      >
+                        Accent color
+                         
+                      </div>
+                      <div
+                        aria-label="Accent color"
+                        class="lens-accent-swatches"
+                        role="group"
+                      >
+                        <button
+                          aria-label="Theme default"
+                          aria-pressed="true"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #51c6ec;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#3f83f8"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #3f83f8;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#8b5cf6"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #8b5cf6;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#e84665"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #e84665;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#0ca678"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #0ca678;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#d28a12"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #d28a12;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#e76f2e"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #e76f2e;"
+                          type="button"
+                        />
+                        <label
+                          class="lens-accent-custom"
+                        >
+                          <span>
+                            Custom color
+                          </span>
+                          <input
+                            aria-label="Custom color"
+                            type="color"
+                            value="#51c6ec"
+                          />
+                        </label>
+                      </div>
+                      <label
+                        class="Switch"
+                        data-testid="switch"
+                      >
+                        Reduce interface motion
+                        <input
+                          role="switch"
+                          type="checkbox"
+                        />
+                      </label>
+                    </div>
                   </section>
                 </div>
                 <div
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="extension-install-registry"
                 >
                   <section
@@ -3137,6 +3653,7 @@ exports[`preferences - navigation to application preferences given in some child
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="start-up"
                 >
                   <section
@@ -3164,6 +3681,7 @@ exports[`preferences - navigation to application preferences given in some child
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="language"
                 >
                   <section
@@ -3253,6 +3771,7 @@ exports[`preferences - navigation to application preferences given in some child
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="timezone"
                 >
                   <section
@@ -3383,8 +3902,14 @@ exports[`preferences - navigation to application preferences given in some child
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -3405,6 +3930,7 @@ exports[`preferences - navigation to application preferences given in some child
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -3425,42 +3951,52 @@ exports[`preferences - navigation to application preferences given in some child
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>

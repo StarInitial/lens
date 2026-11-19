@@ -6,6 +6,7 @@
 .Dock {
   position: relative;
   background: var(--dockHeadBackground);
+  border-top: 1px solid var(--borderFaintColor);
   display: flex;
   flex-direction: column;
 
@@ -46,7 +47,8 @@
 
   .tabs-container {
     padding: 0 $padding * 2;
-    border-top: 1px solid var(--borderColor);
+    padding-block: 6px;
+    gap: 8px;
     flex-shrink: 0;
 
     .Tabs:empty + .toolbar {
@@ -64,11 +66,16 @@
     }
   }
 
+  .Tabs > .lens-active-indicator.line {
+    z-index: 1;
+    border-radius: 0;
+  }
+
   .tab-content {
     position: relative;
     flex: 1;
     overflow: hidden;
-    transition: flex-basis 25ms ease-in;
+    // Resizing stays synchronous so terminal geometry follows the pointer.
     background: var(--dockInfoBackground);
 
     > *:not(.Spinner) {

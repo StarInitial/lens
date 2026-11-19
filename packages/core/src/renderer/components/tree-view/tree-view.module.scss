@@ -1,7 +1,13 @@
 .treeItem {
   display: flex;
   flex-direction: row;
-  padding: 2px var(--padding) 2px 0;
+  position: relative;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 10px;
+  margin: 2px 0;
+  border-radius: 10px;
+  transition: background var(--motion-fast), color var(--motion-fast);
   cursor: pointer;
 
   &:hover {
@@ -9,14 +15,14 @@
   }
 
   &.selected:hover {
-    background-color: var(--blue);
+    background-color: var(--surface-selected);
   }
 }
 
 .selected {
-  background-color: var(--blue);
-  color: #ffffff;
-  border-radius: 2px;
+  background-color: var(--surface-selected);
+  color: var(--primary);
+  border-radius: 10px;
   width: 100%;
 }
 
@@ -27,7 +33,7 @@
 }
 
 .contents {
-  padding-left: 25px;
+  padding-left: 12px;
   transition: all 300ms ease;
   overflow: hidden;
 
@@ -41,8 +47,8 @@
 }
 
 .selected {
-  color: #ffffff;
-  background-color: var(--blue);
+  color: var(--primary);
+  background-color: var(--surface-selected);
 }
 
 .group {
@@ -51,7 +57,7 @@
 }
 
 .iconContainer {
-  align-self: flex-start;
+  align-self: center;
   width: 21px;
   margin-left: 5px;
   margin-right: 5px;

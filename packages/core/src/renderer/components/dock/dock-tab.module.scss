@@ -9,9 +9,12 @@
   --color-border-active: var(--primary);
 
   padding: var(--padding);
-  height: 32px;
+  height: 34px;
+  margin-right: 4px;
+  border-radius: 8px 8px 0 0;
+  transition: background var(--motion-fast), color var(--motion-fast);
   position: relative;
-  border-right: 1px solid var(--dockTabBorderColor);
+  border-right: 0;
   background-size: 1px 3ch;
   overflow: hidden;
 
@@ -36,7 +39,6 @@
   &:global(.active) {
     background-color: var(--color-active);
     background-image: none;
-    border-bottom: 1px solid var(--color-border-active);
     color: var(--color-text-active)!important;
 
     .close {
@@ -88,7 +90,12 @@
 }
 
 .tabIcon {
-  opacity: 0;
+  opacity: .7;
+}
+
+.DockTab :global(.Icon) {
+  --size: 16px;
+  --small-size: 16px;
 }
 
 .title {

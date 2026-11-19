@@ -76,12 +76,12 @@ exports[`hovering hotbar menu tests renders 1`] = `
           id="lens-views"
         />
         <div
-          class="flex justify-center Welcome align-center"
+          class="flex justify-center Welcome align-center lens-page-surface"
           data-testid="welcome-page"
         >
           <div
             data-testid="welcome-banner-container"
-            style="width: 320px;"
+            style="width: 520px;"
           >
             <i
               class="Icon logo svg focusable"
@@ -91,42 +91,119 @@ exports[`hovering hotbar menu tests renders 1`] = `
                 class="icon"
               >
                 <svg
-                  data-name="Layer 1"
-                  id="Layer_1"
                   viewBox="0 0 512 512"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   
   
-                  <defs>
-                    <style>
-                      .cls-1{fill:none!important;}
-                    </style>
-                  </defs>
+                  <title>
+                    StarLens
+                  </title>
+                  
+
+                  <path
+                    d="M 256,256 L 237.38,198.68 Q 239.82,134.07 256,10 Z"
+                  />
                   
   
-                  <rect
-                    class="cls-1"
-                    height="512"
-                    width="512"
-                  />
                   <path
-                    d="M193.6,220,308.08,21.76A247.33,247.33,0,0,0,256,16,239.62,239.62,0,0,0,104.32,70l87.84,152.4Z"
+                    d="M 256,256 L 274.62,198.68 Q 272.18,134.07 256,10 Z"
                   />
+                  
+  
                   <path
-                    d="M485,184A240.6,240.6,0,0,0,341,31.84L253.12,184Z"
+                    d="M 256,256 L 313.32,237.38 Q 377.93,239.82 502,256 Z"
                   />
+                  
+  
                   <path
-                    d="M491.2,208H311.44l7,12L432.64,418A237.85,237.85,0,0,0,496,256,243,243,0,0,0,491.2,208Z"
+                    d="M 256,256 L 313.32,274.62 Q 377.93,272.18 502,256 Z"
                   />
+                  
+  
                   <path
-                    d="M173,256,79.36,94C40.24,136.72,16,193.36,16,256a243,243,0,0,0,4.8,48H200.56Z"
+                    d="M 256,256 L 274.62,313.32 Q 272.18,377.93 256,502 Z"
                   />
+                  
+  
                   <path
-                    d="M27,328A240.6,240.6,0,0,0,171,480.16L258.88,328Z"
+                    d="M 256,256 L 237.38,313.32 Q 239.82,377.93 256,502 Z"
                   />
+                  
+  
                   <path
-                    d="M297.52,328l-93.6,162.24A247.33,247.33,0,0,0,256,496a239.62,239.62,0,0,0,151.68-54L319.84,289.6Z"
+                    d="M 256,256 L 198.68,274.62 Q 134.07,272.18 10,256 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 198.68,237.38 Q 134.07,239.82 10,256 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 275.28,221.23 Q 304.38,194.69 356.41,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 290.77,236.72 Q 317.31,207.62 356.41,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 290.77,275.28 Q 317.31,304.38 356.41,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 275.28,290.77 Q 304.38,317.31 356.41,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 236.72,290.77 Q 207.62,317.31 155.59,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 221.23,275.28 Q 194.69,304.38 155.59,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 221.23,236.72 Q 194.69,207.62 155.59,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 236.72,221.23 Q 207.62,194.69 155.59,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 462.39,299.87 A 211,211 0 0 1 299.87,462.39 L 298.62,456.52 A 205,205 0 0 0 456.52,298.62 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 212.13,462.39 A 211,211 0 0 1 49.61,299.87 L 55.48,298.62 A 205,205 0 0 0 213.38,456.52 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 49.61,212.13 A 211,211 0 0 1 212.13,49.61 L 213.38,55.48 A 205,205 0 0 0 55.48,213.38 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 299.87,49.61 A 211,211 0 0 1 462.39,212.13 L 456.52,213.38 A 205,205 0 0 0 298.62,55.48 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 223,256 a 33,33 0 1,0 66,0 a 33,33 0 1,0 -66,0 Z M 240,256 a 16,16 0 1,1 32,0 a 16,16 0 1,1 -32,0 Z"
+                    fill-rule="evenodd"
                   />
                   
 
@@ -140,7 +217,7 @@ exports[`hovering hotbar menu tests renders 1`] = `
             >
               <div
                 data-testid="welcome-text-container"
-                style="width: 320px;"
+                style="width: 520px;"
               >
                 <h2>
                   Welcome to some-product-name!
@@ -151,10 +228,12 @@ exports[`hovering hotbar menu tests renders 1`] = `
                 <ul
                   class="block"
                   data-testid="welcome-menu-container"
-                  style="width: 320px;"
+                  style="width: 520px;"
                 >
                   <li
                     class="flex grid-12"
+                    role="button"
+                    tabindex="0"
                   >
                     <i
                       class="Icon box col-1 material focusable"
@@ -194,8 +273,14 @@ exports[`hovering hotbar menu tests renders 1`] = `
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -216,6 +301,7 @@ exports[`hovering hotbar menu tests renders 1`] = `
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -236,42 +322,52 @@ exports[`hovering hotbar menu tests renders 1`] = `
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -407,12 +503,12 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
           id="lens-views"
         />
         <div
-          class="flex justify-center Welcome align-center"
+          class="flex justify-center Welcome align-center lens-page-surface"
           data-testid="welcome-page"
         >
           <div
             data-testid="welcome-banner-container"
-            style="width: 320px;"
+            style="width: 520px;"
           >
             <i
               class="Icon logo svg focusable"
@@ -422,42 +518,119 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
                 class="icon"
               >
                 <svg
-                  data-name="Layer 1"
-                  id="Layer_1"
                   viewBox="0 0 512 512"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   
   
-                  <defs>
-                    <style>
-                      .cls-1{fill:none!important;}
-                    </style>
-                  </defs>
+                  <title>
+                    StarLens
+                  </title>
+                  
+
+                  <path
+                    d="M 256,256 L 237.38,198.68 Q 239.82,134.07 256,10 Z"
+                  />
                   
   
-                  <rect
-                    class="cls-1"
-                    height="512"
-                    width="512"
-                  />
                   <path
-                    d="M193.6,220,308.08,21.76A247.33,247.33,0,0,0,256,16,239.62,239.62,0,0,0,104.32,70l87.84,152.4Z"
+                    d="M 256,256 L 274.62,198.68 Q 272.18,134.07 256,10 Z"
                   />
+                  
+  
                   <path
-                    d="M485,184A240.6,240.6,0,0,0,341,31.84L253.12,184Z"
+                    d="M 256,256 L 313.32,237.38 Q 377.93,239.82 502,256 Z"
                   />
+                  
+  
                   <path
-                    d="M491.2,208H311.44l7,12L432.64,418A237.85,237.85,0,0,0,496,256,243,243,0,0,0,491.2,208Z"
+                    d="M 256,256 L 313.32,274.62 Q 377.93,272.18 502,256 Z"
                   />
+                  
+  
                   <path
-                    d="M173,256,79.36,94C40.24,136.72,16,193.36,16,256a243,243,0,0,0,4.8,48H200.56Z"
+                    d="M 256,256 L 274.62,313.32 Q 272.18,377.93 256,502 Z"
                   />
+                  
+  
                   <path
-                    d="M27,328A240.6,240.6,0,0,0,171,480.16L258.88,328Z"
+                    d="M 256,256 L 237.38,313.32 Q 239.82,377.93 256,502 Z"
                   />
+                  
+  
                   <path
-                    d="M297.52,328l-93.6,162.24A247.33,247.33,0,0,0,256,496a239.62,239.62,0,0,0,151.68-54L319.84,289.6Z"
+                    d="M 256,256 L 198.68,274.62 Q 134.07,272.18 10,256 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 198.68,237.38 Q 134.07,239.82 10,256 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 275.28,221.23 Q 304.38,194.69 356.41,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 290.77,236.72 Q 317.31,207.62 356.41,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 290.77,275.28 Q 317.31,304.38 356.41,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 275.28,290.77 Q 304.38,317.31 356.41,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 236.72,290.77 Q 207.62,317.31 155.59,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 221.23,275.28 Q 194.69,304.38 155.59,356.41 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 221.23,236.72 Q 194.69,207.62 155.59,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 256,256 L 236.72,221.23 Q 207.62,194.69 155.59,155.59 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 462.39,299.87 A 211,211 0 0 1 299.87,462.39 L 298.62,456.52 A 205,205 0 0 0 456.52,298.62 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 212.13,462.39 A 211,211 0 0 1 49.61,299.87 L 55.48,298.62 A 205,205 0 0 0 213.38,456.52 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 49.61,212.13 A 211,211 0 0 1 212.13,49.61 L 213.38,55.48 A 205,205 0 0 0 55.48,213.38 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 299.87,49.61 A 211,211 0 0 1 462.39,212.13 L 456.52,213.38 A 205,205 0 0 0 298.62,55.48 Z"
+                  />
+                  
+  
+                  <path
+                    d="M 223,256 a 33,33 0 1,0 66,0 a 33,33 0 1,0 -66,0 Z M 240,256 a 16,16 0 1,1 32,0 a 16,16 0 1,1 -32,0 Z"
+                    fill-rule="evenodd"
                   />
                   
 
@@ -471,7 +644,7 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
             >
               <div
                 data-testid="welcome-text-container"
-                style="width: 320px;"
+                style="width: 520px;"
               >
                 <h2>
                   Welcome to some-product-name!
@@ -482,10 +655,12 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
                 <ul
                   class="block"
                   data-testid="welcome-menu-container"
-                  style="width: 320px;"
+                  style="width: 520px;"
                 >
                   <li
                     class="flex grid-12"
+                    role="button"
+                    tabindex="0"
                   >
                     <i
                       class="Icon box col-1 material focusable"
@@ -525,8 +700,14 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -547,6 +728,7 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -567,42 +749,52 @@ exports[`hovering hotbar menu tests when hovering over the hotbar menu renders 1
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>

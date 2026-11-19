@@ -6,20 +6,23 @@
 .ClusterManager {
   --hotbar-width: 75px;
 
+  background: var(--sidebarBackground);
   display: grid;
   grid-template-areas:
     "topbar topbar"
     "menu main"
     "status-bar status-bar";
   grid-template-rows: auto 1fr min-content;
-  grid-template-columns: min-content 1fr;
+  grid-template-columns: min-content minmax(0, 1fr);
 
-  main {
+  > main {
     grid-area: main;
     position: relative;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    min-height: 0;
+    min-width: 0;
   }
 
   .HotbarMenu {

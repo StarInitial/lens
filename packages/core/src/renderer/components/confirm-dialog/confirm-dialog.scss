@@ -16,7 +16,8 @@
   > .box {
     max-width: 50vw;
     min-width: 45 * $unit;
-    background-color: white;
+    background-color: var(--dialogBackground);
+    color: var(--dialogTextColor);
     border-radius: $radius;
     line-height: 1.5;
   }
@@ -44,7 +45,8 @@
   }
 
   .confirm-buttons {
-    background: #f4f4f4;
+    background: var(--dialogFooterBackground);
+    border-top: 1px solid var(--borderFaintColor);
     padding: $padding * 2.5;
     display: flex;
     justify-content: flex-end;

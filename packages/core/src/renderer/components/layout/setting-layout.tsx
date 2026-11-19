@@ -13,6 +13,7 @@ import { CloseButton } from "./close-button";
 import { getLegacyGlobalDiForExtensionApi } from "@k8slens/legacy-global-di";
 import navigateToCatalogInjectable from "../../../common/front-end-routing/routes/catalog/navigate-to-catalog.injectable";
 import { observableHistoryInjectionToken } from "@k8slens/routing";
+import { ActiveIndicator } from "../motion/active-indicator";
 
 export interface SettingLayoutProps extends React.DOMAttributes<any> {
   className?: IClassName;
@@ -85,6 +86,7 @@ export class SettingLayout extends React.Component<SettingLayoutProps> {
         { navigation && (
           <nav className="sidebarRegion">
             <div className="sidebar">
+              <ActiveIndicator selector='.Tab.active:not([aria-disabled="true"])' />
               {navigation}
             </div>
           </nav>

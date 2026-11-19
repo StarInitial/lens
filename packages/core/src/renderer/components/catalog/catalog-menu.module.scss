@@ -16,7 +16,10 @@
 
 .catalog {
   font-size: medium;
-  padding: var(--padding) calc(var(--padding) * 1.5);
+  padding: 24px 16px 20px;
+  font-size: 18px;
   font-weight: bold;
   color: var(--textColorAccent);
 }
+
+.menu { min-height: 0; height: 100%; }

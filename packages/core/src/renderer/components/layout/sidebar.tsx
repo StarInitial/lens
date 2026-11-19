@@ -15,6 +15,7 @@ import { withInjectables } from "@ogre-tools/injectable-react";
 import type { SidebarItemDeclaration } from "@k8slens/cluster-sidebar";
 import { sidebarItemsInjectable } from "@k8slens/cluster-sidebar";
 import type { IComputedValue } from "mobx";
+import { ActiveIndicator } from "../motion/active-indicator";
 import catalogEntityRegistryInjectable from "../../api/catalog/entity/registry.injectable";
 
 interface Dependencies {
@@ -26,10 +27,11 @@ const NonInjectedSidebar = observer(({
   sidebarItems,
   entityRegistry,
 }: Dependencies) => (
-  <div className={cssNames("flex flex-col")} data-testid="cluster-sidebar">
+  <div className={cssNames("flex flex-col", styles.sidebar)} data-testid="cluster-sidebar">
     <SidebarCluster clusterEntity={entityRegistry.activeEntity} />
 
     <div className={`${styles.sidebarNav} sidebar-active-status`}>
+      <ActiveIndicator selector='[data-nav-active="true"]' />
       {
         sidebarItems.get()
           .map(hierarchicalSidebarItem => (

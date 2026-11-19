@@ -78,81 +78,93 @@ exports[`custom category columns for catalog renders 1`] = `
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root selected treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  aria-current="page"
+                  class="navItem active"
+                  data-nav-active="true"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -164,10 +176,6 @@ exports[`custom category columns for catalog renders 1`] = `
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -175,15 +183,12 @@ exports[`custom category columns for catalog renders 1`] = `
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -193,10 +198,6 @@ exports[`custom category columns for catalog renders 1`] = `
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -204,15 +205,12 @@ exports[`custom category columns for catalog renders 1`] = `
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -224,10 +222,6 @@ exports[`custom category columns for catalog renders 1`] = `
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -235,18 +229,18 @@ exports[`custom category columns for catalog renders 1`] = `
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -256,45 +250,53 @@ exports[`custom category columns for catalog renders 1`] = `
                 data-testid="catalog-list-for-browse-all"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Browse All
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Browse All
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -449,8 +451,14 @@ exports[`custom category columns for catalog renders 1`] = `
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -471,6 +479,7 @@ exports[`custom category columns for catalog renders 1`] = `
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -491,42 +500,52 @@ exports[`custom category columns for catalog renders 1`] = `
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -664,81 +683,93 @@ exports[`custom category columns for catalog when category is added using defaul
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root selected treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  aria-current="page"
+                  class="navItem active"
+                  data-nav-active="true"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -750,10 +781,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -761,15 +788,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -779,10 +803,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -790,15 +810,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -810,10 +827,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -821,15 +834,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -841,10 +851,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -852,18 +858,18 @@ exports[`custom category columns for catalog when category is added using defaul
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -873,45 +879,53 @@ exports[`custom category columns for catalog when category is added using defaul
                 data-testid="catalog-list-for-browse-all"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Browse All
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Browse All
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -1066,8 +1080,14 @@ exports[`custom category columns for catalog when category is added using defaul
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -1088,6 +1108,7 @@ exports[`custom category columns for catalog when category is added using defaul
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -1108,42 +1129,52 @@ exports[`custom category columns for catalog when category is added using defaul
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -1281,81 +1312,92 @@ exports[`custom category columns for catalog when category is added using defaul
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  class="navItem"
+                  data-nav-active="false"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -1367,10 +1409,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -1378,15 +1416,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -1396,10 +1431,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -1407,15 +1438,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -1427,10 +1455,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -1438,15 +1462,13 @@ exports[`custom category columns for catalog when category is added using defaul
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root selected treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        aria-current="page"
+                        class="navItem active"
+                        data-nav-active="true"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -1458,10 +1480,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -1469,18 +1487,18 @@ exports[`custom category columns for catalog when category is added using defaul
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -1490,45 +1508,53 @@ exports[`custom category columns for catalog when category is added using defaul
                 data-testid="catalog-list-for-Test"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Test
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Test
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -1673,8 +1699,14 @@ exports[`custom category columns for catalog when category is added using defaul
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -1695,6 +1727,7 @@ exports[`custom category columns for catalog when category is added using defaul
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -1715,42 +1748,52 @@ exports[`custom category columns for catalog when category is added using defaul
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -1888,81 +1931,92 @@ exports[`custom category columns for catalog when category is added using defaul
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  class="navItem"
+                  data-nav-active="false"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -1974,10 +2028,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -1985,15 +2035,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -2003,10 +2050,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2014,15 +2057,12 @@ exports[`custom category columns for catalog when category is added using defaul
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -2034,10 +2074,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2045,15 +2081,13 @@ exports[`custom category columns for catalog when category is added using defaul
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root selected treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        aria-current="page"
+                        class="navItem active"
+                        data-nav-active="true"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -2065,10 +2099,6 @@ exports[`custom category columns for catalog when category is added using defaul
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2076,18 +2106,18 @@ exports[`custom category columns for catalog when category is added using defaul
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -2097,45 +2127,53 @@ exports[`custom category columns for catalog when category is added using defaul
                 data-testid="catalog-list-for-Test"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Test
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Test
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -2269,8 +2307,14 @@ exports[`custom category columns for catalog when category is added using defaul
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -2291,6 +2335,7 @@ exports[`custom category columns for catalog when category is added using defaul
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -2311,42 +2356,52 @@ exports[`custom category columns for catalog when category is added using defaul
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -2484,81 +2539,93 @@ exports[`custom category columns for catalog when category is added with custom 
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root selected treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  aria-current="page"
+                  class="navItem active"
+                  data-nav-active="true"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -2570,10 +2637,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2581,15 +2644,12 @@ exports[`custom category columns for catalog when category is added with custom 
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -2599,10 +2659,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2610,15 +2666,12 @@ exports[`custom category columns for catalog when category is added with custom 
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -2630,10 +2683,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2641,15 +2690,12 @@ exports[`custom category columns for catalog when category is added with custom 
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -2661,10 +2707,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -2672,18 +2714,18 @@ exports[`custom category columns for catalog when category is added with custom 
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -2693,45 +2735,53 @@ exports[`custom category columns for catalog when category is added with custom 
                 data-testid="catalog-list-for-browse-all"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Browse All
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Browse All
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -2886,8 +2936,14 @@ exports[`custom category columns for catalog when category is added with custom 
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -2908,6 +2964,7 @@ exports[`custom category columns for catalog when category is added with custom 
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -2928,42 +2985,52 @@ exports[`custom category columns for catalog when category is added with custom 
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -3101,81 +3168,92 @@ exports[`custom category columns for catalog when category is added with custom 
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  class="navItem"
+                  data-nav-active="false"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -3187,10 +3265,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3198,15 +3272,12 @@ exports[`custom category columns for catalog when category is added with custom 
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -3216,10 +3287,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3227,15 +3294,12 @@ exports[`custom category columns for catalog when category is added with custom 
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -3247,10 +3311,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3258,15 +3318,13 @@ exports[`custom category columns for catalog when category is added with custom 
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root selected treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        aria-current="page"
+                        class="navItem active"
+                        data-nav-active="true"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -3278,10 +3336,6 @@ exports[`custom category columns for catalog when category is added with custom 
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3289,18 +3343,18 @@ exports[`custom category columns for catalog when category is added with custom 
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -3310,45 +3364,53 @@ exports[`custom category columns for catalog when category is added with custom 
                 data-testid="catalog-list-for-Test"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Test
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Test
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -3440,8 +3502,14 @@ exports[`custom category columns for catalog when category is added with custom 
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -3462,6 +3530,7 @@ exports[`custom category columns for catalog when category is added with custom 
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -3482,42 +3551,52 @@ exports[`custom category columns for catalog when category is added with custom 
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -3655,81 +3734,93 @@ exports[`custom category columns for catalog when category is added without defa
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root selected treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  aria-current="page"
+                  class="navItem active"
+                  data-nav-active="true"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -3741,10 +3832,6 @@ exports[`custom category columns for catalog when category is added without defa
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3752,15 +3839,12 @@ exports[`custom category columns for catalog when category is added without defa
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -3770,10 +3854,6 @@ exports[`custom category columns for catalog when category is added without defa
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3781,15 +3861,12 @@ exports[`custom category columns for catalog when category is added without defa
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -3801,10 +3878,6 @@ exports[`custom category columns for catalog when category is added without defa
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3812,15 +3885,12 @@ exports[`custom category columns for catalog when category is added without defa
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -3832,10 +3902,6 @@ exports[`custom category columns for catalog when category is added without defa
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -3843,18 +3909,18 @@ exports[`custom category columns for catalog when category is added without defa
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -3864,45 +3930,53 @@ exports[`custom category columns for catalog when category is added without defa
                 data-testid="catalog-list-for-browse-all"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Browse All
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Browse All
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -4057,8 +4131,14 @@ exports[`custom category columns for catalog when category is added without defa
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -4079,6 +4159,7 @@ exports[`custom category columns for catalog when category is added without defa
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -4099,42 +4180,52 @@ exports[`custom category columns for catalog when category is added without defa
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -4272,81 +4363,92 @@ exports[`custom category columns for catalog when category is added without defa
         />
         <div
           class="mainLayout"
-          style="--sidebar-width: 200px;"
+          style="--sidebar-width: 248px;"
         >
           <div
             class="sidebar"
           >
             <div
-              class="flex flex-col w-full"
+              class="flex flex-col w-full menu"
             >
               <div
                 class="catalog"
               >
                 Catalog
               </div>
-              <ul
-                class="treeView"
-                role="tree"
+              <nav
+                aria-label="Catalog"
+                class="sidebarNav"
               >
-                <li
-                  class="root treeItem"
-                  data-testid="*-tab"
-                  role="treeitem"
-                >
-                  <div
-                    class="iconContainer"
-                  />
-                  <div
-                    class="label"
-                  >
-                    Browse
-                  </div>
-                </li>
-                <div
-                  class="HorizontalLine size-xxs"
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator"
+                  style="opacity: 0;"
                 />
-                <li
-                  class="root treeGroup"
-                  role="group"
+                <button
+                  class="navItem"
+                  data-nav-active="false"
+                  data-testid="*-tab"
+                  type="button"
                 >
+                  <i
+                    class="Icon material focusable"
+                  >
+                    <span
+                      class="icon"
+                      data-icon-name="view_list"
+                    >
+                      view_list
+                    </span>
+                  </i>
+                  <span>
+                    Browse
+                  </span>
+                </button>
+                <div
+                  class="SidebarItem"
+                >
+                  <button
+                    aria-expanded="true"
+                    class="navItem"
+                    type="button"
+                  >
+                    <i
+                      class="Icon material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="category"
+                      >
+                        category
+                      </span>
+                    </i>
+                    <span>
+                      Categories
+                    </span>
+                    <i
+                      class="Icon expandIcon expanded material focusable"
+                    >
+                      <span
+                        class="icon"
+                        data-icon-name="keyboard_arrow_down"
+                      >
+                        keyboard_arrow_down
+                      </span>
+                    </i>
+                  </button>
                   <div
-                    class="group"
+                    aria-hidden="false"
+                    class="subMenu"
                   >
                     <div
-                      class="iconContainer"
+                      class="subMenuContents"
                     >
-                      <i
-                        class="Icon material focusable"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="expand_more"
-                        >
-                          expand_more
-                        </span>
-                      </i>
-                    </div>
-                    <div
-                      class="label"
-                    >
-                      <div
-                        class="parent"
-                      >
-                        Categories
-                      </div>
-                    </div>
-                  </div>
-                  <ul
-                    class="contents expanded"
-                  >
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/General-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/General-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -4358,10 +4460,6 @@ exports[`custom category columns for catalog when category is added without defa
                             settings
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -4369,15 +4467,12 @@ exports[`custom category columns for catalog when category is added without defa
                             General
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/KubernetesCluster-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/KubernetesCluster-tab"
+                        type="button"
                       >
                         <i
                           class="Icon focusable small"
@@ -4387,10 +4482,6 @@ exports[`custom category columns for catalog when category is added without defa
                             data-icon-name=""
                           />
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -4398,15 +4489,12 @@ exports[`custom category columns for catalog when category is added without defa
                             Clusters
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root treeItem"
-                      data-testid="entity.k8slens.dev/WebLink-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        class="navItem"
+                        data-nav-active="false"
+                        data-testid="entity.k8slens.dev/WebLink-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -4418,10 +4506,6 @@ exports[`custom category columns for catalog when category is added without defa
                             public
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -4429,15 +4513,13 @@ exports[`custom category columns for catalog when category is added without defa
                             Web Links
                           </div>
                         </div>
-                      </div>
-                    </li>
-                    <li
-                      class="root selected treeItem"
-                      data-testid="foo.bar.bat/Test-tab"
-                      role="treeitem"
-                    >
-                      <div
-                        class="iconContainer"
+                      </button>
+                      <button
+                        aria-current="page"
+                        class="navItem active"
+                        data-nav-active="true"
+                        data-testid="foo.bar.bat/Test-tab"
+                        type="button"
                       >
                         <i
                           class="Icon material focusable small"
@@ -4449,10 +4531,6 @@ exports[`custom category columns for catalog when category is added without defa
                             question_mark
                           </span>
                         </i>
-                      </div>
-                      <div
-                        class="label"
-                      >
                         <div
                           class="flex"
                         >
@@ -4460,18 +4538,18 @@ exports[`custom category columns for catalog when category is added without defa
                             Test
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
             <div
               class="ResizingAnchor horizontal trailing"
             />
           </div>
           <div
-            class="contents"
+            class="lens-page-surface contents"
           >
             <div
               class="views"
@@ -4481,45 +4559,53 @@ exports[`custom category columns for catalog when category is added without defa
                 data-testid="catalog-list-for-Test"
               >
                 <div
-                  class="header flex gaps align-center"
+                  class="header"
                 >
-                  <h5
-                    class="title"
-                  >
-                    Test
-                  </h5>
                   <div
-                    class="info-panel box grow"
+                    class="page-heading"
                   >
-                    0 items
+                    <h5
+                      class="title"
+                    >
+                      Test
+                    </h5>
+                    <div
+                      class="info-panel"
+                    >
+                      0 items
+                    </div>
                   </div>
                   <div
-                    class="Input SearchInput focused"
+                    class="page-toolbar"
                   >
-                    <label
-                      class="input-area flex gaps align-center"
-                      id=""
-                    >
-                      <input
-                        class="input box grow"
-                        placeholder="Search..."
-                        spellcheck="false"
-                        value=""
-                      />
-                      <i
-                        class="Icon material focusable small"
-                      >
-                        <span
-                          class="icon"
-                          data-icon-name="search"
-                        >
-                          search
-                        </span>
-                      </i>
-                    </label>
                     <div
-                      class="input-info flex gaps"
-                    />
+                      class="Input SearchInput focused"
+                    >
+                      <label
+                        class="input-area flex gaps align-center"
+                        id=""
+                      >
+                        <input
+                          class="input box grow"
+                          placeholder="Search..."
+                          spellcheck="false"
+                          value=""
+                        />
+                        <i
+                          class="Icon material focusable small"
+                        >
+                          <span
+                            class="icon"
+                            data-icon-name="search"
+                          >
+                            search
+                          </span>
+                        </i>
+                      </label>
+                      <div
+                        class="input-info flex gaps"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -4600,8 +4686,14 @@ exports[`custom category columns for catalog when category is added without defa
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -4622,6 +4714,7 @@ exports[`custom category columns for catalog when category is added without defa
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -4642,42 +4735,52 @@ exports[`custom category columns for catalog when category is added without defa
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>

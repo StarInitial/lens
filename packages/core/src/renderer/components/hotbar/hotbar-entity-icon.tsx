@@ -12,10 +12,8 @@ import { observer } from "mobx-react";
 
 import type { CatalogCategoryRegistry, CatalogEntity, CatalogEntityContextMenu } from "../../../common/catalog";
 import type { IClassName } from "@k8slens/utilities";
-import { cssNames } from "@k8slens/utilities";
 import { Icon } from "@k8slens/icon";
 import { HotbarIcon } from "./hotbar-icon";
-import { LensKubernetesClusterStatus } from "../../../common/catalog-entities/kubernetes-cluster";
 import type { VisitEntityContextMenu } from "../../../common/catalog/visit-entity-context-menu.injectable";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import catalogCategoryRegistryInjectable from "../../../common/catalog/category-registry.injectable";
@@ -61,21 +59,6 @@ class NonInjectedHotbarEntityIcon extends React.Component<HotbarEntityIconProps 
     return <Icon material={category.metadata.icon} className={className} />;
   }
 
-  private renderLedIcon() {
-    if (this.props.entity.kind !== "KubernetesCluster") {
-      return null;
-    }
-
-    return (
-      <div
-        className={cssNames(styles.led, {
-          // TODO: make it more generic
-          [styles.online]: this.props.entity.status.phase === LensKubernetesClusterStatus.CONNECTED,
-        })}
-      />
-    );
-  }
-
   isActive(item: CatalogEntity) {
     return this.props.activeEntity.get()?.metadata?.uid == item.getId();
   }
@@ -115,7 +98,6 @@ class NonInjectedHotbarEntityIcon extends React.Component<HotbarEntityIconProps 
         )}
         onClick={onClick}
       >
-        {this.renderLedIcon()}
         {this.renderKindIcon()}
       </HotbarIcon>
     );

@@ -17,10 +17,20 @@
   overflow: auto;
 
   &.modal {
-    background: transparentize(#222, .5);
+    background: rgb(8 18 32 / 40%);
+    backdrop-filter: blur(5px);
   }
 
   h5 {
-    color: white;
+    color: var(--textColorAccent);
   }
+}
+
+.Dialog > .box { border-radius: 16px; box-shadow: var(--shadow-overlay); max-width: calc(100vw - 48px); }
+
+.Dialog.Animate.opacity-scale {
+  transform: none;
+  > .box { transform: translateY(10px) scale(.98); transition: transform var(--motion-panel) var(--motion-ease); }
+  &.enter > .box { transform: translateY(0) scale(1); }
+  &.leave > .box { transform: translateY(6px) scale(.98); }
 }

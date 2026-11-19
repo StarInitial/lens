@@ -28,7 +28,7 @@
   &.enter {
     transform: translateX(0);
     transition: transform $enterDuration;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: var(--motion-ease, ease-in-out);
   }
 
   &.leave {
@@ -41,14 +41,14 @@
   opacity: 0;
 
   &.enter {
-    transition: opacity $enterDuration;
+    transition: opacity $enterDuration var(--motion-ease, ease-out);
     opacity: 1;
   }
 
   &.leave {
     will-change: opacity, transform;
     opacity: 0;
-    transform: scale(1.25);
+    transform: scale(.98);
     transition: transform $leaveDuration ease-in, opacity $leaveDuration ease-out;
   }
 }

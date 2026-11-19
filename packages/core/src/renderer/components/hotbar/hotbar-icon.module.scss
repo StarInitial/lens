@@ -4,35 +4,16 @@
  */
 
 .HotbarIcon {
-  --corner: 0px 0px 0px 1px var(--clusterMenuBackground);
-  --iconActiveShadow: var(--corner), var(--corner), 0 0 0px 3px var(--clusterMenuBackground), 0 0 0px 6px var(--primary);
-  --iconHoverShadow: 0 0 0px 3px var(--clusterMenuBackground), 0 0 0px 6px var(--clusterMenuCellOutline);
-
   display: flex;
   cursor: pointer;
   position: relative;
-  border-radius: 6px;
-  transition: box-shadow 0.1s ease-in-out;
-
-  &:not(.active):hover {
-    box-shadow: var(--iconHoverShadow);
-  }
+  border-radius: 12px;
+  transition: scale var(--motion-normal) var(--motion-ease), box-shadow var(--motion-fast), filter var(--motion-fast);
+  &:hover { scale: 1.08; box-shadow: 0 4px 14px var(--boxShadow); }
+  &:active { scale: .96; }
+  &:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }
-
-.contextMenuAvailable {
-  cursor: context-menu;
-}
-
-.avatar {
-  border-radius: 6px;
-
-  &.hasImage {
-    background-color: var(--clusterMenuCellBackground);
-  }
-}
-
-.active {
-  box-shadow: var(--iconActiveShadow);
-  transform: scale(1.04);
-  transition: box-shadow 180ms cubic-bezier(.2, .75, .25, 1), transform 180ms cubic-bezier(.2, .75, .25, 1);
-}
+.contextMenuAvailable { cursor: context-menu; }
+.avatar { border-radius: 12px; &.hasImage { background: var(--clusterMenuCellBackground); } }
+.active { filter: saturate(1.15); }
+:global(.isDragging).HotbarIcon { scale: 1; }

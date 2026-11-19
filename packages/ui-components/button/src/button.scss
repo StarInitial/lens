@@ -7,14 +7,21 @@
 .Button {
   position: relative;
   overflow: hidden; // required for transition effect on hover
-  color: white;
+  color: var(--textColorAccent);
   font-family: var(--font-main);
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   border-radius: var(--border-radius);
   background: var(--buttonDefaultBackground);
-  padding: round(8px * .9) 8px * 1.5;
+  padding: 10px 16px;
+  min-height: 36px;
+  font-weight: 500;
+  transition: scale var(--motion-fast, 140ms), background-color var(--motion-fast, 140ms), box-shadow var(--motion-fast, 140ms);
+
+  &:hover { box-shadow: 0 2px 8px var(--boxShadow); filter: brightness(1.04); }
+  &:active { scale: .96; }
+  &:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
   flex-shrink: 0;
   line-height: 1;
   font-size: var(--font-size);
@@ -26,15 +33,18 @@
 
   &.primary {
     background: var(--buttonPrimaryBackground);
+    color: var(--accentForeground);
+    box-shadow: 0 2px 4px var(--boxShadow);
   }
 
   &.accent {
     background: var(--buttonAccentBackground);
+    color: white;
   }
 
   &.light {
     background-color: var(--buttonLightBackground);
-    color: #505050;
+    color: var(--textColorAccent);
   }
 
   &.plain {
@@ -55,6 +65,7 @@
   }
 
   &.outlined {
+    border: 1px solid var(--borderColor);
     color: inherit;
     background: transparent;
 

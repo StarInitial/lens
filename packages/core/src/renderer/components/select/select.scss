@@ -10,10 +10,10 @@ html {
   $menuBackgroundColor: var(--contentColor);
 
   --select-menu-bgc: #{$menuBackgroundColor};
-  --select-menu-border-color: var(--halfGray);
-  --select-option-selected-color: var(--inputOptionHoverColor);
-  --select-option-focused-bgc: var(--primary);
-  --select-option-focused-color: var(--accentForeground);
+  --select-menu-border-color: var(--borderColor);
+  --select-option-selected-color: var(--textColorAccent);
+  --select-option-focused-bgc: var(--surface-selected);
+  --select-option-focused-color: var(--textColorAccent);
 
   .Select {
     position: relative;
@@ -33,8 +33,9 @@ html {
       border: none;
       border-radius: $radius;
       background: var(--select-menu-bgc);
-      min-height: 0;
-      box-shadow: 0 0 0 1px var(--halfGray);
+      min-height: 36px;
+      transition: box-shadow var(--motion-fast), background var(--motion-fast);
+      box-shadow: 0 0 0 1px var(--inputControlBorder);
       cursor: pointer;
       line-height: 1;
 
@@ -71,7 +72,8 @@ html {
 
     &__menu {
       background: var(--select-menu-bgc);
-      box-shadow: inset 0 0 0 1px var(--select-menu-border-color);
+      box-shadow: var(--shadow-overlay);
+      border-radius: 12px;
       width: max-content;
       min-width: 100%;
 
@@ -89,7 +91,7 @@ html {
     &__option {
       white-space: nowrap;
       cursor: pointer;
-      border-radius: 3px;
+      border-radius: 8px;
       padding: 6px 8px;
 
       &:active {

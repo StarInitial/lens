@@ -161,7 +161,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
 
       it("child page is shown", () => {
@@ -202,6 +202,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
         const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
         expect(child).not.toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toBeNull();
       });
     });
 
@@ -231,7 +232,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
     });
 
@@ -258,7 +259,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
     });
 
@@ -284,7 +285,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
 
       it("does not show the sidebar item that should be hidden", () => {
@@ -330,6 +331,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
           const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
           expect(child).not.toBeNull();
+          expect(child?.closest('[aria-hidden="true"]')).toBeNull();
         });
 
         describe("when a child of the parent is selected", () => {
@@ -407,7 +409,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
             expect(actual).toEqual({
               sidebar: {
                 expanded: { "sidebar-item-some-extension-name-some-parent-id": true },
-                width: 200,
+                width: 248,
               },
             });
           });
@@ -558,7 +560,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
         const parent = rendered.getByTestId("sidebar-item-some-extension-name-some-parent-id");
 
         assert(parent);
-        expect(parent.previousSibling).toBeNull();
+        expect(parent.parentElement?.querySelector(".SidebarItem")).toBe(parent);
       });
 
       it("parent is highlighted", () => {
@@ -570,7 +572,7 @@ describe("cluster - sidebar and tab navigation for extensions", () => {
       it("parent sidebar item is not expanded", () => {
         const child = rendered.queryByTestId("sidebar-item-some-extension-name-some-child-id");
 
-        expect(child).toBeNull();
+        expect(child?.closest('[aria-hidden="true"]')).toHaveAttribute("inert");
       });
 
       it("child page is shown", () => {

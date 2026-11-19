@@ -7,6 +7,7 @@ import { loggerInjectionToken } from "@k8slens/logger";
 import { object } from "@k8slens/utilities";
 import type { LensTheme } from "./lens-theme";
 import resetThemeInjectable from "../../features/user-preferences/common/reset-theme.injectable";
+import { defaultAccentColor } from "../../features/user-preferences/common/preference-descriptors.injectable";
 
 export type ApplyLensTheme = (theme: LensTheme, accentColor: string, reduceMotion: boolean) => void;
 
@@ -27,26 +28,37 @@ const applyLensThemeInjectable = getInjectable({
 
     return (theme, accentColor, reduceMotion) => {
       try {
+        accentColor = accentColor === defaultAccentColor ? theme.colors.primary : accentColor;
         const colors = object.entries(theme.colors);
 
         for (const [name, value] of colors) {
           document.documentElement.style.setProperty(`--${name}`, value);
         }
 
-        for (const name of ["primary", "blue", "buttonPrimaryBackground", "sidebarSubmenuActiveColor", "iconActiveBackground"]) {
+        for (const name of [
+          "primary", "blue", "buttonPrimaryBackground", "sidebarSubmenuActiveColor",
+          "sidebarActiveColor", "layoutTabsActiveColor", "navHoverColor", "iconActiveBackground",
+        ]) {
           document.documentElement.style.setProperty(`--${name}`, accentColor);
         }
+
+        // Legacy controls must derive their selection colors from the same
+        // accent as the workspace navigation, rather than the base palette.
+        for (const name of ["navSelectedBackground", "menuActiveBackground", "menuSelectedOptionBgc", "tableBgcSelected", "radioActiveBackground"]) {
+          document.documentElement.style.setProperty(`--${name}`, "var(--surface-selected)");
+        }
+
+        document.documentElement.style.setProperty("--sidebarItemHoverBackground", "var(--surface-hover)");
+        document.documentElement.style.setProperty("--clusterMenuCellOutline", "color-mix(in srgb, var(--primary) 20%, transparent)");
 
         document.documentElement.style.setProperty("--accentForeground", getAccentForeground(accentColor));
         document.documentElement.style.setProperty("--iconActiveColor", getAccentForeground(accentColor));
 
-        const systemReduceMotion = typeof window.matchMedia === "function"
-          && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        document.documentElement.dataset.reduceMotion = String(reduceMotion || systemReduceMotion);
+        document.documentElement.dataset.reduceMotion = String(reduceMotion);
 
         // Adding universal theme flag which can be used in component styles
         document.body.classList.toggle("theme-light", theme.type === "light");
+        document.documentElement.style.colorScheme = theme.type;
       } catch (error) {
         logger.error("[THEME]: Failed to apply active theme", error);
         resetTheme();

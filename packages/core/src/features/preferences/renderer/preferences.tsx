@@ -60,7 +60,7 @@ const toPreferenceItemHierarchy = (composite: Composite<PreferenceItemTypes>) =>
       const Component = value.Component;
 
       return (
-        <div data-preference-item-test={composite.id}>
+        <div className="preference-card" data-preference-item-test={composite.id}>
           <Component item={value}>
             <Map
               items={composite.children}

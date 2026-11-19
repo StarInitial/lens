@@ -11,10 +11,12 @@
   .MuiFab-primary {
     background-color: var(--blue);
     color: var(--accentForeground);
-    border-radius: 50%;
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
 
     &:hover {
-      background-color: #317bb3;
+      background-color: var(--primary);
+      filter: brightness(1.08);
     }
  }
 }

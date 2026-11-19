@@ -5,7 +5,8 @@
 
 .topBar {
   background-color: var(--layoutBackground);
-  border-bottom: 1px solid var(--borderFaintColor);
+  border-bottom: 0;
+  color: var(--textColorSecondary);
   z-index: 2;
   grid-area: topbar;
   height: var(--main-layout-header);

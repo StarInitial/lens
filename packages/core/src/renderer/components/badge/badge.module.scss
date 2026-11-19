@@ -32,10 +32,13 @@
 }
 
 .badge:not(.flat) {
-  background: var(--colorVague);
-  border-radius: 3px;
+  background: var(--secondaryBackground);
+  color: var(--textColorSecondary);
+  border-radius: 999px;
   line-height: normal;
-  padding: 0.2rem 0.4rem;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .small {

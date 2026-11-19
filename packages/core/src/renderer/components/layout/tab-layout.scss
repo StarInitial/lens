@@ -12,7 +12,9 @@
   > .Tabs {
     background: var(--layoutTabsBackground);
     flex-shrink: 0;
-    height: 34px;
+    min-height: 48px;
+    padding-inline: var(--page-padding);
+    border-bottom: 1px solid var(--borderFaintColor);
   }
 
   main {
@@ -21,7 +23,10 @@
     flex-grow: 1;
     overflow-y: hidden;
     overflow-x: auto;
-    margin: $spacing;
+    margin: var(--page-padding);
+    min-height: 0;
+    min-width: 0;
+    &:has(> .ItemListLayout) { margin: 0; }
 
     &.scrollable {
       overflow-y: scroll;

@@ -85,9 +85,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
             <div
               class="sidebar"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator"
+                style="opacity: 0;"
+              />
               <div
                 class="Tabs flex column"
               >
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator line"
+                  style="opacity: 0;"
+                />
                 <div
                   data-preference-tab-group-test="general-tab-group"
                 >
@@ -97,6 +107,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     Preferences
                   </div>
                   <div
+                    aria-selected="true"
                     class="Tab flex gaps align-center active"
                     data-preference-tab-link-test="app"
                     role="tab"
@@ -109,6 +120,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="proxy"
                     role="tab"
@@ -121,6 +133,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="kubernetes"
                     role="tab"
@@ -133,6 +146,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="editor"
                     role="tab"
@@ -145,6 +159,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="terminal"
                     role="tab"
@@ -157,6 +172,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="extension-registered-tab-page-id-metrics-extension-tab"
                     role="tab"
@@ -180,6 +196,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
               class="content"
             >
               <section
+                class="preference-page"
                 data-preference-page-test="application-page"
                 id="application-page"
               >
@@ -189,6 +206,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Application
                 </h2>
                 <div
+                  class="preference-card"
                   data-preference-item-test="theme"
                 >
                   <section
@@ -274,12 +292,100 @@ exports[`preferences - navigation to extension specific preferences given in pre
                         </div>
                       </div>
                     </div>
+                    <div
+                      class="lens-accent-settings"
+                    >
+                      <div
+                        class="SubTitle"
+                      >
+                        Accent color
+                         
+                      </div>
+                      <div
+                        aria-label="Accent color"
+                        class="lens-accent-swatches"
+                        role="group"
+                      >
+                        <button
+                          aria-label="Theme default"
+                          aria-pressed="true"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #51c6ec;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#3f83f8"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #3f83f8;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#8b5cf6"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #8b5cf6;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#e84665"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #e84665;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#0ca678"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #0ca678;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#d28a12"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #d28a12;"
+                          type="button"
+                        />
+                        <button
+                          aria-label="#e76f2e"
+                          aria-pressed="false"
+                          class="lens-accent-swatch"
+                          style="--accent-swatch: #e76f2e;"
+                          type="button"
+                        />
+                        <label
+                          class="lens-accent-custom"
+                        >
+                          <span>
+                            Custom color
+                          </span>
+                          <input
+                            aria-label="Custom color"
+                            type="color"
+                            value="#51c6ec"
+                          />
+                        </label>
+                      </div>
+                      <label
+                        class="Switch"
+                        data-testid="switch"
+                      >
+                        Reduce interface motion
+                        <input
+                          role="switch"
+                          type="checkbox"
+                        />
+                      </label>
+                    </div>
                   </section>
                 </div>
                 <div
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="extension-install-registry"
                 >
                   <section
@@ -397,6 +503,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="start-up"
                 >
                   <section
@@ -424,6 +531,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="language"
                 >
                   <section
@@ -513,6 +621,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   class="HorizontalLine size-xl"
                 />
                 <div
+                  class="preference-card"
                   data-preference-item-test="timezone"
                 >
                   <section
@@ -643,8 +752,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -665,6 +780,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -685,42 +801,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>
@@ -864,9 +990,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -876,6 +1012,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -888,6 +1025,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -900,6 +1038,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -912,6 +1051,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -924,6 +1064,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -936,6 +1077,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="extension-registered-tab-page-id-metrics-extension-tab"
                   role="tab"
@@ -959,6 +1101,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="preference-item-for-extension-registered-tab-page-id-additional-page-metrics-extension-tab"
               id="preference-item-for-extension-registered-tab-page-id-additional-page-metrics-extension-tab"
             >
@@ -968,6 +1111,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 Metrics tab
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="preference-item-for-extension-registered-tab-page-id-item-metrics-preference-item-id"
               >
                 <section
@@ -1040,8 +1184,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -1062,6 +1212,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -1082,42 +1233,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -1260,9 +1421,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -1272,6 +1443,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -1284,6 +1456,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -1296,6 +1469,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -1308,6 +1482,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -1320,6 +1495,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -1332,6 +1508,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="extension-registered-tab-page-id-metrics-extension-tab"
                   role="tab"
@@ -1344,6 +1521,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="extension-duplicated-tab-page-id-metrics-extension-tab"
                   role="tab"
@@ -1367,6 +1545,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="preference-item-for-extension-registered-tab-page-id-additional-page-metrics-extension-tab"
               id="preference-item-for-extension-registered-tab-page-id-additional-page-metrics-extension-tab"
             >
@@ -1376,6 +1555,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 Metrics tab
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="preference-item-for-extension-registered-tab-page-id-item-metrics-preference-item-id"
               >
                 <section
@@ -1448,8 +1628,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -1470,6 +1656,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -1490,42 +1677,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -1668,9 +1865,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -1680,6 +1887,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -1692,6 +1900,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -1704,6 +1913,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -1716,6 +1926,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -1728,6 +1939,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -1740,6 +1952,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="extension-registered-tab-page-id-metrics-extension-tab"
                   role="tab"
@@ -1752,6 +1965,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="extension-duplicated-tab-page-id-metrics-extension-tab"
                   role="tab"
@@ -1775,6 +1989,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="preference-item-for-extension-duplicated-tab-page-id-additional-page-metrics-extension-tab"
               id="preference-item-for-extension-duplicated-tab-page-id-additional-page-metrics-extension-tab"
             >
@@ -1784,6 +1999,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 Metrics tab
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="preference-item-for-extension-duplicated-tab-page-id-item-another-metrics-preference-item-id"
               >
                 <section
@@ -1856,8 +2072,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -1878,6 +2100,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -1898,42 +2121,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -2076,9 +2309,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -2088,6 +2331,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -2100,6 +2344,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -2112,6 +2357,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -2124,6 +2370,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -2136,6 +2383,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -2174,6 +2422,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Extensions
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="some-test-extension-id"
                   role="tab"
@@ -2186,6 +2435,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="some-other-test-extension-id"
                   role="tab"
@@ -2209,6 +2459,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="preference-item-for-extension-some-test-extension-id-page"
               id="preference-item-for-extension-some-test-extension-id-page"
             >
@@ -2218,6 +2469,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 some-test-extension-id preferences
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="preference-item-for-extension-some-test-extension-id-item-some-preference-item-id"
               >
                 <section
@@ -2290,8 +2542,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -2312,6 +2570,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -2332,42 +2591,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -2510,9 +2779,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -2522,6 +2801,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -2534,6 +2814,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -2546,6 +2827,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -2558,6 +2840,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -2570,6 +2853,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -2593,6 +2877,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="application-page"
               id="application-page"
             >
@@ -2602,6 +2887,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 Application
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="theme"
               >
                 <section
@@ -2687,12 +2973,100 @@ exports[`preferences - navigation to extension specific preferences given in pre
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="lens-accent-settings"
+                  >
+                    <div
+                      class="SubTitle"
+                    >
+                      Accent color
+                       
+                    </div>
+                    <div
+                      aria-label="Accent color"
+                      class="lens-accent-swatches"
+                      role="group"
+                    >
+                      <button
+                        aria-label="Theme default"
+                        aria-pressed="true"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #51c6ec;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#3f83f8"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #3f83f8;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#8b5cf6"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #8b5cf6;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e84665"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e84665;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#0ca678"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #0ca678;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#d28a12"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #d28a12;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e76f2e"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e76f2e;"
+                        type="button"
+                      />
+                      <label
+                        class="lens-accent-custom"
+                      >
+                        <span>
+                          Custom color
+                        </span>
+                        <input
+                          aria-label="Custom color"
+                          type="color"
+                          value="#51c6ec"
+                        />
+                      </label>
+                    </div>
+                    <label
+                      class="Switch"
+                      data-testid="switch"
+                    >
+                      Reduce interface motion
+                      <input
+                        role="switch"
+                        type="checkbox"
+                      />
+                    </label>
+                  </div>
                 </section>
               </div>
               <div
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="extension-install-registry"
               >
                 <section
@@ -2810,6 +3184,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="start-up"
               >
                 <section
@@ -2837,6 +3212,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="language"
               >
                 <section
@@ -2926,6 +3302,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="timezone"
               >
                 <section
@@ -3056,8 +3433,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -3078,6 +3461,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -3098,42 +3482,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -3276,9 +3670,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -3288,6 +3692,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -3300,6 +3705,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -3312,6 +3718,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -3324,6 +3731,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -3336,6 +3744,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -3374,6 +3783,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Extensions
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="some-test-extension-id"
                   role="tab"
@@ -3397,6 +3807,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="application-page"
               id="application-page"
             >
@@ -3406,6 +3817,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 Application
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="theme"
               >
                 <section
@@ -3491,12 +3903,100 @@ exports[`preferences - navigation to extension specific preferences given in pre
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="lens-accent-settings"
+                  >
+                    <div
+                      class="SubTitle"
+                    >
+                      Accent color
+                       
+                    </div>
+                    <div
+                      aria-label="Accent color"
+                      class="lens-accent-swatches"
+                      role="group"
+                    >
+                      <button
+                        aria-label="Theme default"
+                        aria-pressed="true"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #51c6ec;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#3f83f8"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #3f83f8;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#8b5cf6"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #8b5cf6;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e84665"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e84665;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#0ca678"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #0ca678;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#d28a12"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #d28a12;"
+                        type="button"
+                      />
+                      <button
+                        aria-label="#e76f2e"
+                        aria-pressed="false"
+                        class="lens-accent-swatch"
+                        style="--accent-swatch: #e76f2e;"
+                        type="button"
+                      />
+                      <label
+                        class="lens-accent-custom"
+                      >
+                        <span>
+                          Custom color
+                        </span>
+                        <input
+                          aria-label="Custom color"
+                          type="color"
+                          value="#51c6ec"
+                        />
+                      </label>
+                    </div>
+                    <label
+                      class="Switch"
+                      data-testid="switch"
+                    >
+                      Reduce interface motion
+                      <input
+                        role="switch"
+                        type="checkbox"
+                      />
+                    </label>
+                  </div>
                 </section>
               </div>
               <div
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="extension-install-registry"
               >
                 <section
@@ -3614,6 +4114,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="start-up"
               >
                 <section
@@ -3641,6 +4142,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="language"
               >
                 <section
@@ -3730,6 +4232,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 class="HorizontalLine size-xl"
               />
               <div
+                class="preference-card"
                 data-preference-item-test="timezone"
               >
                 <section
@@ -3860,8 +4363,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -3882,6 +4391,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -3902,42 +4412,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -4080,9 +4600,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
           <div
             class="sidebar"
           >
+            <span
+              aria-hidden="true"
+              class="lens-active-indicator"
+              style="opacity: 0;"
+            />
             <div
               class="Tabs flex column"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator line"
+                style="opacity: 0;"
+              />
               <div
                 data-preference-tab-group-test="general-tab-group"
               >
@@ -4092,6 +4622,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Preferences
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="app"
                   role="tab"
@@ -4104,6 +4635,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="proxy"
                   role="tab"
@@ -4116,6 +4648,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="kubernetes"
                   role="tab"
@@ -4128,6 +4661,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="editor"
                   role="tab"
@@ -4140,6 +4674,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   </div>
                 </div>
                 <div
+                  aria-selected="false"
                   class="Tab flex gaps align-center"
                   data-preference-tab-link-test="terminal"
                   role="tab"
@@ -4178,6 +4713,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                   Extensions
                 </div>
                 <div
+                  aria-selected="true"
                   class="Tab flex gaps align-center active"
                   data-preference-tab-link-test="some-test-extension-id"
                   role="tab"
@@ -4201,6 +4737,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
             class="content"
           >
             <section
+              class="preference-page"
               data-preference-page-test="preference-item-for-extension-some-test-extension-id-page"
               id="preference-item-for-extension-some-test-extension-id-page"
             >
@@ -4210,6 +4747,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                 some-test-extension-id preferences
               </h2>
               <div
+                class="preference-card"
                 data-preference-item-test="preference-item-for-extension-some-test-extension-id-item-some-preference-item-id"
               >
                 <section
@@ -4282,8 +4820,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
       <div
         class="HotbarItems flex column gaps"
       >
+        <span
+          aria-hidden="true"
+          class="lens-active-indicator"
+          style="opacity: 0;"
+        />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="0"
         >
           <div
@@ -4304,6 +4848,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="1"
         >
           <div
@@ -4324,42 +4869,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
         </div>
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="2"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="3"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="4"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="5"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="6"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="7"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="8"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="9"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="10"
         />
         <div
           class="HotbarCell isDraggingOwner animateDown"
+          data-nav-active="false"
           index="11"
         />
       </div>
@@ -4503,9 +5058,19 @@ exports[`preferences - navigation to extension specific preferences given in pre
             <div
               class="sidebar"
             >
+              <span
+                aria-hidden="true"
+                class="lens-active-indicator"
+                style="opacity: 0;"
+              />
               <div
                 class="Tabs flex column"
               >
+                <span
+                  aria-hidden="true"
+                  class="lens-active-indicator line"
+                  style="opacity: 0;"
+                />
                 <div
                   data-preference-tab-group-test="general-tab-group"
                 >
@@ -4515,6 +5080,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     Preferences
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="app"
                     role="tab"
@@ -4527,6 +5093,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="proxy"
                     role="tab"
@@ -4539,6 +5106,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="kubernetes"
                     role="tab"
@@ -4551,6 +5119,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="editor"
                     role="tab"
@@ -4563,6 +5132,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
                     </div>
                   </div>
                   <div
+                    aria-selected="false"
                     class="Tab flex gaps align-center"
                     data-preference-tab-link-test="terminal"
                     role="tab"
@@ -4635,8 +5205,14 @@ exports[`preferences - navigation to extension specific preferences given in pre
         <div
           class="HotbarItems flex column gaps"
         >
+          <span
+            aria-hidden="true"
+            class="lens-active-indicator"
+            style="opacity: 0;"
+          />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="0"
           >
             <div
@@ -4657,6 +5233,7 @@ exports[`preferences - navigation to extension specific preferences given in pre
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="1"
           >
             <div
@@ -4677,42 +5254,52 @@ exports[`preferences - navigation to extension specific preferences given in pre
           </div>
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="2"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="3"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="4"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="5"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="6"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="7"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="8"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="9"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="10"
           />
           <div
             class="HotbarCell isDraggingOwner animateDown"
+            data-nav-active="false"
             index="11"
           />
         </div>

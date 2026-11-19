@@ -9,6 +9,8 @@
   position: relative;
   text-align: center;
   background: var(--clusterMenuBackground);
+  border-right: 1px solid var(--clusterMenuBorderColor);
+  box-sizing: border-box;
   padding-top: 1px;
   width: var(--hotbar-width);
   overflow: hidden;
@@ -25,8 +27,9 @@
     --cellWidth: 40px;
     --cellHeight: 40px;
 
+    position: relative;
     box-sizing: content-box;
-    margin: 0 auto;
+    margin: 8px auto;
     height: 100%;
     overflow: hidden;
     padding-bottom: 8px;
@@ -49,9 +52,9 @@
       width: var(--cellWidth);
       height: var(--cellHeight);
       min-height: var(--cellHeight);
-      margin: 12px;
-      background: var(--clusterMenuCellBackground);
-      border-radius: 6px;
+      margin: 10px 12px;
+      background: transparent;
+      border-radius: 12px;
       position: relative;
 
       &.isDraggingOver {
@@ -62,7 +65,7 @@
           z-index: 50;
 
           > div:not(:empty) {
-            border-radius: 6px;
+            border-radius: 12px;
             box-shadow: 0 0 9px #00000042;
           }
 
@@ -125,3 +128,7 @@
     margin-top: 2px;
   }
 }
+
+.HotbarMenu .lens-active-indicator { border-radius: 14px; box-shadow: 0 0 0 6px var(--surface-selected); }
+.HotbarMenu .lens-active-indicator::before { left: -10px; }
+.HotbarMenu.draggingOver .lens-active-indicator { visibility: hidden; }

@@ -27,8 +27,9 @@
   }
 
   > .header {
-    text-align: center;
-    color: white;
+    text-align: left;
+    color: var(--textColorAccent);
+    border-bottom: 1px solid var(--borderFaintColor);
     background: var(--dialogHeaderBackground);
     padding: var(--wizard-spacing);
     border-top-left-radius: $radius;
@@ -45,8 +46,8 @@
   }
 
   .Stepper {
-    color: silver;
-    --stepper-color-point: black;
+    color: var(--textColorSecondary);
+    --stepper-color-point: var(--primary);
     --stepper-color-text: currentColor;
     margin-top: var(--wizard-spacing);
   }

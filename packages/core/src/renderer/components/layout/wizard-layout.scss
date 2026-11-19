@@ -28,6 +28,9 @@
   > .content-col {
     margin-right: $spacing;
     background-color: var(--contentColor);
+    border: 1px solid var(--borderFaintColor);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
     border-radius: $radius;
 
     > div {
@@ -37,7 +40,7 @@
     > .error {
       border-radius: $radius;
       padding: $padding;
-      background-color: pink;
+      background-color: color-mix(in srgb, var(--colorError) 12%, var(--contentColor));
     }
   }
 

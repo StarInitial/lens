@@ -5,8 +5,8 @@
 
 .HelmCharts {
   .SearchInput {
-    width: 70%;
-    margin: auto;
+    width: min(100%, 520px);
+    margin: 0;
 
     > label {
       padding: $padding $padding * 2;

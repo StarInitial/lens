@@ -10,6 +10,7 @@ import type { StrictReactNode } from "@k8slens/utilities";
 import { cssNames } from "@k8slens/utilities";
 import { Icon } from "@k8slens/icon";
 import autoBindReact from "auto-bind/react";
+import { ActiveIndicator } from "../motion/active-indicator";
 
 const TabsContext = React.createContext<TabsContextValue<unknown>>({});
 
@@ -45,7 +46,10 @@ export class Tabs<D> extends React.PureComponent<TabsProps<D>> {
           {...elemProps}
           className={className}
           ref={elem => this.elem = elem}
-        />
+        >
+          {React.Children.toArray(this.props.children).length > 0 && <ActiveIndicator selector=":scope > .Tab.active" line />}
+          {this.props.children}
+        </div>
       </TabsContext.Provider>
     );
   }
@@ -104,6 +108,7 @@ export class Tab<D> extends React.PureComponent<TabProps<D>> {
 
   onKeyDown(evt: React.KeyboardEvent<HTMLElement>) {
     if (evt.key === " " || evt.key === "Enter") {
+      evt.preventDefault();
       this.ref.current?.click();
     }
 
@@ -129,7 +134,9 @@ export class Tab<D> extends React.PureComponent<TabProps<D>> {
       <div
         {...elemProps}
         className={className}
-        tabIndex={0}
+        tabIndex={disabled ? -1 : 0}
+        aria-selected={this.isActive}
+        aria-disabled={disabled || undefined}
         onClick={this.onClick}
         onFocus={this.onFocus}
         onKeyDown={this.onKeyDown}
